@@ -1,0 +1,4 @@
+Experiment,Model,MAE (%),RMSE (%),R2
+Chronological Extrapolation (2C cell),LightGBM / GBDT,6.089,7.206,-2.4831
+Chronological Extrapolation (2C cell),1D-CNN (PyTorch),0.891,1.058,0.9249
+Cross-Protocol Holdout (Train 2C -> Test 3C),LightGBM / GBDT,1.769,1.903,0.8184

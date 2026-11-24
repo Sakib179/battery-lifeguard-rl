@@ -1,0 +1,5 @@
+charge_rate_c,model,rul_coverage_kept,rul_mae_lower,rul_worst_no_higher,rul_passes,soh_beats_both_controls_at_10_and_50,rul_mae_cycles
+2,soh_dependent,True,False,False,False,False,31.285714285714285
+2,soh_dependent_with_history,True,False,False,False,False,114.14285714285714
+3,soh_dependent,True,False,False,False,True,23.6
+3,soh_dependent_with_history,True,False,False,False,True,34.93333333333333

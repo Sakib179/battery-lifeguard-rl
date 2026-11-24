@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>LifeGuard-RL · Battery simulation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+      color: #ebf3f6;
+      background: #0d161d;
+      --panel: #15232d;
+      --border: #30424e;
+      --muted: #a8bac4;
+      --measured: #76e4cc;
+      --forecast: #f5bc80;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1280px; margin: auto; padding: 36px 28px 44px; }
+    header, .controls, .stats { margin-bottom: 18px; }
+    h1, h2, h3, p, dl, dd { margin: 0; }
+    h1 { margin: 3px 0 7px; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.1; }
+    h2 { font-size: 1.18rem; }
+    h3 { font-size: 0.96rem; }
+    .project { color: var(--measured); font-weight: 650; }
+    .muted { color: var(--muted); }
+    .small { font-size: 0.88rem; line-height: 1.45; }
+    .numbers { font-variant-numeric: tabular-nums; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; }
+
+    .controls, .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .controls { padding: 15px; }
+    label { display: grid; gap: 6px; font-size: 0.9rem; font-weight: 600; }
+    select, button { font: inherit; color: inherit; }
+    select {
+      width: 100%;
+      min-height: 42px;
+      padding: 7px 28px 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      appearance: none;
+      background: linear-gradient(45deg, transparent 50%, var(--muted) 50%) right 15px center / 5px 5px no-repeat,
+                  linear-gradient(135deg, var(--muted) 50%, transparent 50%) right 10px center / 5px 5px no-repeat,
+                  #101b23;
+    }
+    :focus-visible { outline: 2px solid var(--measured); outline-offset: 3px; }
+    .stat { padding: 13px 15px; }
+    .stat dt { color: var(--muted); font-size: 0.88rem; }
+    .stat-value { margin-top: 4px; font-size: clamp(1.25rem, 2.5vw, 1.85rem); font-weight: 650; }
+    .stat-detail { margin-top: 3px; }
+    #measured-soh { color: var(--measured); }
+    #forecast-soh { color: var(--forecast); }
+
+    .views { display: grid; grid-template-columns: minmax(0, 2.6fr) minmax(270px, 1fr); gap: 14px; align-items: start; }
+    .trajectory, .benchmark { padding: 17px; }
+    .heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .legend { display: flex; gap: 8px 16px; flex-wrap: wrap; margin: 12px 0 3px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 20px; border-top: 2px solid var(--measured); }
+    .legend .forecast { border-color: var(--forecast); border-top-style: dashed; }
+    .legend .threshold { border-color: var(--muted); border-top-style: dotted; }
+    canvas { display: block; width: 100%; height: clamp(255px, 37vw, 375px); }
+
+    .timeline { display: grid; gap: 8px; padding: 12px 0; border-top: 1px solid var(--border); }
+    .timeline input { width: 100%; margin: 0; accent-color: var(--measured); cursor: pointer; }
+    .timeline-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    button {
+      min-height: 40px;
+      min-width: 42px;
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #1d303c;
+      cursor: pointer;
+    }
+    button:hover:not(:disabled) { filter: brightness(1.13); }
+    button:disabled { opacity: 0.52; cursor: default; }
+    #play { min-width: 82px; background: var(--measured); color: #09211d; border-color: transparent; font-weight: 750; }
+    #cycle-position { margin-left: auto; }
+
+    .benchmark > p { margin-top: 5px; }
+    .benchmark-section { margin-top: 18px; }
+    .benchmark-section + .benchmark-section { padding-top: 15px; border-top: 1px solid var(--border); }
+    table { width: 100%; margin-top: 6px; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { padding: 7px 0; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--muted); font-weight: 550; }
+    tbody tr { border-top: 1px solid var(--border); }
+    .comparison { display: grid; grid-template-columns: 1fr auto; gap: 7px 10px; align-items: start; margin-top: 8px; }
+    .comparison dd { text-align: right; }
+    .comparison small { display: block; }
+    .benchmark-note { margin-top: 8px; }
+
+    @media (max-width: 880px) {
+      .views { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 620px) {
+      main { padding: 24px 13px 32px; }
+      .controls, .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .controls, .stat, .trajectory, .benchmark { padding: 11px; }
+      select { font-size: 0.87rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="project">LifeGuard-RL</p>
+      <h1>Battery simulation</h1>
+      <p class="muted">XJTU battery aging · Saved results from Notebook 07</p>
+    </header>
+
+    <section class="controls panel" aria-label="Simulation settings">
+      <label>Battery<select id="battery"></select></label>
+      <label>Start cycle<select id="landmark"></select></label>
+      <label>Starting SOH<select id="initializer"></select></label>
+      <label>Forecast model<select id="model"></select></label>
+    </section>
+
+    <dl class="stats numbers" aria-label="Results at the selected cycle">
+      <div class="stat panel"><dt>Measured SOH</dt><dd id="measured-soh" class="stat-value"></dd></div>
+      <div class="stat panel"><dt>Forecast SOH</dt><dd id="forecast-soh" class="stat-value"></dd></div>
+      <div class="stat panel"><dt>Absolute SOH error</dt><dd id="soh-error" class="stat-value"></dd></div>
+      <div class="stat panel">
+        <dt>Projected RUL (cycles)</dt>
+        <dd id="projected-rul" class="stat-value"></dd>
+        <dd id="projected-detail" class="stat-detail small muted"></dd>
+      </div>
+    </dl>
+
+    <div class="views">
+      <section class="trajectory panel" aria-labelledby="trajectory-title">
+        <div class="heading">
+          <h2 id="trajectory-title">SOH over cycling</h2>
+          <p id="protocol" class="small muted"></p>
+        </div>
+        <div class="legend small" aria-hidden="true">
+          <span><i></i>Measured SOH</span>
+          <span><i class="forecast"></i>Forecast SOH</span>
+          <span><i class="threshold"></i><span id="threshold-label"></span></span>
+        </div>
+        <canvas id="chart" role="img" aria-label="Measured and forecast state of health by cycle, with the end-of-life threshold"></canvas>
+        <div class="timeline">
+          <label for="cycle">Playback cycle</label>
+          <input id="cycle" type="range" step="1">
+          <div class="timeline-actions">
+            <button id="play" type="button">Play</button>
+            <button id="back" type="button" aria-label="Previous cycle">−1</button>
+            <button id="forward" type="button" aria-label="Next cycle">+1</button>
+            <output id="cycle-position" for="cycle" class="numbers small" aria-live="off"></output>
+          </div>
+        </div>
+        <p id="recorded-eol" class="small"></p>
+        <p class="small muted">The forecast starts at the selected start cycle. RUL counts down from that forecast.</p>
+      </section>
+
+      <aside class="benchmark panel" aria-labelledby="benchmark-title">
+        <h2 id="benchmark-title">Held-out benchmark</h2>
+        <p id="benchmark-context" class="small muted"></p>
+        <section class="benchmark-section">
+          <h3>SOH forecast MAE</h3>
+          <table class="numbers" aria-label="Mean absolute SOH error by forecast horizon">
+            <thead><tr><th scope="col">Ahead</th><th scope="col">MAE</th><th scope="col">Cells</th></tr></thead>
+            <tbody id="soh-benchmark"></tbody>
+          </table>
+          <p class="benchmark-note small muted">pp = percentage points</p>
+        </section>
+        <section class="benchmark-section">
+          <h3>RUL benchmark MAE</h3>
+          <dl class="comparison small numbers">
+            <dt>Selected model</dt><dd id="model-rul-mae"></dd>
+            <dt>Earlier charge-based model</dt><dd id="previous-rul-mae"></dd>
+          </dl>
+          <p class="benchmark-note small muted">RUL error uses cells with a verified EOL.</p>
+        </section>
+        <section class="benchmark-section">
+          <h3>Earlier RUL forecast for this cell</h3>
+          <p id="previous-rul" class="benchmark-note small numbers"></p>
+        </section>
+      </aside>
+    </div>
+    <noscript><p>This dashboard needs JavaScript to play the saved results.</p></noscript>
+  </main>
+
+  <!-- NOTEBOOK_RESULTS -->
+  <script>
+    "use strict";
+
+    const data = JSON.parse(document.getElementById("notebook-data").textContent);
+    const get = id => document.getElementById(id);
+    const labels = {
+      charge: "Charge-based SOH",
+      measured: "Measured SOH",
+      persistence: "Persistence (fixed SOH)",
+      constant_fade: "Constant fade",
+      soh_dependent: "SOH-dependent fade",
+      soh_dependent_with_history: "SOH-dependent fade + history",
+    };
+    const cells = data.cells.slice().sort((a, b) => a.id.localeCompare(b.id, "en", {numeric: true}));
+    const battery = get("battery");
+    const landmark = get("landmark");
+    const initializer = get("initializer");
+    const model = get("model");
+    const slider = get("cycle");
+    const play = get("play");
+    const back = get("back");
+    const forward = get("forward");
+    const chart = get("chart");
+    const context = chart.getContext("2d");
+    const missing = "—";
+    let playbackTimer = null;
+    let run;
+
+    function fillSelect(select, values, preferred, label = value => labels[value] ?? value) {
+      select.replaceChildren(...values.map(value => new Option(label(value), value)));
+      if (values.includes(preferred)) select.value = preferred;
+    }
+
+    function useSelection() {
+      pause();
+      const cell = cells.find(entry => entry.id === battery.value);
+      fillSelect(landmark, Object.keys(cell.landmarks), landmark.value || "100");
+      const start = Number(landmark.value);
+      const anchor = cell.landmarks[start];
+      fillSelect(initializer, Object.keys(anchor.initializers), initializer.value || "charge");
+      const models = anchor.initializers[initializer.value];
+      fillSelect(model, Object.keys(models), model.value || "soh_dependent");
+      const forecast = models[model.value];
+      const observed = anchor.observed;
+      const values = observed.concat(forecast.forecast).filter(Number.isFinite);
+      run = {
+        start,
+        end: start + observed.length - 1,
+        observed,
+        forecast,
+        low: Math.min(78, Math.floor(Math.min(data.eolThreshold, ...values)) - 1),
+        high: Math.max(101, Math.ceil(Math.max(data.eolThreshold, ...values)) + 1),
+      };
+      slider.min = start;
+      slider.max = run.end;
+      slider.value = start;
+      get("protocol").textContent = `${cell.rate}C fixed charge rate`;
+      get("recorded-eol").textContent = cell.eventStatus === "right_censored"
+        ? `Actual EOL unknown · measured through cycle ${cell.lastRecorded}`
+        : `Measured EOL at cycle ${cell.observedEol}`;
+      renderBenchmark(cell, anchor);
+      renderCycle();
+    }
+
+    function fixed(value, digits, unit) {
+      return Number.isFinite(value) ? `${value.toFixed(digits)}${unit}` : missing;
+    }
+
+    function renderBenchmark(cell, anchor) {
+      const key = `${cell.rate}/${run.start}/${initializer.value}/${model.value}`;
+      const earlierKey = `${cell.rate}/${run.start}/charge/previous_rul_model`;
+      get("benchmark-context").textContent = `${cell.rate}C · Start at cycle ${run.start} · ${labels[initializer.value]}`;
+
+      const rows = data.horizons.map(horizon => {
+        const metric = data.sohMetrics[key]?.[horizon];
+        const row = document.createElement("tr");
+        for (const value of [`${horizon} cycles`, fixed(metric?.mae, 3, " pp"), metric?.cells ?? missing]) {
+          row.insertCell().textContent = value;
+        }
+        return row;
+      });
+      get("soh-benchmark").replaceChildren(...rows);
+
+      for (const [element, metric] of [
+        [get("model-rul-mae"), data.rulMetrics[key]],
+        [get("previous-rul-mae"), data.rulMetrics[earlierKey]],
+      ]) {
+        element.textContent = fixed(metric?.mae, 2, " cycles");
+        if (metric) {
+          const count = document.createElement("small");
+          count.className = "muted";
+          count.textContent = `${metric.predictions}/${metric.observed} cells`;
+          element.append(count);
+        }
+      }
+      get("previous-rul").textContent = Number.isFinite(anchor.previousRul)
+        ? `${anchor.previousRul.toFixed(1)} cycles left at cycle ${run.start}`
+        : "No saved earlier prediction for this cell";
+    }
+
+    function renderCycle() {
+      const cycle = Number(slider.value);
+      const index = cycle - run.start;
+      const actual = run.observed[index];
+      const forecast = run.forecast.forecast[index];
+      get("measured-soh").textContent = fixed(actual, 2, "%");
+      get("forecast-soh").textContent = fixed(forecast, 2, "%");
+      const error = Number.isFinite(actual) && Number.isFinite(forecast) ? Math.abs(actual - forecast) : null;
+      get("soh-error").textContent = fixed(error, 2, " pp");
+
+      const rul = run.forecast.rul;
+      let projected = missing;
+      let detail = "RUL unavailable";
+      if (Number.isFinite(rul)) {
+        projected = String(Math.max(0, rul - index));
+        detail = `Forecast EOL at cycle ${run.start + rul}`;
+      } else if (run.forecast.status === "persistence") {
+        detail = "Fixed SOH baseline";
+      } else if (run.forecast.status === "no_crossing_by_600") {
+        detail = `No crossing within ${data.maxRollout} cycles`;
+      }
+      get("projected-rul").textContent = projected;
+      get("projected-detail").textContent = detail;
+      get("cycle-position").textContent = `Cycle ${cycle} / ${run.end}`;
+      slider.setAttribute("aria-valuetext", `Cycle ${cycle}`);
+      back.disabled = cycle === run.start;
+      forward.disabled = cycle === run.end;
+      drawChart(index);
+    }
+
+    function pause() {
+      clearInterval(playbackTimer);
+      playbackTimer = null;
+      play.textContent = "Play";
+    }
+
+    function seek(cycle) {
+      slider.value = Math.max(run.start, Math.min(run.end, cycle));
+      if (Number(slider.value) === run.end) pause();
+      renderCycle();
+    }
+
+    function drawChart(index) {
+      if (!context) return;
+      const width = chart.clientWidth;
+      const height = chart.clientHeight;
+      if (!width || !height) return;
+      const scale = Math.min(window.devicePixelRatio || 1, 2);
+      const pixelWidth = Math.round(width * scale);
+      const pixelHeight = Math.round(height * scale);
+      if (chart.width !== pixelWidth || chart.height !== pixelHeight) {
+        chart.width = pixelWidth;
+        chart.height = pixelHeight;
+      }
+      context.setTransform(scale, 0, 0, scale, 0, 0);
+      context.clearRect(0, 0, width, height);
+
+      const left = 40;
+      const right = width - 17;
+      const top = 23;
+      const bottom = height - 39;
+      const last = run.end - run.start;
+      const x = i => left + (right - left) * i / Math.max(1, last);
+      const y = value => bottom - (bottom - top) * (value - run.low) / (run.high - run.low);
+      const measuredColor = "#76e4cc";
+      const forecastColor = "#f5bc80";
+      context.font = "12px system-ui";
+      context.fillStyle = "#a8bac4";
+      context.lineWidth = 1;
+      context.textAlign = "left";
+      context.fillText("SOH (%)", 1, 14);
+      context.textAlign = "right";
+      for (let tick = Math.ceil(run.low / 5) * 5; tick <= run.high; tick += 5) {
+        const ordinate = y(tick);
+        const threshold = tick === data.eolThreshold;
+        context.strokeStyle = threshold ? "#8da6b5" : "#354a58";
+        context.setLineDash(threshold ? [2, 4] : []);
+        context.beginPath();
+        context.moveTo(left, ordinate);
+        context.lineTo(right, ordinate);
+        context.stroke();
+        context.fillText(tick, left - 8, ordinate + 4);
+      }
+      context.setLineDash([]);
+      const sections = width < 415 ? 3 : 5;
+      const ticks = new Set(Array.from({length: sections + 1}, (_, i) => Math.round(i * last / sections)));
+      context.textAlign = "center";
+      for (const tick of ticks) {
+        context.fillText(run.start + tick, x(tick), bottom + 15);
+      }
+      context.fillText("Cycle", (left + right) / 2, height - 3);
+
+      context.strokeStyle = "#9db3c2";
+      context.beginPath();
+      context.moveTo(x(index), top);
+      context.lineTo(x(index), bottom);
+      context.stroke();
+
+      function drawSeries(series, end, color, dash, opacity, first = 0) {
+        context.globalAlpha = opacity;
+        context.strokeStyle = color;
+        context.lineWidth = 2.2;
+        context.setLineDash(dash);
+        context.beginPath();
+        let hasPrevious = false;
+        for (let i = first; i <= end; i++) {
+          const value = series[i];
+          if (Number.isFinite(value)) {
+            if (hasPrevious) context.lineTo(x(i), y(value));
+            else context.moveTo(x(i), y(value));
+          }
+          hasPrevious = Number.isFinite(value);
+        }
+        context.stroke();
+        context.globalAlpha = 1;
+        context.setLineDash([]);
+      }
+
+      const forecast = run.forecast.forecast;
+      drawSeries(forecast, last, forecastColor, [6, 4], 0.42, index);
+      drawSeries(run.observed, index, measuredColor, [], 1);
+      drawSeries(forecast, index, forecastColor, [6, 4], 1);
+      for (const [value, color, radius] of [[run.observed[index], measuredColor, 5], [forecast[index], forecastColor, 3]]) {
+        if (!Number.isFinite(value)) continue;
+        context.fillStyle = color;
+        context.beginPath();
+        context.arc(x(index), y(value), radius, 0, 2 * Math.PI);
+        context.fill();
+      }
+    }
+
+    for (const select of [battery, landmark, initializer, model]) {
+      select.addEventListener("change", useSelection);
+    }
+    slider.addEventListener("input", () => { pause(); renderCycle(); });
+    back.addEventListener("click", () => { pause(); seek(Number(slider.value) - 1); });
+    forward.addEventListener("click", () => { pause(); seek(Number(slider.value) + 1); });
+    play.addEventListener("click", () => {
+      if (playbackTimer !== null) {
+        pause();
+        return;
+      }
+      if (Number(slider.value) === run.end) seek(run.start);
+      if (run.start === run.end) return;
+      play.textContent = "Pause";
+      playbackTimer = setInterval(() => seek(Number(slider.value) + 1), 100);
+    });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
+
+    get("threshold-label").textContent = `${data.eolThreshold}% SOH threshold`;
+    fillSelect(battery, cells.map(cell => cell.id), "XJTU_3C_battery-1");
+    useSelection();
+    new ResizeObserver(() => drawChart(Number(slider.value) - run.start)).observe(chart);
+  </script>
+</body>
+</html>

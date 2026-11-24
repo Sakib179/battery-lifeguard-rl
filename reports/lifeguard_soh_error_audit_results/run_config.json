@@ -1,0 +1,32 @@
+{
+  "dataset": "BatteryLife v12",
+  "dataset_doi": "10.5281/zenodo.21149533",
+  "soh_input": "result",
+  "seed": 42,
+  "nominal_capacity_ah": 2.0,
+  "flag_history": 10,
+  "flag_min_history": 5,
+  "flag_mad_multiplier": 6.0,
+  "flag_floors": {
+    "prefix_charge_ah": 0.08,
+    "charge_duration_s": 120.0,
+    "taper_duration_s": 120.0
+  },
+  "fallback_count": 3,
+  "history_charge_count": 5,
+  "ridge_alpha": 10.0,
+  "ridge_fields": [
+    "rise_charge_3_8_to_4_0_ah",
+    "rise_charge_4_0_to_4_1_ah",
+    "charge_change_from_recent_median_ah"
+  ],
+  "near_eol_soh_pct": 82.0,
+  "large_error_pp": 1.0,
+  "chosen_model": "first_cycle_calibrated",
+  "packages": {
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.6.1",
+    "matplotlib": "3.10.0"
+  }
+}

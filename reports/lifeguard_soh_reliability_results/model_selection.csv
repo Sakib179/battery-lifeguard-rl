@@ -1,0 +1,4 @@
+model,coverage_kept,both_mean_errors_no_higher,both_near_eol_errors_no_higher,large_errors_reduced,passes,transfer_large_errors,transfer_mean_mae_pp
+charge_only_linear_guarded,True,True,True,True,True,100,0.22502252588987043
+huber_taper_correction,True,True,False,False,False,130,0.1788074708258598
+huber_taper_correction_guarded,True,True,False,False,False,130,0.17746810482768127

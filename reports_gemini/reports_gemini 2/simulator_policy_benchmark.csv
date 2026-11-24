@@ -1,0 +1,4 @@
+Operating Strategy,Cycles to EOL,Total Delivered Energy (kWh),Fast Charge (3C) Usage (%)
+Fixed 2C (Standard Charge),306.0,2.05,0.0%
+Fixed 3C (Always Fast Charge),216.0,1.47,100.0%
+LifeGuard Smart Heuristic (Adaptive 3C->2C),275.2,1.84,62.3%

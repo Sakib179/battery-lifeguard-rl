@@ -1,0 +1,3 @@
+Experiment,Model,MAE (%),RMSE (%),R2
+"Chronological Forecast (2C cell, cycles 261-401)",Peak-Registered 1D-ResNet (Option A),5.831,7.805,-3.0862
+Cross-Protocol Zero-Shot (Train 2C -> Test 3C),Peak-Registered 1D-ResNet (Option A),13.783,26.7,-34.7555

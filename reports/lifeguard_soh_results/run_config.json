@@ -1,0 +1,45 @@
+{
+  "mode": "benchmark",
+  "seed": 42,
+  "dataset": "BatteryLife v12",
+  "dataset_doi": "10.5281/zenodo.21149533",
+  "cells": [
+    "XJTU_2C_battery-1",
+    "XJTU_2C_battery-2",
+    "XJTU_2C_battery-3",
+    "XJTU_2C_battery-4",
+    "XJTU_2C_battery-5",
+    "XJTU_2C_battery-6",
+    "XJTU_2C_battery-7",
+    "XJTU_2C_battery-8",
+    "XJTU_3C_battery-1",
+    "XJTU_3C_battery-2",
+    "XJTU_3C_battery-3",
+    "XJTU_3C_battery-4",
+    "XJTU_3C_battery-5",
+    "XJTU_3C_battery-6",
+    "XJTU_3C_battery-7",
+    "XJTU_3C_battery-8",
+    "XJTU_3C_battery-9",
+    "XJTU_3C_battery-10",
+    "XJTU_3C_battery-11",
+    "XJTU_3C_battery-12",
+    "XJTU_3C_battery-13",
+    "XJTU_3C_battery-14",
+    "XJTU_3C_battery-15"
+  ],
+  "total_cycles": 6938,
+  "eligible_cycles": 6937,
+  "pilot_eol_cycles": {
+    "XJTU_2C_battery-7": 401,
+    "XJTU_3C_battery-2": 291
+  },
+  "gpu_status": "disabled",
+  "python": "3.13.16",
+  "packages": {
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.6.1",
+    "matplotlib": "3.10.0"
+  }
+}

@@ -1,0 +1,8 @@
+design,fold,first_train_cells,first_adjustment_pp,first_test_cycles_adjusted,ridge_train_cells,ridge_train_cycles,ridge_test_cycles_adjusted
+within_xjtu,fold_1,18,-4.218710354166788,5,18,5221,1577
+within_xjtu,fold_2,18,-4.426356479166664,5,18,5303,1495
+within_xjtu,fold_3,18,-4.218710354166788,5,18,5184,1614
+within_xjtu,fold_4,19,-4.408562583333719,4,19,5675,1123
+within_xjtu,fold_5,19,-4.397417916665802,4,19,5809,989
+2C_to_3C,all_test_cells,8,-4.426356479166664,15,8,3161,3637
+3C_to_2C,all_test_cells,15,-4.319001999999969,8,15,3637,3161

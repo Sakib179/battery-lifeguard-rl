@@ -1,0 +1,5 @@
+Experiment,Model,Target,MAE,RMSE,R2
+"Chronological Forecast (2C cell, cycles 261-401)",MET-CNN (Multimodal 1D-CNN + MLP),SOH (%),12.995,16.948,-18.2647
+"Chronological Forecast (2C cell, cycles 261-401)",MET-CNN (Multimodal 1D-CNN + MLP),RUL (Cycles),209.07,217.88,-27.6539
+Cross-Protocol Zero-Shot (Train 2C -> Test 3C),MET-CNN (Multimodal 1D-CNN + MLP),SOH (%),6.997,7.433,-1.7712
+Cross-Protocol Zero-Shot (Train 2C -> Test 3C),MET-CNN (Multimodal 1D-CNN + MLP),RUL (Cycles),110.98,134.02,-1.5454

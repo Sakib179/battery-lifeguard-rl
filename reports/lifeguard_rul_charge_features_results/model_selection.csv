@@ -1,0 +1,4 @@
+model,same_test_coverage,mean_error_lower,worst_error_lower,short_life_error_no_higher,passes,mae_delta_cycles,worst_error_delta_cycles,short_life_mae_delta_cycles
+ridge_3c_original_features,True,True,False,True,False,-0.44803178002465316,7.042745542708033,-0.2229345705820549
+ridge_3c_recent_signals,True,False,True,True,False,0.16503777120558283,-8.514778671241857,-3.2146412522952623
+ridge_3c_recent_signals_and_change,True,False,True,True,False,0.3639841231729015,-8.424181652234694,-0.6602012698156123

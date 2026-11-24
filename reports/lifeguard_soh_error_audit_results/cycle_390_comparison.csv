@@ -1,0 +1,7 @@
+cell_id,cycle,charge_rate_c,observed_soh_pct,trace_flagged,input_valid,ridge_ready,design,fold,model,predicted_soh_pct,status,first_adjustment_used,ridge_adjustment_used,absolute_error_pp
+XJTU_2C_battery-2,390,2,83.39999999999999,True,True,False,within_xjtu,fold_3,linear_with_charge_check,81.71817028304744,fallback,False,False,1.6818297169525493
+XJTU_2C_battery-2,390,2,83.39999999999999,True,True,False,within_xjtu,fold_3,first_cycle_calibrated,81.71817028304744,fallback,False,False,1.6818297169525493
+XJTU_2C_battery-2,390,2,83.39999999999999,True,True,False,within_xjtu,fold_3,first_cycle_and_history_ridge,81.7542808066891,fallback,False,False,1.645719193310896
+XJTU_2C_battery-2,390,2,83.39999999999999,True,True,False,3C_to_2C,all_test_cells,linear_with_charge_check,81.52251437673105,fallback,False,False,1.8774856232689388
+XJTU_2C_battery-2,390,2,83.39999999999999,True,True,False,3C_to_2C,all_test_cells,first_cycle_calibrated,81.52251437673105,fallback,False,False,1.8774856232689388
+XJTU_2C_battery-2,390,2,83.39999999999999,True,True,False,3C_to_2C,all_test_cells,first_cycle_and_history_ridge,81.08745498860313,fallback,False,False,2.312545011396864

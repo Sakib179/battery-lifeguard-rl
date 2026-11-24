@@ -1,0 +1,41 @@
+{
+  "dataset": "BatteryLife v12",
+  "dataset_doi": "10.5281/zenodo.21149533",
+  "soh_input": "result",
+  "rul_reference_input": "rul_predictions.csv",
+  "seed": 42,
+  "landmarks": [
+    50,
+    100
+  ],
+  "horizons": [
+    1,
+    10,
+    50
+  ],
+  "primary_landmark": 100,
+  "eol_soh_pct": 80.0,
+  "max_rollout_steps": 600,
+  "bin_width_pp": 2.0,
+  "max_rate_window": 10,
+  "min_rate_window": 3,
+  "min_cells_per_bin": 2,
+  "charge_history_window": 20,
+  "charge_history_endpoint_cycles": 5,
+  "charge_history_min_gap": 10,
+  "history_ratio_bounds": [
+    0.5,
+    2.0
+  ],
+  "history_shrinkage": 0.5,
+  "chosen_rul_models_at_cycle_100": {
+    "2": "previous_rul_model",
+    "3": "previous_rul_model"
+  },
+  "packages": {
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.6.1",
+    "matplotlib": "3.10.0"
+  }
+}

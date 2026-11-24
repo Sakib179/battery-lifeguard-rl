@@ -1,0 +1,54 @@
+{
+  "dataset": "BatteryLife v12",
+  "dataset_doi": "10.5281/zenodo.21149533",
+  "soh_input": "result",
+  "seed": 42,
+  "nominal_capacity_ah": 2.0,
+  "eol_capacity_ah": 1.6,
+  "landmarks": [
+    50,
+    100
+  ],
+  "primary_landmark": 100,
+  "short_life_cycle": 200,
+  "ridge_alphas": [
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "candidate_columns": {
+    "ridge_3c_original_features": [
+      "charge_initial_median",
+      "charge_recent_median",
+      "charge_recent_slope"
+    ],
+    "ridge_3c_recent_signals": [
+      "recent_charge_ah",
+      "recent_4_0_to_4_1_s",
+      "recent_taper_s"
+    ],
+    "ridge_3c_recent_signals_and_change": [
+      "recent_charge_ah",
+      "recent_4_0_to_4_1_s",
+      "recent_taper_s",
+      "charge_change_ah"
+    ]
+  },
+  "charge_flag_history": 10,
+  "charge_flag_min_history": 5,
+  "charge_flag_mad_multiplier": 6.0,
+  "charge_flag_floors": {
+    "prefix_charge_ah": 0.08,
+    "charge_duration_s": 120.0,
+    "taper_duration_s": 120.0
+  },
+  "chosen_3c_model": "ridge_charge_history_pooled",
+  "chosen_2c_model": "protocol_median",
+  "packages": {
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.6.1",
+    "matplotlib": "3.10.0"
+  }
+}

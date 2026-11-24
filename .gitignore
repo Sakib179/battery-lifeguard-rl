@@ -1,0 +1,9 @@
+# Downloaded battery datasets
+/Dataset/
+
+# Local files and caches
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+/.venv/
