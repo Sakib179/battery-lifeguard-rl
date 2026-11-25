@@ -1,0 +1,8 @@
+charge_rate_c,landmark_cycle,initializer,model,observed_test_cells,predicted_test_cells,mae_cycles,worst_error_cycles,short_life_mae_cycles,short_life_cells,signed_bias_cycles
+3,100,charge,soh_dependent,15,15,23.6,68.0,16.0,4,-5.466666666666667
+3,100,charge,late_life_calibrated,15,15,20.8,60.0,13.0,4,-2.2666666666666666
+3,100,charge,nb06_recent_ridge,15,15,19.6,55.0,13.25,4,-2.0
+3,100,charge,nb06_ridge_average,15,15,20.133333333333333,58.0,12.25,4,-2.2666666666666666
+3,100,charge,eol_timing_charge_summary,15,15,20.2,55.0,13.75,4,-2.3333333333333335
+3,100,charge,eol_timing_charge_curve,15,15,22.133333333333333,58.0,17.25,4,0.5333333333333333
+3,100,charge,eol_timing_charge_discharge,15,15,23.466666666666665,64.0,16.0,4,0.8

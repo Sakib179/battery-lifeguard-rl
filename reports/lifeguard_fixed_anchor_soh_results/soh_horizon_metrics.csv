@@ -1,0 +1,7 @@
+charge_rate_c,landmark_cycle,initializer,model,horizon_cycles,paired_test_cells,paired_mae_pp
+2,100,charge,late_life_calibrated,1,8,0.0387392033161138
+2,100,charge,late_life_calibrated,10,8,0.19239261659857654
+2,100,charge,late_life_calibrated,50,8,0.5263927626568901
+3,100,charge,late_life_calibrated,1,15,0.11867719976511637
+3,100,charge,late_life_calibrated,10,15,0.24081018398735712
+3,100,charge,late_life_calibrated,50,13,0.42219141452323383

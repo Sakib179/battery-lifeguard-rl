@@ -1,0 +1,21 @@
+{
+  "input": "lifeguard_digital_twin_validation_results.zip",
+  "input_sha256": "f373ad9c4d72a8e74844592e4e45bad6c43648816adf629b91d27f28b6a4e48e",
+  "landmark_cycle": 100,
+  "eol_soh_pct": 80.0,
+  "horizons": [
+    1,
+    10,
+    50
+  ],
+  "tail_cycles": 20,
+  "horizon_tolerance_pp": 0.05,
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "cells": 23
+}

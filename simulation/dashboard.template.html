@@ -62,8 +62,12 @@
     .legend span { display: inline-flex; align-items: center; gap: 6px; }
     .legend i { width: 20px; border-top: 2px solid var(--measured); }
     .legend .forecast { border-color: var(--forecast); border-top-style: dashed; }
+    .legend .forecast.points { border-top-width: 4px; border-top-style: dotted; }
     .legend .threshold { border-color: var(--muted); border-top-style: dotted; }
     canvas { display: block; width: 100%; height: clamp(255px, 37vw, 375px); }
+    .chart-setting { margin-top: 12px; max-width: 240px; }
+    .rolling-forecasts { margin-top: 15px; }
+    .rolling-forecasts p { margin-top: 5px; }
 
     .timeline { display: grid; gap: 8px; padding: 12px 0; border-top: 1px solid var(--border); }
     .timeline input { width: 100%; margin: 0; accent-color: var(--measured); cursor: pointer; }
@@ -83,6 +87,7 @@
     #cycle-position { margin-left: auto; }
 
     .benchmark > p { margin-top: 5px; }
+    .benchmark-window { margin-top: 12px; }
     .benchmark-section { margin-top: 18px; }
     .benchmark-section + .benchmark-section { padding-top: 15px; border-top: 1px solid var(--border); }
     table { width: 100%; margin-top: 6px; border-collapse: collapse; font-size: 0.88rem; }
@@ -94,6 +99,7 @@
     .comparison dd { text-align: right; }
     .comparison small { display: block; }
     .benchmark-note { margin-top: 8px; }
+    .fixed-comparison td:last-child { color: var(--forecast); font-weight: 650; }
 
     @media (max-width: 880px) {
       .views { grid-template-columns: minmax(0, 1fr); }
@@ -111,21 +117,21 @@
     <header>
       <p class="project">LifeGuard-RL</p>
       <h1>Battery simulation</h1>
-      <p class="muted">XJTU battery aging · Saved results from Notebook 07</p>
+      <p id="source" class="muted">XJTU battery aging · Saved results from Notebook 07</p>
     </header>
 
     <section class="controls panel" aria-label="Simulation settings">
       <label>Battery<select id="battery"></select></label>
       <label>Start cycle<select id="landmark"></select></label>
-      <label>Starting SOH<select id="initializer"></select></label>
+      <label>SOH input<select id="initializer"></select></label>
       <label>Forecast model<select id="model"></select></label>
     </section>
 
     <dl class="stats numbers" aria-label="Results at the selected cycle">
       <div class="stat panel"><dt>Measured SOH</dt><dd id="measured-soh" class="stat-value"></dd></div>
-      <div class="stat panel"><dt>Forecast SOH</dt><dd id="forecast-soh" class="stat-value"></dd></div>
-      <div class="stat panel"><dt>Absolute SOH error</dt><dd id="soh-error" class="stat-value"></dd></div>
-      <div class="stat panel">
+      <div class="stat panel"><dt id="forecast-soh-label">Forecast SOH</dt><dd id="forecast-soh" class="stat-value"></dd></div>
+      <div class="stat panel"><dt id="soh-error-label">Absolute SOH error</dt><dd id="soh-error" class="stat-value"></dd></div>
+      <div id="projected-rul-card" class="stat panel">
         <dt>Projected RUL (cycles)</dt>
         <dd id="projected-rul" class="stat-value"></dd>
         <dd id="projected-detail" class="stat-detail small muted"></dd>
@@ -138,9 +144,12 @@
           <h2 id="trajectory-title">SOH over cycling</h2>
           <p id="protocol" class="small muted"></p>
         </div>
+        <div id="rolling-chart-settings" class="chart-setting" hidden>
+          <label>Chart horizon<select id="rolling-horizon"></select></label>
+        </div>
         <div class="legend small" aria-hidden="true">
           <span><i></i>Measured SOH</span>
-          <span><i class="forecast"></i>Forecast SOH</span>
+          <span><i id="forecast-swatch" class="forecast"></i><span id="forecast-legend">Forecast SOH</span></span>
           <span><i class="threshold"></i><span id="threshold-label"></span></span>
         </div>
         <canvas id="chart" role="img" aria-label="Measured and forecast state of health by cycle, with the end-of-life threshold"></canvas>
@@ -155,30 +164,69 @@
           </div>
         </div>
         <p id="recorded-eol" class="small"></p>
-        <p class="small muted">The forecast starts at the selected start cycle. RUL counts down from that forecast.</p>
+        <p id="playback-note" class="small muted">The forecast starts at the selected start cycle. RUL counts down from that forecast.</p>
+        <section id="rolling-forecasts" class="rolling-forecasts" hidden>
+          <h3 id="rolling-forecasts-title">Latest SOH forecasts</h3>
+          <table class="numbers" aria-labelledby="rolling-forecasts-title">
+            <thead><tr><th scope="col">Ahead</th><th scope="col">Target cycle</th><th scope="col">SOH</th></tr></thead>
+            <tbody id="rolling-forecast-rows"></tbody>
+          </table>
+          <p class="small muted">Forecasts are shown for targets with a saved measurement.</p>
+        </section>
       </section>
 
       <aside class="benchmark panel" aria-labelledby="benchmark-title">
         <h2 id="benchmark-title">Held-out benchmark</h2>
         <p id="benchmark-context" class="small muted"></p>
+        <div id="benchmark-window-control" class="benchmark-window" hidden>
+          <label>Benchmark updates<select id="benchmark-window"></select></label>
+        </div>
         <section class="benchmark-section">
           <h3>SOH forecast MAE</h3>
-          <table class="numbers" aria-label="Mean absolute SOH error by forecast horizon">
-            <thead><tr><th scope="col">Ahead</th><th scope="col">MAE</th><th scope="col">Cells</th></tr></thead>
+          <table class="numbers" aria-label="SOH errors by forecast horizon">
+            <thead><tr><th scope="col">Ahead</th><th scope="col">MAE</th><th id="soh-benchmark-detail" scope="col">Cells</th></tr></thead>
             <tbody id="soh-benchmark"></tbody>
           </table>
           <p class="benchmark-note small muted">pp = percentage points</p>
         </section>
-        <section class="benchmark-section">
-          <h3>RUL benchmark MAE</h3>
+        <section id="late-life-benchmark" class="benchmark-section" hidden>
+          <h3>Last 20 cycles before and including EOL</h3>
+          <dl class="comparison small numbers">
+            <dt>Mean SOH error</dt><dd id="late-life-mae"></dd>
+            <dt>Worst SOH error</dt><dd id="late-life-worst"></dd>
+          </dl>
+          <p id="late-life-cells" class="benchmark-note small muted"></p>
+        </section>
+        <section id="fixed-soh-benchmark" class="benchmark-section" hidden>
+          <h3 id="fixed-soh-title">SOH curve errors (pp)</h3>
+          <table class="numbers fixed-comparison" aria-labelledby="fixed-soh-title">
+            <thead><tr><th scope="col">Error</th><th scope="col">Baseline</th><th scope="col">Previous</th><th scope="col">Revised</th></tr></thead>
+            <tbody id="fixed-soh-metrics"></tbody>
+          </table>
+          <dl class="comparison small">
+            <dt>Revised full-curve max</dt><dd id="fixed-soh-full-worst"></dd>
+            <dt>Revised last-20 max</dt><dd id="fixed-soh-tail-worst"></dd>
+          </dl>
+          <p id="fixed-soh-coverage" class="benchmark-note small muted"></p>
+        </section>
+        <section id="rul-benchmark" class="benchmark-section">
+          <h3 id="rul-benchmark-title">RUL benchmark MAE</h3>
           <dl class="comparison small numbers">
             <dt>Selected model</dt><dd id="model-rul-mae"></dd>
-            <dt>Earlier charge-based model</dt><dd id="previous-rul-mae"></dd>
+            <dt id="previous-rul-label">Earlier charge-based model</dt><dd id="previous-rul-mae"></dd>
           </dl>
+          <p id="rolling-rul-worst-location" class="benchmark-note small muted" hidden></p>
           <p class="benchmark-note small muted">RUL error uses cells with a verified EOL.</p>
         </section>
-        <section class="benchmark-section">
-          <h3>Earlier RUL forecast for this cell</h3>
+        <section id="rolling-tail" class="benchmark-section" hidden>
+          <h3>RUL in the last 20 cycles</h3>
+          <dl class="comparison small numbers">
+            <dt>Mean error</dt><dd id="rolling-tail-mae"></dd>
+            <dt>Worst error</dt><dd id="rolling-tail-worst"></dd>
+          </dl>
+        </section>
+        <section id="previous-rul-benchmark" class="benchmark-section">
+          <h3 id="previous-rul-title">Earlier RUL forecast for this cell</h3>
           <p id="previous-rul" class="benchmark-note small numbers"></p>
         </section>
       </aside>
@@ -195,16 +243,22 @@
     const labels = {
       charge: "Charge-based SOH",
       measured: "Measured SOH",
+      rolling_input: "Charge + past discharge",
       persistence: "Persistence (fixed SOH)",
       constant_fade: "Constant fade",
       soh_dependent: "SOH-dependent fade",
       soh_dependent_with_history: "SOH-dependent fade + history",
+      late_life_calibrated: "Late-life calibrated",
+      rolling_forecast: "Rolling forecast (Notebook 11)",
+      revised_fixed: "Revised fixed SOH (Notebook 12)",
     };
     const cells = data.cells.slice().sort((a, b) => a.id.localeCompare(b.id, "en", {numeric: true}));
     const battery = get("battery");
     const landmark = get("landmark");
     const initializer = get("initializer");
     const model = get("model");
+    const rollingHorizon = get("rolling-horizon");
+    const benchmarkWindow = get("benchmark-window");
     const slider = get("cycle");
     const play = get("play");
     const back = get("back");
@@ -226,17 +280,29 @@
       fillSelect(landmark, Object.keys(cell.landmarks), landmark.value || "100");
       const start = Number(landmark.value);
       const anchor = cell.landmarks[start];
-      fillSelect(initializer, Object.keys(anchor.initializers), initializer.value || "charge");
-      const models = anchor.initializers[initializer.value];
-      fillSelect(model, Object.keys(models), model.value || "soh_dependent");
-      const forecast = models[model.value];
+      const rollingPoints = data.rolling?.starts.includes(start)
+        ? cell.rolling?.filter(point => point.cycle >= start) : null;
+      const rollingAvailable = rollingPoints?.length > 0;
+      const inputs = Object.keys(anchor.initializers);
+      if (rollingAvailable) inputs.push("rolling_input");
+      fillSelect(initializer, inputs, initializer.value || (rollingAvailable ? "rolling_input" : "charge"));
+      const rolling = initializer.value === "rolling_input" ? rollingPoints : null;
+      const models = rolling ? ["rolling_forecast"] : Object.keys(anchor.initializers[initializer.value]);
+      const defaultModel = models.includes("revised_fixed") ? "revised_fixed" : "soh_dependent";
+      fillSelect(model, models, models.includes(model.value) ? model.value : defaultModel);
+      const revisedFixed = model.value === "revised_fixed";
+      const forecast = rolling ? null : anchor.initializers[initializer.value][model.value];
       const observed = anchor.observed;
-      const values = observed.concat(forecast.forecast).filter(Number.isFinite);
+      const estimates = rolling ? rolling.flatMap(point => Object.values(point.soh)) : forecast.forecast;
+      const values = observed.concat(estimates).filter(Number.isFinite);
       run = {
+        cell,
         start,
         end: start + observed.length - 1,
         observed,
         forecast,
+        rolling,
+        revisedFixed,
         low: Math.min(78, Math.floor(Math.min(data.eolThreshold, ...values)) - 1),
         high: Math.max(101, Math.ceil(Math.max(data.eolThreshold, ...values)) + 1),
       };
@@ -247,7 +313,26 @@
       get("recorded-eol").textContent = cell.eventStatus === "right_censored"
         ? `Actual EOL unknown · measured through cycle ${cell.lastRecorded}`
         : `Measured EOL at cycle ${cell.observedEol}`;
-      renderBenchmark(cell, anchor);
+      get("rolling-chart-settings").hidden = !rolling;
+      get("rolling-forecasts").hidden = !rolling;
+      get("forecast-swatch").className = rolling ? "forecast points" : "forecast";
+      get("forecast-soh-label").textContent = rolling ? "SOH estimate at latest update" : "Forecast SOH";
+      get("soh-error-label").textContent = rolling ? "SOH error at latest update" : "Absolute SOH error";
+      get("playback-note").textContent = rolling
+        ? `Forecasts refresh every ${data.rolling.step} cycles when new charge data are available. RUL counts down between updates.`
+        : revisedFixed ? `RUL counts down to the forecast’s first ${data.eolThreshold}% SOH crossing.`
+          : "The forecast starts at the selected start cycle. RUL counts down from that forecast.";
+      const windows = rolling ? Object.keys(data.rolling.benchmarks[start]) : [];
+      get("benchmark-window-control").hidden = windows.length < 2;
+      if (windows.length) {
+        const nextStart = data.rolling.starts.find(cycle => cycle > start);
+        const windowLabel = value => value === "early"
+          ? `Cycles ${start}–${nextStart - data.rolling.step}`
+          : "All updates";
+        fillSelect(benchmarkWindow, windows, windows.includes(benchmarkWindow.value) ? benchmarkWindow.value : "all",
+                   windowLabel);
+      }
+      renderBenchmark();
       renderCycle();
     }
 
@@ -255,44 +340,138 @@
       return Number.isFinite(value) ? `${value.toFixed(digits)}${unit}` : missing;
     }
 
-    function renderBenchmark(cell, anchor) {
-      const key = `${cell.rate}/${run.start}/${initializer.value}/${model.value}`;
+    function horizonLabel(horizon) {
+      if (Number(horizon) === 0) return "Current";
+      return `${horizon} ${Number(horizon) === 1 ? "cycle" : "cycles"}`;
+    }
+
+    function tableRow(values) {
+      const row = document.createElement("tr");
+      for (const value of values) row.insertCell().textContent = value;
+      return row;
+    }
+
+    function renderFixedSohBenchmark(group) {
+      get("fixed-soh-benchmark").hidden = !group;
+      if (!group) return;
+      const rows = [
+        ["Full curve mean", "full", "mae"],
+        ["Full curve max", "full", "worst"],
+        ["Last 20 mean", "last20", "mae"],
+        ["Last 20 max", "last20", "worst"],
+      ].map(([label, window, field]) => tableRow([label, ...[
+        group.dashboard_fixed, group.previous_fixed, group.revised_fixed,
+      ].map(model => fixed(model[window][field], 3, ""))]));
+      get("fixed-soh-metrics").replaceChildren(...rows);
+      const {full, last20} = group.revised_fixed;
+      get("fixed-soh-full-worst").textContent = worstLocation(full);
+      get("fixed-soh-tail-worst").textContent = worstLocation(last20);
+      get("fixed-soh-coverage").textContent = `${full.cells} cells for the full curve · ${last20.cells} with a verified EOL for the last 20 cycles`;
+    }
+
+    function worstLocation(metric) {
+      const battery = metric.worstCell.replace(/^XJTU_/, "").replace("_", " ");
+      return `${battery} · cycle ${metric.worstCycle}`;
+    }
+
+    function renderBenchmark() {
+      const {cell, rolling} = run;
+      const anchor = cell.landmarks[run.start];
+      const selection = `${cell.rate}/${run.start}/${initializer.value}`;
+      const key = `${selection}/${model.value}`;
       const earlierKey = `${cell.rate}/${run.start}/charge/previous_rul_model`;
       get("benchmark-context").textContent = `${cell.rate}C · Start at cycle ${run.start} · ${labels[initializer.value]}`;
+      get("rul-benchmark").hidden = run.revisedFixed;
+      get("previous-rul-benchmark").hidden = run.revisedFixed;
+      get("soh-benchmark-detail").textContent = rolling ? "Worst" : "Cells";
+      get("previous-rul-label").textContent = rolling ? "Earlier rolling model" : "Earlier charge-based model";
+      get("previous-rul-title").textContent = rolling ? "Earlier RUL at this update" : "Earlier RUL forecast for this cell";
+      const view = rolling ? data.rolling.benchmarks[run.start][benchmarkWindow.value] : null;
+      const rollingStats = view?.rul[cell.rate];
+      const tail = rollingStats?.["1–20"]?.selected;
+      get("rolling-tail").hidden = !tail;
+      if (tail) {
+        get("rolling-tail-mae").textContent = fixed(tail.mae, 2, " cycles");
+        get("rolling-tail-worst").textContent = fixed(tail.worst, 2, " cycles");
+      }
+      const worst = rollingStats?.all?.selected;
+      get("rolling-rul-worst-location").hidden = !worst;
+      if (worst) get("rolling-rul-worst-location").textContent = `Worst selected error at ${worstLocation(worst)}`;
 
-      const rows = data.horizons.map(horizon => {
-        const metric = data.sohMetrics[key]?.[horizon];
-        const row = document.createElement("tr");
-        for (const value of [`${horizon} cycles`, fixed(metric?.mae, 3, " pp"), metric?.cells ?? missing]) {
-          row.insertCell().textContent = value;
-        }
-        return row;
+      const sohStats = rolling ? view.soh[cell.rate] : data.sohMetrics[key];
+      const horizons = rolling ? data.rolling.horizons : run.revisedFixed ? Object.keys(sohStats) : data.horizons;
+      const rows = horizons.map(horizon => {
+        const metric = sohStats?.[horizon];
+        const detail = rolling ? fixed(metric?.worst, 3, " pp") : metric?.cells ?? missing;
+        return tableRow([horizonLabel(horizon), fixed(metric?.mae, 3, " pp"), detail]);
       });
       get("soh-benchmark").replaceChildren(...rows);
 
+      const lateLife = data.lateLifeMetrics[key];
+      get("late-life-benchmark").hidden = !lateLife;
+      if (lateLife) {
+        get("late-life-mae").textContent = fixed(lateLife.mae, 3, " pp");
+        get("late-life-worst").textContent = fixed(lateLife.worst, 3, " pp");
+        get("late-life-cells").textContent = `${lateLife.cells} cells with a verified EOL`;
+      }
+      renderFixedSohBenchmark(run.revisedFixed ? data.fixedSohMetrics[selection] : null);
+      if (run.revisedFixed) return;
+
       for (const [element, metric] of [
-        [get("model-rul-mae"), data.rulMetrics[key]],
-        [get("previous-rul-mae"), data.rulMetrics[earlierKey]],
+        [get("model-rul-mae"), rolling ? rollingStats?.all?.selected : data.rulMetrics[key]],
+        [get("previous-rul-mae"), rolling ? rollingStats?.all?.earlier : data.rulMetrics[earlierKey]],
       ]) {
         element.textContent = fixed(metric?.mae, 2, " cycles");
         if (metric) {
           const count = document.createElement("small");
           count.className = "muted";
-          count.textContent = `${metric.predictions}/${metric.observed} cells`;
+          count.textContent = rolling
+            ? `Worst ${fixed(metric.worst, 2, " cycles")}`
+            : `${metric.predictions}/${metric.observed} cells`;
           element.append(count);
         }
       }
-      get("previous-rul").textContent = Number.isFinite(anchor.previousRul)
-        ? `${anchor.previousRul.toFixed(1)} cycles left at cycle ${run.start}`
-        : "No saved earlier prediction for this cell";
+      if (!rolling) {
+        get("previous-rul").textContent = Number.isFinite(anchor.previousRul)
+          ? `${anchor.previousRul.toFixed(1)} cycles left at cycle ${run.start}`
+          : "No saved earlier prediction for this cell";
+      }
+    }
+
+    function renderRollingCycle(cycle) {
+      const point = run.rolling.findLast(update => update.cycle <= cycle);
+      const estimate = point?.soh[0];
+      const actual = point ? run.observed[point.cycle - run.start] : null;
+      get("forecast-soh").textContent = fixed(estimate, 2, "%");
+      const error = Number.isFinite(actual) && Number.isFinite(estimate) ? Math.abs(actual - estimate) : null;
+      get("soh-error").textContent = fixed(error, 2, " pp");
+      get("projected-rul").textContent = point ? fixed(Math.max(0, point.rul - (cycle - point.cycle)), 1, "") : missing;
+      get("projected-detail").textContent = point ? `Updated at cycle ${point.cycle}` : "Waiting for the first saved update";
+      get("rolling-forecasts-title").textContent = point ? `SOH forecasts from cycle ${point.cycle}` : "Latest SOH forecasts";
+      get("previous-rul").textContent = point ? `${fixed(point.earlierRul, 1, " cycles")} at cycle ${point.cycle}` : missing;
+      get("rolling-forecast-rows").replaceChildren(...data.rolling.horizons.filter(horizon => horizon > 0).map(horizon => {
+        const value = point?.soh[horizon];
+        return tableRow([horizonLabel(horizon), Number.isFinite(value) ? point.cycle + horizon : missing, fixed(value, 2, "%")]);
+      }));
     }
 
     function renderCycle() {
       const cycle = Number(slider.value);
       const index = cycle - run.start;
       const actual = run.observed[index];
-      const forecast = run.forecast.forecast[index];
       get("measured-soh").textContent = fixed(actual, 2, "%");
+      get("forecast-legend").textContent = run.rolling ? `${horizonLabel(rollingHorizon.value)} SOH forecasts` : "Forecast SOH";
+      if (run.rolling) renderRollingCycle(cycle);
+      else renderFixedCycle(index, actual);
+      get("cycle-position").textContent = `Cycle ${cycle} / ${run.end}`;
+      slider.setAttribute("aria-valuetext", `Cycle ${cycle}`);
+      back.disabled = cycle === run.start;
+      forward.disabled = cycle === run.end;
+      drawChart(index);
+    }
+
+    function renderFixedCycle(index, actual) {
+      const forecast = run.forecast.forecast[index];
       get("forecast-soh").textContent = fixed(forecast, 2, "%");
       const error = Number.isFinite(actual) && Number.isFinite(forecast) ? Math.abs(actual - forecast) : null;
       get("soh-error").textContent = fixed(error, 2, " pp");
@@ -307,14 +486,11 @@
         detail = "Fixed SOH baseline";
       } else if (run.forecast.status === "no_crossing_by_600") {
         detail = `No crossing within ${data.maxRollout} cycles`;
+      } else if (run.forecast.status === "no_crossing_by_limit") {
+        detail = `No ${data.eolThreshold}% SOH crossing within ${run.forecast.maxRollout} cycles`;
       }
       get("projected-rul").textContent = projected;
       get("projected-detail").textContent = detail;
-      get("cycle-position").textContent = `Cycle ${cycle} / ${run.end}`;
-      slider.setAttribute("aria-valuetext", `Cycle ${cycle}`);
-      back.disabled = cycle === run.start;
-      forward.disabled = cycle === run.end;
-      drawChart(index);
     }
 
     function pause() {
@@ -405,22 +581,37 @@
         context.setLineDash([]);
       }
 
-      const forecast = run.forecast.forecast;
-      drawSeries(forecast, last, forecastColor, [6, 4], 0.42, index);
-      drawSeries(run.observed, index, measuredColor, [], 1);
-      drawSeries(forecast, index, forecastColor, [6, 4], 1);
-      for (const [value, color, radius] of [[run.observed[index], measuredColor, 5], [forecast[index], forecastColor, 3]]) {
-        if (!Number.isFinite(value)) continue;
+      function dot(position, value, color, radius) {
+        if (!Number.isFinite(value)) return;
         context.fillStyle = color;
         context.beginPath();
-        context.arc(x(index), y(value), radius, 0, 2 * Math.PI);
+        context.arc(x(position), y(value), radius, 0, 2 * Math.PI);
         context.fill();
       }
+
+      if (run.rolling) {
+        drawSeries(run.observed, index, measuredColor, [], 1);
+        const horizon = Number(rollingHorizon.value);
+        for (const point of run.rolling) {
+          const origin = point.cycle - run.start;
+          if (origin > index) break;
+          dot(origin + horizon, point.soh[horizon], forecastColor, 2.6);
+        }
+      } else {
+        const forecast = run.forecast.forecast;
+        drawSeries(forecast, last, forecastColor, [6, 4], 0.42, index);
+        drawSeries(run.observed, index, measuredColor, [], 1);
+        drawSeries(forecast, index, forecastColor, [6, 4], 1);
+        dot(index, forecast[index], forecastColor, 3);
+      }
+      dot(index, run.observed[index], measuredColor, 5);
     }
 
     for (const select of [battery, landmark, initializer, model]) {
       select.addEventListener("change", useSelection);
     }
+    rollingHorizon.addEventListener("change", renderCycle);
+    benchmarkWindow.addEventListener("change", renderBenchmark);
     slider.addEventListener("input", () => { pause(); renderCycle(); });
     back.addEventListener("click", () => { pause(); seek(Number(slider.value) - 1); });
     forward.addEventListener("click", () => { pause(); seek(Number(slider.value) + 1); });
@@ -436,6 +627,12 @@
     });
     document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
 
+    if (data.rolling) {
+      fillSelect(rollingHorizon, data.rolling.horizons.map(String), "10", horizonLabel);
+      get("source").textContent = "XJTU battery aging · Fixed and rolling forecasts";
+    } else if (Object.keys(data.lateLifeMetrics).length) {
+      get("source").textContent = "XJTU battery aging · Saved results from Notebooks 07 and 08";
+    }
     get("threshold-label").textContent = `${data.eolThreshold}% SOH threshold`;
     fillSelect(battery, cells.map(cell => cell.id), "XJTU_3C_battery-1");
     useSelection();

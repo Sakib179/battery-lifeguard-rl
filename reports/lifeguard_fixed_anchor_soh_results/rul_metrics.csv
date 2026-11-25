@@ -1,0 +1,13 @@
+charge_rate_c,landmark_cycle,initializer,model,observed_test_cells,predicted_test_cells,mae_cycles,worst_error_cycles,median_signed_error_cycles,over_20_cycles_early,over_20_cycles_late
+2,100,charge,persistence,7,0,,,,0,0
+2,100,charge,constant_fade,7,7,55.0,68.0,60.0,0,7
+2,100,charge,soh_dependent,7,7,31.285714285714285,63.0,-33.0,6,0
+2,100,charge,soh_dependent_with_history,7,7,114.14285714285714,131.0,-120.0,7,0
+2,100,charge,late_life_calibrated,7,7,9,17,4,0,0
+2,100,charge,previous_rul_model,7,7,9.0,17.0,4.0,0,0
+3,100,charge,persistence,15,0,,,,0,0
+3,100,charge,constant_fade,15,15,151.26666666666668,187.0,149.0,0,15
+3,100,charge,soh_dependent,15,15,23.6,68.0,2.0,3,3
+3,100,charge,soh_dependent_with_history,15,15,34.93333333333333,88.0,-27.0,9,0
+3,100,charge,late_life_calibrated,15,15,20.8,60,1,3,3
+3,100,charge,previous_rul_model,15,15,21.93666118593364,52.8483275289104,4.388891061729595,4,4

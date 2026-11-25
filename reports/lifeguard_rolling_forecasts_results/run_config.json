@@ -1,0 +1,46 @@
+{
+  "start_cycle": 50,
+  "start_cycles": [
+    50,
+    100
+  ],
+  "checkpoint_interval": 5,
+  "soh_horizons": [
+    0,
+    1,
+    10,
+    50
+  ],
+  "threshold_soh_pct": 80.0,
+  "neighbor_distance_scale": [
+    50.0,
+    3.0,
+    0.04,
+    4.0
+  ],
+  "neighbor_count": 6,
+  "ridge_2c_alpha": 3,
+  "boosting_3c": {
+    "max_iter": 60,
+    "max_leaf_nodes": 9,
+    "min_samples_leaf": 15,
+    "learning_rate": 0.12,
+    "l2_regularization": 1,
+    "monotonic_cst": [
+      -1,
+      1,
+      -1
+    ],
+    "early_stopping": false,
+    "random_state": 0
+  },
+  "sources": [
+    "lifeguard_soh_results",
+    "lifeguard_soh_error_audit_results",
+    "lifeguard_rul_charge_features_results",
+    "lifeguard_digital_twin_validation_results",
+    "lifeguard_fixed_anchor_soh_results",
+    "lifeguard_eol_timing_results",
+    "lifeguard_average_and_worst_error_results"
+  ]
+}

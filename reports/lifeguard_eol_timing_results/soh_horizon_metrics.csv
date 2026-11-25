@@ -1,0 +1,16 @@
+charge_rate_c,landmark_cycle,initializer,model,horizon_cycles,paired_test_cells,paired_mae_pp
+3,100,charge,eol_timing_charge_summary,1,15,0.11867719976511637
+3,100,charge,eol_timing_charge_summary,10,15,0.24081018398735712
+3,100,charge,eol_timing_charge_summary,50,13,0.446122917197497
+3,100,charge,eol_timing_charge_summary,100,11,1.1687656988785564
+3,100,charge,eol_timing_charge_summary,150,9,3.4047307847997197
+3,100,charge,eol_timing_charge_curve,1,15,0.11867719976511637
+3,100,charge,eol_timing_charge_curve,10,15,0.24081018398735712
+3,100,charge,eol_timing_charge_curve,50,13,0.4590684676179677
+3,100,charge,eol_timing_charge_curve,100,11,1.1944426088127371
+3,100,charge,eol_timing_charge_curve,150,9,3.435945492301416
+3,100,charge,eol_timing_charge_discharge,1,15,0.11867719976511637
+3,100,charge,eol_timing_charge_discharge,10,15,0.24081018398735712
+3,100,charge,eol_timing_charge_discharge,50,13,0.4594936053434876
+3,100,charge,eol_timing_charge_discharge,100,11,1.2696360541387848
+3,100,charge,eol_timing_charge_discharge,150,9,3.6635840630003997

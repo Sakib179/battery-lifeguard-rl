@@ -1,0 +1,26 @@
+{
+  "guard_start": 100,
+  "history_start": 25,
+  "history_size": 15,
+  "rise_allowance_pp": 0.5,
+  "landmark_cycle": 100,
+  "eol_soh_pct": 80.0,
+  "features": [
+    "recent_charge_ah",
+    "recent_4_0_to_4_1_s",
+    "recent_taper_s"
+  ],
+  "alphas": [
+    0.1,
+    1.0,
+    5.0
+  ],
+  "train_worst_weight": 0.5,
+  "tune_worst_weight": 0.25,
+  "source_reports": [
+    "lifeguard_soh_error_audit_results",
+    "lifeguard_rul_charge_features_results",
+    "lifeguard_digital_twin_validation_results",
+    "lifeguard_fixed_anchor_soh_results"
+  ]
+}

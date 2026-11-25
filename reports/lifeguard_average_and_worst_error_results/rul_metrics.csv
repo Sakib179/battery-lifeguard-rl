@@ -1,0 +1,6 @@
+charge_rate_c,landmark_cycle,model,cells,mae_cycles,worst_error_cycles,p95_error_cycles,short_life_cells,short_life_mae_cycles,worst_cell
+3,100,ridge_charge_history_pooled,15,21.936661185933637,52.8483275289104,44.5646680678956,4,21.900197703130402,XJTU_3C_battery-9
+3,100,ridge_3c_recent_signals,15,22.101698957139224,44.333548857668546,43.75133743266111,4,18.68555645083514,XJTU_3C_battery-3
+3,100,ridge_average,15,21.22770180549964,48.17507288971274,43.8328464010258,4,20.292877076982773,XJTU_3C_battery-9
+3,100,tail_penalized_linear,15,21.165936543431624,46.97227954943975,44.45714791570635,4,18.477396335489697,XJTU_3C_battery-3
+2,100,protocol_median,7,9.0,17.0,16.7,0,,XJTU_2C_battery-8

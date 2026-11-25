@@ -1,0 +1,3 @@
+charge_rate_c,landmark_cycle,initializer,model,complete_feature_coverage,complete_trajectory_rul_coverage,direct_rul_gain_cycles,full_curve_gain_pp,last_20_gain_pp,horizon_10_delta_pp,horizon_50_delta_pp,passes_benchmark,approved
+3,100,charge,eol_timing_charge_curve,True,True,-3.638253643005651,-0.15419924441209942,-0.15510807204712274,0.0,0.063178634969358,False,False
+3,100,charge,eol_timing_charge_discharge,True,True,-3.4645192036363355,-0.20687530442260904,-0.3650480629459394,0.0,0.06360377269487788,False,False

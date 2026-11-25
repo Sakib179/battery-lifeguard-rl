@@ -1,0 +1,16 @@
+fold,model,ridge_alpha,train_cells_with_features,test_cells,test_cells_with_features
+1,eol_timing_charge_summary,1.0,12,3,3
+1,eol_timing_charge_curve,1.0,12,3,3
+1,eol_timing_charge_discharge,10.0,12,3,3
+2,eol_timing_charge_summary,1.0,12,3,3
+2,eol_timing_charge_curve,1.0,12,3,3
+2,eol_timing_charge_discharge,0.1,12,3,3
+3,eol_timing_charge_summary,1.0,12,3,3
+3,eol_timing_charge_curve,1.0,12,3,3
+3,eol_timing_charge_discharge,10.0,12,3,3
+4,eol_timing_charge_summary,0.1,12,3,3
+4,eol_timing_charge_curve,1.0,12,3,3
+4,eol_timing_charge_discharge,10.0,12,3,3
+5,eol_timing_charge_summary,1.0,12,3,3
+5,eol_timing_charge_curve,10.0,12,3,3
+5,eol_timing_charge_discharge,10.0,12,3,3

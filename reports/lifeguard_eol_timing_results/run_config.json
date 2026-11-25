@@ -1,0 +1,36 @@
+{
+  "landmark_cycle": 100,
+  "charge_rate_c": 3,
+  "eol_soh_pct": 80.0,
+  "cells": 15,
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "feature_windows": [
+    [
+      41,
+      50
+    ],
+    [
+      91,
+      100
+    ]
+  ],
+  "feature_version": 1,
+  "ridge_alphas": [
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "horizon_tolerance_pp": 0.05,
+  "prior_reports": [
+    "lifeguard_rul_charge_features_results",
+    "lifeguard_digital_twin_validation_results",
+    "lifeguard_fixed_anchor_soh_results"
+  ]
+}
