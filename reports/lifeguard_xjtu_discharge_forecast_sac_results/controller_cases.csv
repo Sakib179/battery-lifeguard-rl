@@ -1,0 +1,9 @@
+cell_id,train_starts,test_starts,excluded_starts,sac_transitions
+XJTU_RW_battery-1,124,12,2,38526
+XJTU_RW_battery-2,113,22,2,34769
+XJTU_RW_battery-3,109,25,2,33877
+XJTU_RW_battery-4,119,17,2,36854
+XJTU_RW_battery-5,116,18,3,36009
+XJTU_RW_battery-6,121,14,2,37278
+XJTU_RW_battery-7,124,12,1,38594
+XJTU_RW_battery-8,122,13,2,37853

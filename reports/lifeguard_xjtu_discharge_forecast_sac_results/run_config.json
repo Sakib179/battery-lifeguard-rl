@@ -1,0 +1,51 @@
+{
+  "forecast_cycles": [
+    10,
+    20,
+    30
+  ],
+  "forecast_metric_weights": [
+    0.3,
+    0.4,
+    0.3
+  ],
+  "forecast_goal": 0.5,
+  "controller_selected": "lookahead",
+  "operating_cycles_per_action": 10,
+  "starts": 133,
+  "disturbance_seed": 42,
+  "disturbance_paths": 8,
+  "stress_scale": 1.25,
+  "conservative_planning_paths": 32,
+  "planning_energy_probability": 0.95,
+  "energy_budget_fraction": 0.9,
+  "qualification_loss_reduction": 0.1,
+  "energy_budget_hit_tolerance": 0.01,
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "sac_updates": 1500,
+  "sac_batch": 64,
+  "gru_epochs": 48,
+  "threads": 1,
+  "controller_reused": true,
+  "forecast_revision": {
+    "blend_weights": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "soh_caps": [
+      0.5,
+      1.0,
+      1.5
+    ],
+    "wh_caps_per_block": [
+      0.25,
+      0.5,
+      1.0
+    ]
+  }
+}
