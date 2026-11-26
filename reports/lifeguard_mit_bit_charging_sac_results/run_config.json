@@ -1,0 +1,43 @@
+{
+  "dataset": "10.17632/kw34hhw7xg.3",
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "horizons": [
+    5,
+    10,
+    15
+  ],
+  "forecast_targets": [
+    0.2,
+    0.15,
+    0.1
+  ],
+  "starts": [
+    11,
+    41,
+    66
+  ],
+  "disturbance_paths": 8,
+  "sac_training_paths": 2,
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "sac_hidden_layers": [
+    64,
+    64
+  ],
+  "sac_updates": 1500,
+  "sac_batch_size": 64,
+  "learning_rate": 0.0003,
+  "target_update": 0.005,
+  "energy_budget_fraction": 0.9,
+  "training_entropy_fraction": 0.7,
+  "bootstrap_draws": 2000
+}

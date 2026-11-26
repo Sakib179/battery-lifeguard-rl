@@ -1,0 +1,4 @@
+policy,baseline,mean_loss_change_pp,mean_ci95_low,mean_ci95_high,tail_loss_change_pp,tail_ci95_low,tail_ci95_high,budget_hit_change,budget_ci95_low,budget_ci95_high,support_stop_change,loss_pass,energy_pass,support_pass,qualifies
+fqi,ppo,-0.08574528204974169,-0.1319868494371537,-0.04408922666325292,-0.07569417845686155,-0.12632847582396667,-0.018768262083091555,0.0,0.0,0.0,0.0,True,True,True,True
+fqi,lookahead,0.14489830757281094,0.1148615528380433,0.17730697589300934,0.1871280884823271,0.1377634614932764,0.23875914810428545,0.0,0.0,0.0,0.0,False,True,True,False
+scenario,lookahead,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False,True,True,False

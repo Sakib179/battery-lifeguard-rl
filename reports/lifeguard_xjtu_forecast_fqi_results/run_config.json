@@ -1,0 +1,26 @@
+{
+  "forecast_horizon_tests": 3,
+  "forecast_seeds": [
+    42,
+    73,
+    101
+  ],
+  "ridge_alphas": [
+    1,
+    10,
+    100
+  ],
+  "transformer_epochs": 70,
+  "fqi_training_paths_per_start": 8,
+  "fqi_trees": 64,
+  "fqi_max_depth": 6,
+  "fqi_min_samples_leaf": 5,
+  "scenario_planning_paths": 32,
+  "scenario_required_energy_probability": 0.95,
+  "scenario_tail_fraction": 0.1,
+  "test_seed": 42,
+  "test_disturbances_per_start": 8,
+  "bootstrap_draws": 2000,
+  "energy_budget_fraction": 0.9,
+  "energy_hit_rate_tolerance": 0.01
+}
