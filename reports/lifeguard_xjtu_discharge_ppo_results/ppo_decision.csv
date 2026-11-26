@@ -1,0 +1,2 @@
+ppo_minus_lookahead_loss_pp,loss_ci95_low_pp,loss_ci95_high_pp,ppo_minus_lookahead_hit_rate,hit_ci95_low,hit_ci95_high,better_soh_loss,comparable_energy,completed_all_in_support,retain_ppo
+0.2306435896225526,0.20210839468684705,0.2573399078930376,0.0,0.0,0.0,False,True,False,False

@@ -1,0 +1,36 @@
+{
+  "action_templates": [
+    "low",
+    "middle",
+    "high"
+  ],
+  "operating_cycles_per_action": 10,
+  "horizon_tests": 3,
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "disturbance_paths_per_start": 8,
+  "evaluation_seed": 42,
+  "updates": 8,
+  "samples_per_update": 96,
+  "budget_fraction": 0.9,
+  "energy_alpha": 10,
+  "soh_alpha_by_battery": {
+    "XJTU_RW_battery-1": 1,
+    "XJTU_RW_battery-2": 1,
+    "XJTU_RW_battery-3": 1,
+    "XJTU_RW_battery-4": 1,
+    "XJTU_RW_battery-5": 1,
+    "XJTU_RW_battery-6": 1,
+    "XJTU_RW_battery-7": 1,
+    "XJTU_RW_battery-8": 1
+  },
+  "min_soh": 80.0,
+  "support_soh_radius_pp": 6.0,
+  "support_age_radius": 70.0,
+  "support_min_training_cells": 2,
+  "gymnasium_version": "1.2.2",
+  "torch_version": "2.14.0"
+}

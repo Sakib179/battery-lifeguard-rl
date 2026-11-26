@@ -1,0 +1,841 @@
+held_out,health_band,action_a,duration_s,commands,training_batteries
+XJTU_RW_battery-1,90% and above,2,120,135,7
+XJTU_RW_battery-1,90% and above,2,180,20,7
+XJTU_RW_battery-1,90% and above,2,240,44,7
+XJTU_RW_battery-1,90% and above,2,300,78,7
+XJTU_RW_battery-1,90% and above,2,360,86,7
+XJTU_RW_battery-1,90% and above,3,120,72,7
+XJTU_RW_battery-1,90% and above,3,180,89,7
+XJTU_RW_battery-1,90% and above,3,240,51,7
+XJTU_RW_battery-1,90% and above,3,300,107,7
+XJTU_RW_battery-1,90% and above,3,360,69,7
+XJTU_RW_battery-1,90% and above,4,120,120,7
+XJTU_RW_battery-1,90% and above,4,180,49,7
+XJTU_RW_battery-1,90% and above,4,240,79,7
+XJTU_RW_battery-1,90% and above,4,300,32,7
+XJTU_RW_battery-1,90% and above,4,360,122,7
+XJTU_RW_battery-1,90% and above,5,120,0,0
+XJTU_RW_battery-1,90% and above,5,180,0,0
+XJTU_RW_battery-1,90% and above,5,240,0,0
+XJTU_RW_battery-1,90% and above,5,300,14,7
+XJTU_RW_battery-1,90% and above,5,360,13,7
+XJTU_RW_battery-1,90% and above,6,120,0,0
+XJTU_RW_battery-1,90% and above,6,180,0,0
+XJTU_RW_battery-1,90% and above,6,240,0,0
+XJTU_RW_battery-1,90% and above,6,300,0,0
+XJTU_RW_battery-1,90% and above,6,360,0,0
+XJTU_RW_battery-1,90% and above,7,120,0,0
+XJTU_RW_battery-1,90% and above,7,180,0,0
+XJTU_RW_battery-1,90% and above,7,240,0,0
+XJTU_RW_battery-1,90% and above,7,300,0,0
+XJTU_RW_battery-1,90% and above,7,360,0,0
+XJTU_RW_battery-1,90% and above,8,120,0,0
+XJTU_RW_battery-1,90% and above,8,180,0,0
+XJTU_RW_battery-1,90% and above,8,240,0,0
+XJTU_RW_battery-1,90% and above,8,300,0,0
+XJTU_RW_battery-1,90% and above,8,360,0,0
+XJTU_RW_battery-1,80% to under 90%,2,120,42,7
+XJTU_RW_battery-1,80% to under 90%,2,180,10,7
+XJTU_RW_battery-1,80% to under 90%,2,240,14,7
+XJTU_RW_battery-1,80% to under 90%,2,300,16,7
+XJTU_RW_battery-1,80% to under 90%,2,360,21,7
+XJTU_RW_battery-1,80% to under 90%,3,120,19,7
+XJTU_RW_battery-1,80% to under 90%,3,180,19,6
+XJTU_RW_battery-1,80% to under 90%,3,240,19,6
+XJTU_RW_battery-1,80% to under 90%,3,300,33,7
+XJTU_RW_battery-1,80% to under 90%,3,360,23,7
+XJTU_RW_battery-1,80% to under 90%,4,120,29,7
+XJTU_RW_battery-1,80% to under 90%,4,180,11,6
+XJTU_RW_battery-1,80% to under 90%,4,240,17,7
+XJTU_RW_battery-1,80% to under 90%,4,300,8,5
+XJTU_RW_battery-1,80% to under 90%,4,360,26,7
+XJTU_RW_battery-1,80% to under 90%,5,120,0,0
+XJTU_RW_battery-1,80% to under 90%,5,180,0,0
+XJTU_RW_battery-1,80% to under 90%,5,240,0,0
+XJTU_RW_battery-1,80% to under 90%,5,300,2,2
+XJTU_RW_battery-1,80% to under 90%,5,360,1,1
+XJTU_RW_battery-1,80% to under 90%,6,120,0,0
+XJTU_RW_battery-1,80% to under 90%,6,180,0,0
+XJTU_RW_battery-1,80% to under 90%,6,240,0,0
+XJTU_RW_battery-1,80% to under 90%,6,300,0,0
+XJTU_RW_battery-1,80% to under 90%,6,360,0,0
+XJTU_RW_battery-1,80% to under 90%,7,120,0,0
+XJTU_RW_battery-1,80% to under 90%,7,180,0,0
+XJTU_RW_battery-1,80% to under 90%,7,240,0,0
+XJTU_RW_battery-1,80% to under 90%,7,300,0,0
+XJTU_RW_battery-1,80% to under 90%,7,360,0,0
+XJTU_RW_battery-1,80% to under 90%,8,120,0,0
+XJTU_RW_battery-1,80% to under 90%,8,180,0,0
+XJTU_RW_battery-1,80% to under 90%,8,240,0,0
+XJTU_RW_battery-1,80% to under 90%,8,300,0,0
+XJTU_RW_battery-1,80% to under 90%,8,360,0,0
+XJTU_RW_battery-1,Below 80%,2,120,0,0
+XJTU_RW_battery-1,Below 80%,2,180,0,0
+XJTU_RW_battery-1,Below 80%,2,240,0,0
+XJTU_RW_battery-1,Below 80%,2,300,0,0
+XJTU_RW_battery-1,Below 80%,2,360,0,0
+XJTU_RW_battery-1,Below 80%,3,120,0,0
+XJTU_RW_battery-1,Below 80%,3,180,0,0
+XJTU_RW_battery-1,Below 80%,3,240,0,0
+XJTU_RW_battery-1,Below 80%,3,300,0,0
+XJTU_RW_battery-1,Below 80%,3,360,0,0
+XJTU_RW_battery-1,Below 80%,4,120,0,0
+XJTU_RW_battery-1,Below 80%,4,180,0,0
+XJTU_RW_battery-1,Below 80%,4,240,0,0
+XJTU_RW_battery-1,Below 80%,4,300,0,0
+XJTU_RW_battery-1,Below 80%,4,360,0,0
+XJTU_RW_battery-1,Below 80%,5,120,0,0
+XJTU_RW_battery-1,Below 80%,5,180,0,0
+XJTU_RW_battery-1,Below 80%,5,240,0,0
+XJTU_RW_battery-1,Below 80%,5,300,0,0
+XJTU_RW_battery-1,Below 80%,5,360,0,0
+XJTU_RW_battery-1,Below 80%,6,120,0,0
+XJTU_RW_battery-1,Below 80%,6,180,0,0
+XJTU_RW_battery-1,Below 80%,6,240,0,0
+XJTU_RW_battery-1,Below 80%,6,300,0,0
+XJTU_RW_battery-1,Below 80%,6,360,0,0
+XJTU_RW_battery-1,Below 80%,7,120,0,0
+XJTU_RW_battery-1,Below 80%,7,180,0,0
+XJTU_RW_battery-1,Below 80%,7,240,0,0
+XJTU_RW_battery-1,Below 80%,7,300,0,0
+XJTU_RW_battery-1,Below 80%,7,360,0,0
+XJTU_RW_battery-1,Below 80%,8,120,0,0
+XJTU_RW_battery-1,Below 80%,8,180,0,0
+XJTU_RW_battery-1,Below 80%,8,240,0,0
+XJTU_RW_battery-1,Below 80%,8,300,0,0
+XJTU_RW_battery-1,Below 80%,8,360,0,0
+XJTU_RW_battery-2,90% and above,2,120,125,7
+XJTU_RW_battery-2,90% and above,2,180,18,7
+XJTU_RW_battery-2,90% and above,2,240,39,7
+XJTU_RW_battery-2,90% and above,2,300,71,7
+XJTU_RW_battery-2,90% and above,2,360,83,7
+XJTU_RW_battery-2,90% and above,3,120,68,7
+XJTU_RW_battery-2,90% and above,3,180,83,7
+XJTU_RW_battery-2,90% and above,3,240,47,7
+XJTU_RW_battery-2,90% and above,3,300,97,7
+XJTU_RW_battery-2,90% and above,3,360,63,7
+XJTU_RW_battery-2,90% and above,4,120,111,7
+XJTU_RW_battery-2,90% and above,4,180,44,7
+XJTU_RW_battery-2,90% and above,4,240,76,7
+XJTU_RW_battery-2,90% and above,4,300,30,7
+XJTU_RW_battery-2,90% and above,4,360,110,7
+XJTU_RW_battery-2,90% and above,5,120,0,0
+XJTU_RW_battery-2,90% and above,5,180,0,0
+XJTU_RW_battery-2,90% and above,5,240,0,0
+XJTU_RW_battery-2,90% and above,5,300,14,7
+XJTU_RW_battery-2,90% and above,5,360,11,7
+XJTU_RW_battery-2,90% and above,6,120,0,0
+XJTU_RW_battery-2,90% and above,6,180,0,0
+XJTU_RW_battery-2,90% and above,6,240,0,0
+XJTU_RW_battery-2,90% and above,6,300,0,0
+XJTU_RW_battery-2,90% and above,6,360,0,0
+XJTU_RW_battery-2,90% and above,7,120,0,0
+XJTU_RW_battery-2,90% and above,7,180,0,0
+XJTU_RW_battery-2,90% and above,7,240,0,0
+XJTU_RW_battery-2,90% and above,7,300,0,0
+XJTU_RW_battery-2,90% and above,7,360,0,0
+XJTU_RW_battery-2,90% and above,8,120,0,0
+XJTU_RW_battery-2,90% and above,8,180,0,0
+XJTU_RW_battery-2,90% and above,8,240,0,0
+XJTU_RW_battery-2,90% and above,8,300,0,0
+XJTU_RW_battery-2,90% and above,8,360,0,0
+XJTU_RW_battery-2,80% to under 90%,2,120,43,7
+XJTU_RW_battery-2,80% to under 90%,2,180,10,7
+XJTU_RW_battery-2,80% to under 90%,2,240,15,7
+XJTU_RW_battery-2,80% to under 90%,2,300,14,7
+XJTU_RW_battery-2,80% to under 90%,2,360,18,7
+XJTU_RW_battery-2,80% to under 90%,3,120,17,6
+XJTU_RW_battery-2,80% to under 90%,3,180,17,6
+XJTU_RW_battery-2,80% to under 90%,3,240,20,7
+XJTU_RW_battery-2,80% to under 90%,3,300,34,7
+XJTU_RW_battery-2,80% to under 90%,3,360,22,7
+XJTU_RW_battery-2,80% to under 90%,4,120,32,7
+XJTU_RW_battery-2,80% to under 90%,4,180,10,5
+XJTU_RW_battery-2,80% to under 90%,4,240,14,7
+XJTU_RW_battery-2,80% to under 90%,4,300,7,4
+XJTU_RW_battery-2,80% to under 90%,4,360,25,7
+XJTU_RW_battery-2,80% to under 90%,5,120,0,0
+XJTU_RW_battery-2,80% to under 90%,5,180,0,0
+XJTU_RW_battery-2,80% to under 90%,5,240,0,0
+XJTU_RW_battery-2,80% to under 90%,5,300,1,1
+XJTU_RW_battery-2,80% to under 90%,5,360,1,1
+XJTU_RW_battery-2,80% to under 90%,6,120,0,0
+XJTU_RW_battery-2,80% to under 90%,6,180,0,0
+XJTU_RW_battery-2,80% to under 90%,6,240,0,0
+XJTU_RW_battery-2,80% to under 90%,6,300,0,0
+XJTU_RW_battery-2,80% to under 90%,6,360,0,0
+XJTU_RW_battery-2,80% to under 90%,7,120,0,0
+XJTU_RW_battery-2,80% to under 90%,7,180,0,0
+XJTU_RW_battery-2,80% to under 90%,7,240,0,0
+XJTU_RW_battery-2,80% to under 90%,7,300,0,0
+XJTU_RW_battery-2,80% to under 90%,7,360,0,0
+XJTU_RW_battery-2,80% to under 90%,8,120,0,0
+XJTU_RW_battery-2,80% to under 90%,8,180,0,0
+XJTU_RW_battery-2,80% to under 90%,8,240,0,0
+XJTU_RW_battery-2,80% to under 90%,8,300,0,0
+XJTU_RW_battery-2,80% to under 90%,8,360,0,0
+XJTU_RW_battery-2,Below 80%,2,120,0,0
+XJTU_RW_battery-2,Below 80%,2,180,0,0
+XJTU_RW_battery-2,Below 80%,2,240,0,0
+XJTU_RW_battery-2,Below 80%,2,300,0,0
+XJTU_RW_battery-2,Below 80%,2,360,0,0
+XJTU_RW_battery-2,Below 80%,3,120,0,0
+XJTU_RW_battery-2,Below 80%,3,180,0,0
+XJTU_RW_battery-2,Below 80%,3,240,0,0
+XJTU_RW_battery-2,Below 80%,3,300,0,0
+XJTU_RW_battery-2,Below 80%,3,360,0,0
+XJTU_RW_battery-2,Below 80%,4,120,0,0
+XJTU_RW_battery-2,Below 80%,4,180,0,0
+XJTU_RW_battery-2,Below 80%,4,240,0,0
+XJTU_RW_battery-2,Below 80%,4,300,0,0
+XJTU_RW_battery-2,Below 80%,4,360,0,0
+XJTU_RW_battery-2,Below 80%,5,120,0,0
+XJTU_RW_battery-2,Below 80%,5,180,0,0
+XJTU_RW_battery-2,Below 80%,5,240,0,0
+XJTU_RW_battery-2,Below 80%,5,300,0,0
+XJTU_RW_battery-2,Below 80%,5,360,0,0
+XJTU_RW_battery-2,Below 80%,6,120,0,0
+XJTU_RW_battery-2,Below 80%,6,180,0,0
+XJTU_RW_battery-2,Below 80%,6,240,0,0
+XJTU_RW_battery-2,Below 80%,6,300,0,0
+XJTU_RW_battery-2,Below 80%,6,360,0,0
+XJTU_RW_battery-2,Below 80%,7,120,0,0
+XJTU_RW_battery-2,Below 80%,7,180,0,0
+XJTU_RW_battery-2,Below 80%,7,240,0,0
+XJTU_RW_battery-2,Below 80%,7,300,0,0
+XJTU_RW_battery-2,Below 80%,7,360,0,0
+XJTU_RW_battery-2,Below 80%,8,120,0,0
+XJTU_RW_battery-2,Below 80%,8,180,0,0
+XJTU_RW_battery-2,Below 80%,8,240,0,0
+XJTU_RW_battery-2,Below 80%,8,300,0,0
+XJTU_RW_battery-2,Below 80%,8,360,0,0
+XJTU_RW_battery-3,90% and above,2,120,125,7
+XJTU_RW_battery-3,90% and above,2,180,18,7
+XJTU_RW_battery-3,90% and above,2,240,39,7
+XJTU_RW_battery-3,90% and above,2,300,71,7
+XJTU_RW_battery-3,90% and above,2,360,83,7
+XJTU_RW_battery-3,90% and above,3,120,68,7
+XJTU_RW_battery-3,90% and above,3,180,83,7
+XJTU_RW_battery-3,90% and above,3,240,47,7
+XJTU_RW_battery-3,90% and above,3,300,97,7
+XJTU_RW_battery-3,90% and above,3,360,63,7
+XJTU_RW_battery-3,90% and above,4,120,111,7
+XJTU_RW_battery-3,90% and above,4,180,44,7
+XJTU_RW_battery-3,90% and above,4,240,76,7
+XJTU_RW_battery-3,90% and above,4,300,30,7
+XJTU_RW_battery-3,90% and above,4,360,110,7
+XJTU_RW_battery-3,90% and above,5,120,0,0
+XJTU_RW_battery-3,90% and above,5,180,0,0
+XJTU_RW_battery-3,90% and above,5,240,0,0
+XJTU_RW_battery-3,90% and above,5,300,14,7
+XJTU_RW_battery-3,90% and above,5,360,11,7
+XJTU_RW_battery-3,90% and above,6,120,0,0
+XJTU_RW_battery-3,90% and above,6,180,0,0
+XJTU_RW_battery-3,90% and above,6,240,0,0
+XJTU_RW_battery-3,90% and above,6,300,0,0
+XJTU_RW_battery-3,90% and above,6,360,0,0
+XJTU_RW_battery-3,90% and above,7,120,0,0
+XJTU_RW_battery-3,90% and above,7,180,0,0
+XJTU_RW_battery-3,90% and above,7,240,0,0
+XJTU_RW_battery-3,90% and above,7,300,0,0
+XJTU_RW_battery-3,90% and above,7,360,0,0
+XJTU_RW_battery-3,90% and above,8,120,0,0
+XJTU_RW_battery-3,90% and above,8,180,0,0
+XJTU_RW_battery-3,90% and above,8,240,0,0
+XJTU_RW_battery-3,90% and above,8,300,0,0
+XJTU_RW_battery-3,90% and above,8,360,0,0
+XJTU_RW_battery-3,80% to under 90%,2,120,38,7
+XJTU_RW_battery-3,80% to under 90%,2,180,9,7
+XJTU_RW_battery-3,80% to under 90%,2,240,13,7
+XJTU_RW_battery-3,80% to under 90%,2,300,14,7
+XJTU_RW_battery-3,80% to under 90%,2,360,17,7
+XJTU_RW_battery-3,80% to under 90%,3,120,14,6
+XJTU_RW_battery-3,80% to under 90%,3,180,16,6
+XJTU_RW_battery-3,80% to under 90%,3,240,16,6
+XJTU_RW_battery-3,80% to under 90%,3,300,32,7
+XJTU_RW_battery-3,80% to under 90%,3,360,21,7
+XJTU_RW_battery-3,80% to under 90%,4,120,26,7
+XJTU_RW_battery-3,80% to under 90%,4,180,9,5
+XJTU_RW_battery-3,80% to under 90%,4,240,13,7
+XJTU_RW_battery-3,80% to under 90%,4,300,7,4
+XJTU_RW_battery-3,80% to under 90%,4,360,23,7
+XJTU_RW_battery-3,80% to under 90%,5,120,0,0
+XJTU_RW_battery-3,80% to under 90%,5,180,0,0
+XJTU_RW_battery-3,80% to under 90%,5,240,0,0
+XJTU_RW_battery-3,80% to under 90%,5,300,1,1
+XJTU_RW_battery-3,80% to under 90%,5,360,1,1
+XJTU_RW_battery-3,80% to under 90%,6,120,0,0
+XJTU_RW_battery-3,80% to under 90%,6,180,0,0
+XJTU_RW_battery-3,80% to under 90%,6,240,0,0
+XJTU_RW_battery-3,80% to under 90%,6,300,0,0
+XJTU_RW_battery-3,80% to under 90%,6,360,0,0
+XJTU_RW_battery-3,80% to under 90%,7,120,0,0
+XJTU_RW_battery-3,80% to under 90%,7,180,0,0
+XJTU_RW_battery-3,80% to under 90%,7,240,0,0
+XJTU_RW_battery-3,80% to under 90%,7,300,0,0
+XJTU_RW_battery-3,80% to under 90%,7,360,0,0
+XJTU_RW_battery-3,80% to under 90%,8,120,0,0
+XJTU_RW_battery-3,80% to under 90%,8,180,0,0
+XJTU_RW_battery-3,80% to under 90%,8,240,0,0
+XJTU_RW_battery-3,80% to under 90%,8,300,0,0
+XJTU_RW_battery-3,80% to under 90%,8,360,0,0
+XJTU_RW_battery-3,Below 80%,2,120,0,0
+XJTU_RW_battery-3,Below 80%,2,180,0,0
+XJTU_RW_battery-3,Below 80%,2,240,0,0
+XJTU_RW_battery-3,Below 80%,2,300,0,0
+XJTU_RW_battery-3,Below 80%,2,360,0,0
+XJTU_RW_battery-3,Below 80%,3,120,0,0
+XJTU_RW_battery-3,Below 80%,3,180,0,0
+XJTU_RW_battery-3,Below 80%,3,240,0,0
+XJTU_RW_battery-3,Below 80%,3,300,0,0
+XJTU_RW_battery-3,Below 80%,3,360,0,0
+XJTU_RW_battery-3,Below 80%,4,120,0,0
+XJTU_RW_battery-3,Below 80%,4,180,0,0
+XJTU_RW_battery-3,Below 80%,4,240,0,0
+XJTU_RW_battery-3,Below 80%,4,300,0,0
+XJTU_RW_battery-3,Below 80%,4,360,0,0
+XJTU_RW_battery-3,Below 80%,5,120,0,0
+XJTU_RW_battery-3,Below 80%,5,180,0,0
+XJTU_RW_battery-3,Below 80%,5,240,0,0
+XJTU_RW_battery-3,Below 80%,5,300,0,0
+XJTU_RW_battery-3,Below 80%,5,360,0,0
+XJTU_RW_battery-3,Below 80%,6,120,0,0
+XJTU_RW_battery-3,Below 80%,6,180,0,0
+XJTU_RW_battery-3,Below 80%,6,240,0,0
+XJTU_RW_battery-3,Below 80%,6,300,0,0
+XJTU_RW_battery-3,Below 80%,6,360,0,0
+XJTU_RW_battery-3,Below 80%,7,120,0,0
+XJTU_RW_battery-3,Below 80%,7,180,0,0
+XJTU_RW_battery-3,Below 80%,7,240,0,0
+XJTU_RW_battery-3,Below 80%,7,300,0,0
+XJTU_RW_battery-3,Below 80%,7,360,0,0
+XJTU_RW_battery-3,Below 80%,8,120,0,0
+XJTU_RW_battery-3,Below 80%,8,180,0,0
+XJTU_RW_battery-3,Below 80%,8,240,0,0
+XJTU_RW_battery-3,Below 80%,8,300,0,0
+XJTU_RW_battery-3,Below 80%,8,360,0,0
+XJTU_RW_battery-4,90% and above,2,120,131,7
+XJTU_RW_battery-4,90% and above,2,180,19,7
+XJTU_RW_battery-4,90% and above,2,240,42,7
+XJTU_RW_battery-4,90% and above,2,300,74,7
+XJTU_RW_battery-4,90% and above,2,360,84,7
+XJTU_RW_battery-4,90% and above,3,120,71,7
+XJTU_RW_battery-4,90% and above,3,180,85,7
+XJTU_RW_battery-4,90% and above,3,240,51,7
+XJTU_RW_battery-4,90% and above,3,300,104,7
+XJTU_RW_battery-4,90% and above,3,360,65,7
+XJTU_RW_battery-4,90% and above,4,120,116,7
+XJTU_RW_battery-4,90% and above,4,180,47,7
+XJTU_RW_battery-4,90% and above,4,240,77,7
+XJTU_RW_battery-4,90% and above,4,300,32,7
+XJTU_RW_battery-4,90% and above,4,360,116,7
+XJTU_RW_battery-4,90% and above,5,120,0,0
+XJTU_RW_battery-4,90% and above,5,180,0,0
+XJTU_RW_battery-4,90% and above,5,240,0,0
+XJTU_RW_battery-4,90% and above,5,300,14,7
+XJTU_RW_battery-4,90% and above,5,360,12,7
+XJTU_RW_battery-4,90% and above,6,120,0,0
+XJTU_RW_battery-4,90% and above,6,180,0,0
+XJTU_RW_battery-4,90% and above,6,240,0,0
+XJTU_RW_battery-4,90% and above,6,300,0,0
+XJTU_RW_battery-4,90% and above,6,360,0,0
+XJTU_RW_battery-4,90% and above,7,120,0,0
+XJTU_RW_battery-4,90% and above,7,180,0,0
+XJTU_RW_battery-4,90% and above,7,240,0,0
+XJTU_RW_battery-4,90% and above,7,300,0,0
+XJTU_RW_battery-4,90% and above,7,360,0,0
+XJTU_RW_battery-4,90% and above,8,120,0,0
+XJTU_RW_battery-4,90% and above,8,180,0,0
+XJTU_RW_battery-4,90% and above,8,240,0,0
+XJTU_RW_battery-4,90% and above,8,300,0,0
+XJTU_RW_battery-4,90% and above,8,360,0,0
+XJTU_RW_battery-4,80% to under 90%,2,120,41,7
+XJTU_RW_battery-4,80% to under 90%,2,180,10,7
+XJTU_RW_battery-4,80% to under 90%,2,240,14,7
+XJTU_RW_battery-4,80% to under 90%,2,300,14,7
+XJTU_RW_battery-4,80% to under 90%,2,360,22,7
+XJTU_RW_battery-4,80% to under 90%,3,120,16,6
+XJTU_RW_battery-4,80% to under 90%,3,180,21,7
+XJTU_RW_battery-4,80% to under 90%,3,240,16,6
+XJTU_RW_battery-4,80% to under 90%,3,300,30,7
+XJTU_RW_battery-4,80% to under 90%,3,360,25,7
+XJTU_RW_battery-4,80% to under 90%,4,120,31,7
+XJTU_RW_battery-4,80% to under 90%,4,180,8,5
+XJTU_RW_battery-4,80% to under 90%,4,240,17,7
+XJTU_RW_battery-4,80% to under 90%,4,300,6,4
+XJTU_RW_battery-4,80% to under 90%,4,360,26,7
+XJTU_RW_battery-4,80% to under 90%,5,120,0,0
+XJTU_RW_battery-4,80% to under 90%,5,180,0,0
+XJTU_RW_battery-4,80% to under 90%,5,240,0,0
+XJTU_RW_battery-4,80% to under 90%,5,300,2,2
+XJTU_RW_battery-4,80% to under 90%,5,360,1,1
+XJTU_RW_battery-4,80% to under 90%,6,120,0,0
+XJTU_RW_battery-4,80% to under 90%,6,180,0,0
+XJTU_RW_battery-4,80% to under 90%,6,240,0,0
+XJTU_RW_battery-4,80% to under 90%,6,300,0,0
+XJTU_RW_battery-4,80% to under 90%,6,360,0,0
+XJTU_RW_battery-4,80% to under 90%,7,120,0,0
+XJTU_RW_battery-4,80% to under 90%,7,180,0,0
+XJTU_RW_battery-4,80% to under 90%,7,240,0,0
+XJTU_RW_battery-4,80% to under 90%,7,300,0,0
+XJTU_RW_battery-4,80% to under 90%,7,360,0,0
+XJTU_RW_battery-4,80% to under 90%,8,120,0,0
+XJTU_RW_battery-4,80% to under 90%,8,180,0,0
+XJTU_RW_battery-4,80% to under 90%,8,240,0,0
+XJTU_RW_battery-4,80% to under 90%,8,300,0,0
+XJTU_RW_battery-4,80% to under 90%,8,360,0,0
+XJTU_RW_battery-4,Below 80%,2,120,0,0
+XJTU_RW_battery-4,Below 80%,2,180,0,0
+XJTU_RW_battery-4,Below 80%,2,240,0,0
+XJTU_RW_battery-4,Below 80%,2,300,0,0
+XJTU_RW_battery-4,Below 80%,2,360,0,0
+XJTU_RW_battery-4,Below 80%,3,120,0,0
+XJTU_RW_battery-4,Below 80%,3,180,0,0
+XJTU_RW_battery-4,Below 80%,3,240,0,0
+XJTU_RW_battery-4,Below 80%,3,300,0,0
+XJTU_RW_battery-4,Below 80%,3,360,0,0
+XJTU_RW_battery-4,Below 80%,4,120,0,0
+XJTU_RW_battery-4,Below 80%,4,180,0,0
+XJTU_RW_battery-4,Below 80%,4,240,0,0
+XJTU_RW_battery-4,Below 80%,4,300,0,0
+XJTU_RW_battery-4,Below 80%,4,360,0,0
+XJTU_RW_battery-4,Below 80%,5,120,0,0
+XJTU_RW_battery-4,Below 80%,5,180,0,0
+XJTU_RW_battery-4,Below 80%,5,240,0,0
+XJTU_RW_battery-4,Below 80%,5,300,0,0
+XJTU_RW_battery-4,Below 80%,5,360,0,0
+XJTU_RW_battery-4,Below 80%,6,120,0,0
+XJTU_RW_battery-4,Below 80%,6,180,0,0
+XJTU_RW_battery-4,Below 80%,6,240,0,0
+XJTU_RW_battery-4,Below 80%,6,300,0,0
+XJTU_RW_battery-4,Below 80%,6,360,0,0
+XJTU_RW_battery-4,Below 80%,7,120,0,0
+XJTU_RW_battery-4,Below 80%,7,180,0,0
+XJTU_RW_battery-4,Below 80%,7,240,0,0
+XJTU_RW_battery-4,Below 80%,7,300,0,0
+XJTU_RW_battery-4,Below 80%,7,360,0,0
+XJTU_RW_battery-4,Below 80%,8,120,0,0
+XJTU_RW_battery-4,Below 80%,8,180,0,0
+XJTU_RW_battery-4,Below 80%,8,240,0,0
+XJTU_RW_battery-4,Below 80%,8,300,0,0
+XJTU_RW_battery-4,Below 80%,8,360,0,0
+XJTU_RW_battery-5,90% and above,2,120,129,7
+XJTU_RW_battery-5,90% and above,2,180,19,7
+XJTU_RW_battery-5,90% and above,2,240,41,7
+XJTU_RW_battery-5,90% and above,2,300,74,7
+XJTU_RW_battery-5,90% and above,2,360,84,7
+XJTU_RW_battery-5,90% and above,3,120,71,7
+XJTU_RW_battery-5,90% and above,3,180,85,7
+XJTU_RW_battery-5,90% and above,3,240,50,7
+XJTU_RW_battery-5,90% and above,3,300,102,7
+XJTU_RW_battery-5,90% and above,3,360,65,7
+XJTU_RW_battery-5,90% and above,4,120,113,7
+XJTU_RW_battery-5,90% and above,4,180,47,7
+XJTU_RW_battery-5,90% and above,4,240,77,7
+XJTU_RW_battery-5,90% and above,4,300,32,7
+XJTU_RW_battery-5,90% and above,4,360,115,7
+XJTU_RW_battery-5,90% and above,5,120,0,0
+XJTU_RW_battery-5,90% and above,5,180,0,0
+XJTU_RW_battery-5,90% and above,5,240,0,0
+XJTU_RW_battery-5,90% and above,5,300,14,7
+XJTU_RW_battery-5,90% and above,5,360,12,7
+XJTU_RW_battery-5,90% and above,6,120,0,0
+XJTU_RW_battery-5,90% and above,6,180,0,0
+XJTU_RW_battery-5,90% and above,6,240,0,0
+XJTU_RW_battery-5,90% and above,6,300,0,0
+XJTU_RW_battery-5,90% and above,6,360,0,0
+XJTU_RW_battery-5,90% and above,7,120,0,0
+XJTU_RW_battery-5,90% and above,7,180,0,0
+XJTU_RW_battery-5,90% and above,7,240,0,0
+XJTU_RW_battery-5,90% and above,7,300,0,0
+XJTU_RW_battery-5,90% and above,7,360,0,0
+XJTU_RW_battery-5,90% and above,8,120,0,0
+XJTU_RW_battery-5,90% and above,8,180,0,0
+XJTU_RW_battery-5,90% and above,8,240,0,0
+XJTU_RW_battery-5,90% and above,8,300,0,0
+XJTU_RW_battery-5,90% and above,8,360,0,0
+XJTU_RW_battery-5,80% to under 90%,2,120,42,7
+XJTU_RW_battery-5,80% to under 90%,2,180,10,7
+XJTU_RW_battery-5,80% to under 90%,2,240,14,7
+XJTU_RW_battery-5,80% to under 90%,2,300,13,7
+XJTU_RW_battery-5,80% to under 90%,2,360,21,7
+XJTU_RW_battery-5,80% to under 90%,3,120,15,6
+XJTU_RW_battery-5,80% to under 90%,3,180,17,6
+XJTU_RW_battery-5,80% to under 90%,3,240,17,6
+XJTU_RW_battery-5,80% to under 90%,3,300,31,7
+XJTU_RW_battery-5,80% to under 90%,3,360,23,7
+XJTU_RW_battery-5,80% to under 90%,4,120,32,7
+XJTU_RW_battery-5,80% to under 90%,4,180,8,5
+XJTU_RW_battery-5,80% to under 90%,4,240,15,7
+XJTU_RW_battery-5,80% to under 90%,4,300,6,4
+XJTU_RW_battery-5,80% to under 90%,4,360,24,7
+XJTU_RW_battery-5,80% to under 90%,5,120,0,0
+XJTU_RW_battery-5,80% to under 90%,5,180,0,0
+XJTU_RW_battery-5,80% to under 90%,5,240,0,0
+XJTU_RW_battery-5,80% to under 90%,5,300,2,2
+XJTU_RW_battery-5,80% to under 90%,5,360,0,0
+XJTU_RW_battery-5,80% to under 90%,6,120,0,0
+XJTU_RW_battery-5,80% to under 90%,6,180,0,0
+XJTU_RW_battery-5,80% to under 90%,6,240,0,0
+XJTU_RW_battery-5,80% to under 90%,6,300,0,0
+XJTU_RW_battery-5,80% to under 90%,6,360,0,0
+XJTU_RW_battery-5,80% to under 90%,7,120,0,0
+XJTU_RW_battery-5,80% to under 90%,7,180,0,0
+XJTU_RW_battery-5,80% to under 90%,7,240,0,0
+XJTU_RW_battery-5,80% to under 90%,7,300,0,0
+XJTU_RW_battery-5,80% to under 90%,7,360,0,0
+XJTU_RW_battery-5,80% to under 90%,8,120,0,0
+XJTU_RW_battery-5,80% to under 90%,8,180,0,0
+XJTU_RW_battery-5,80% to under 90%,8,240,0,0
+XJTU_RW_battery-5,80% to under 90%,8,300,0,0
+XJTU_RW_battery-5,80% to under 90%,8,360,0,0
+XJTU_RW_battery-5,Below 80%,2,120,0,0
+XJTU_RW_battery-5,Below 80%,2,180,0,0
+XJTU_RW_battery-5,Below 80%,2,240,0,0
+XJTU_RW_battery-5,Below 80%,2,300,0,0
+XJTU_RW_battery-5,Below 80%,2,360,0,0
+XJTU_RW_battery-5,Below 80%,3,120,0,0
+XJTU_RW_battery-5,Below 80%,3,180,0,0
+XJTU_RW_battery-5,Below 80%,3,240,0,0
+XJTU_RW_battery-5,Below 80%,3,300,0,0
+XJTU_RW_battery-5,Below 80%,3,360,0,0
+XJTU_RW_battery-5,Below 80%,4,120,0,0
+XJTU_RW_battery-5,Below 80%,4,180,0,0
+XJTU_RW_battery-5,Below 80%,4,240,0,0
+XJTU_RW_battery-5,Below 80%,4,300,0,0
+XJTU_RW_battery-5,Below 80%,4,360,0,0
+XJTU_RW_battery-5,Below 80%,5,120,0,0
+XJTU_RW_battery-5,Below 80%,5,180,0,0
+XJTU_RW_battery-5,Below 80%,5,240,0,0
+XJTU_RW_battery-5,Below 80%,5,300,0,0
+XJTU_RW_battery-5,Below 80%,5,360,0,0
+XJTU_RW_battery-5,Below 80%,6,120,0,0
+XJTU_RW_battery-5,Below 80%,6,180,0,0
+XJTU_RW_battery-5,Below 80%,6,240,0,0
+XJTU_RW_battery-5,Below 80%,6,300,0,0
+XJTU_RW_battery-5,Below 80%,6,360,0,0
+XJTU_RW_battery-5,Below 80%,7,120,0,0
+XJTU_RW_battery-5,Below 80%,7,180,0,0
+XJTU_RW_battery-5,Below 80%,7,240,0,0
+XJTU_RW_battery-5,Below 80%,7,300,0,0
+XJTU_RW_battery-5,Below 80%,7,360,0,0
+XJTU_RW_battery-5,Below 80%,8,120,0,0
+XJTU_RW_battery-5,Below 80%,8,180,0,0
+XJTU_RW_battery-5,Below 80%,8,240,0,0
+XJTU_RW_battery-5,Below 80%,8,300,0,0
+XJTU_RW_battery-5,Below 80%,8,360,0,0
+XJTU_RW_battery-6,90% and above,2,120,133,7
+XJTU_RW_battery-6,90% and above,2,180,20,7
+XJTU_RW_battery-6,90% and above,2,240,43,7
+XJTU_RW_battery-6,90% and above,2,300,78,7
+XJTU_RW_battery-6,90% and above,2,360,86,7
+XJTU_RW_battery-6,90% and above,3,120,72,7
+XJTU_RW_battery-6,90% and above,3,180,89,7
+XJTU_RW_battery-6,90% and above,3,240,50,7
+XJTU_RW_battery-6,90% and above,3,300,105,7
+XJTU_RW_battery-6,90% and above,3,360,69,7
+XJTU_RW_battery-6,90% and above,4,120,117,7
+XJTU_RW_battery-6,90% and above,4,180,49,7
+XJTU_RW_battery-6,90% and above,4,240,79,7
+XJTU_RW_battery-6,90% and above,4,300,32,7
+XJTU_RW_battery-6,90% and above,4,360,121,7
+XJTU_RW_battery-6,90% and above,5,120,0,0
+XJTU_RW_battery-6,90% and above,5,180,0,0
+XJTU_RW_battery-6,90% and above,5,240,0,0
+XJTU_RW_battery-6,90% and above,5,300,14,7
+XJTU_RW_battery-6,90% and above,5,360,13,7
+XJTU_RW_battery-6,90% and above,6,120,0,0
+XJTU_RW_battery-6,90% and above,6,180,0,0
+XJTU_RW_battery-6,90% and above,6,240,0,0
+XJTU_RW_battery-6,90% and above,6,300,0,0
+XJTU_RW_battery-6,90% and above,6,360,0,0
+XJTU_RW_battery-6,90% and above,7,120,0,0
+XJTU_RW_battery-6,90% and above,7,180,0,0
+XJTU_RW_battery-6,90% and above,7,240,0,0
+XJTU_RW_battery-6,90% and above,7,300,0,0
+XJTU_RW_battery-6,90% and above,7,360,0,0
+XJTU_RW_battery-6,90% and above,8,120,0,0
+XJTU_RW_battery-6,90% and above,8,180,0,0
+XJTU_RW_battery-6,90% and above,8,240,0,0
+XJTU_RW_battery-6,90% and above,8,300,0,0
+XJTU_RW_battery-6,90% and above,8,360,0,0
+XJTU_RW_battery-6,80% to under 90%,2,120,41,7
+XJTU_RW_battery-6,80% to under 90%,2,180,9,7
+XJTU_RW_battery-6,80% to under 90%,2,240,14,7
+XJTU_RW_battery-6,80% to under 90%,2,300,16,7
+XJTU_RW_battery-6,80% to under 90%,2,360,20,7
+XJTU_RW_battery-6,80% to under 90%,3,120,17,6
+XJTU_RW_battery-6,80% to under 90%,3,180,19,6
+XJTU_RW_battery-6,80% to under 90%,3,240,17,6
+XJTU_RW_battery-6,80% to under 90%,3,300,31,7
+XJTU_RW_battery-6,80% to under 90%,3,360,22,7
+XJTU_RW_battery-6,80% to under 90%,4,120,32,7
+XJTU_RW_battery-6,80% to under 90%,4,180,10,5
+XJTU_RW_battery-6,80% to under 90%,4,240,17,7
+XJTU_RW_battery-6,80% to under 90%,4,300,6,4
+XJTU_RW_battery-6,80% to under 90%,4,360,26,7
+XJTU_RW_battery-6,80% to under 90%,5,120,0,0
+XJTU_RW_battery-6,80% to under 90%,5,180,0,0
+XJTU_RW_battery-6,80% to under 90%,5,240,0,0
+XJTU_RW_battery-6,80% to under 90%,5,300,2,2
+XJTU_RW_battery-6,80% to under 90%,5,360,1,1
+XJTU_RW_battery-6,80% to under 90%,6,120,0,0
+XJTU_RW_battery-6,80% to under 90%,6,180,0,0
+XJTU_RW_battery-6,80% to under 90%,6,240,0,0
+XJTU_RW_battery-6,80% to under 90%,6,300,0,0
+XJTU_RW_battery-6,80% to under 90%,6,360,0,0
+XJTU_RW_battery-6,80% to under 90%,7,120,0,0
+XJTU_RW_battery-6,80% to under 90%,7,180,0,0
+XJTU_RW_battery-6,80% to under 90%,7,240,0,0
+XJTU_RW_battery-6,80% to under 90%,7,300,0,0
+XJTU_RW_battery-6,80% to under 90%,7,360,0,0
+XJTU_RW_battery-6,80% to under 90%,8,120,0,0
+XJTU_RW_battery-6,80% to under 90%,8,180,0,0
+XJTU_RW_battery-6,80% to under 90%,8,240,0,0
+XJTU_RW_battery-6,80% to under 90%,8,300,0,0
+XJTU_RW_battery-6,80% to under 90%,8,360,0,0
+XJTU_RW_battery-6,Below 80%,2,120,0,0
+XJTU_RW_battery-6,Below 80%,2,180,0,0
+XJTU_RW_battery-6,Below 80%,2,240,0,0
+XJTU_RW_battery-6,Below 80%,2,300,0,0
+XJTU_RW_battery-6,Below 80%,2,360,0,0
+XJTU_RW_battery-6,Below 80%,3,120,0,0
+XJTU_RW_battery-6,Below 80%,3,180,0,0
+XJTU_RW_battery-6,Below 80%,3,240,0,0
+XJTU_RW_battery-6,Below 80%,3,300,0,0
+XJTU_RW_battery-6,Below 80%,3,360,0,0
+XJTU_RW_battery-6,Below 80%,4,120,0,0
+XJTU_RW_battery-6,Below 80%,4,180,0,0
+XJTU_RW_battery-6,Below 80%,4,240,0,0
+XJTU_RW_battery-6,Below 80%,4,300,0,0
+XJTU_RW_battery-6,Below 80%,4,360,0,0
+XJTU_RW_battery-6,Below 80%,5,120,0,0
+XJTU_RW_battery-6,Below 80%,5,180,0,0
+XJTU_RW_battery-6,Below 80%,5,240,0,0
+XJTU_RW_battery-6,Below 80%,5,300,0,0
+XJTU_RW_battery-6,Below 80%,5,360,0,0
+XJTU_RW_battery-6,Below 80%,6,120,0,0
+XJTU_RW_battery-6,Below 80%,6,180,0,0
+XJTU_RW_battery-6,Below 80%,6,240,0,0
+XJTU_RW_battery-6,Below 80%,6,300,0,0
+XJTU_RW_battery-6,Below 80%,6,360,0,0
+XJTU_RW_battery-6,Below 80%,7,120,0,0
+XJTU_RW_battery-6,Below 80%,7,180,0,0
+XJTU_RW_battery-6,Below 80%,7,240,0,0
+XJTU_RW_battery-6,Below 80%,7,300,0,0
+XJTU_RW_battery-6,Below 80%,7,360,0,0
+XJTU_RW_battery-6,Below 80%,8,120,0,0
+XJTU_RW_battery-6,Below 80%,8,180,0,0
+XJTU_RW_battery-6,Below 80%,8,240,0,0
+XJTU_RW_battery-6,Below 80%,8,300,0,0
+XJTU_RW_battery-6,Below 80%,8,360,0,0
+XJTU_RW_battery-7,90% and above,2,120,137,7
+XJTU_RW_battery-7,90% and above,2,180,20,7
+XJTU_RW_battery-7,90% and above,2,240,44,7
+XJTU_RW_battery-7,90% and above,2,300,78,7
+XJTU_RW_battery-7,90% and above,2,360,87,7
+XJTU_RW_battery-7,90% and above,3,120,73,7
+XJTU_RW_battery-7,90% and above,3,180,90,7
+XJTU_RW_battery-7,90% and above,3,240,52,7
+XJTU_RW_battery-7,90% and above,3,300,107,7
+XJTU_RW_battery-7,90% and above,3,360,69,7
+XJTU_RW_battery-7,90% and above,4,120,123,7
+XJTU_RW_battery-7,90% and above,4,180,49,7
+XJTU_RW_battery-7,90% and above,4,240,80,7
+XJTU_RW_battery-7,90% and above,4,300,32,7
+XJTU_RW_battery-7,90% and above,4,360,122,7
+XJTU_RW_battery-7,90% and above,5,120,0,0
+XJTU_RW_battery-7,90% and above,5,180,0,0
+XJTU_RW_battery-7,90% and above,5,240,0,0
+XJTU_RW_battery-7,90% and above,5,300,14,7
+XJTU_RW_battery-7,90% and above,5,360,13,7
+XJTU_RW_battery-7,90% and above,6,120,0,0
+XJTU_RW_battery-7,90% and above,6,180,0,0
+XJTU_RW_battery-7,90% and above,6,240,0,0
+XJTU_RW_battery-7,90% and above,6,300,0,0
+XJTU_RW_battery-7,90% and above,6,360,0,0
+XJTU_RW_battery-7,90% and above,7,120,0,0
+XJTU_RW_battery-7,90% and above,7,180,0,0
+XJTU_RW_battery-7,90% and above,7,240,0,0
+XJTU_RW_battery-7,90% and above,7,300,0,0
+XJTU_RW_battery-7,90% and above,7,360,0,0
+XJTU_RW_battery-7,90% and above,8,120,0,0
+XJTU_RW_battery-7,90% and above,8,180,0,0
+XJTU_RW_battery-7,90% and above,8,240,0,0
+XJTU_RW_battery-7,90% and above,8,300,0,0
+XJTU_RW_battery-7,90% and above,8,360,0,0
+XJTU_RW_battery-7,80% to under 90%,2,120,41,7
+XJTU_RW_battery-7,80% to under 90%,2,180,10,7
+XJTU_RW_battery-7,80% to under 90%,2,240,15,7
+XJTU_RW_battery-7,80% to under 90%,2,300,16,7
+XJTU_RW_battery-7,80% to under 90%,2,360,21,7
+XJTU_RW_battery-7,80% to under 90%,3,120,18,6
+XJTU_RW_battery-7,80% to under 90%,3,180,19,6
+XJTU_RW_battery-7,80% to under 90%,3,240,18,6
+XJTU_RW_battery-7,80% to under 90%,3,300,35,7
+XJTU_RW_battery-7,80% to under 90%,3,360,24,7
+XJTU_RW_battery-7,80% to under 90%,4,120,27,7
+XJTU_RW_battery-7,80% to under 90%,4,180,11,6
+XJTU_RW_battery-7,80% to under 90%,4,240,16,7
+XJTU_RW_battery-7,80% to under 90%,4,300,8,5
+XJTU_RW_battery-7,80% to under 90%,4,360,28,7
+XJTU_RW_battery-7,80% to under 90%,5,120,0,0
+XJTU_RW_battery-7,80% to under 90%,5,180,0,0
+XJTU_RW_battery-7,80% to under 90%,5,240,0,0
+XJTU_RW_battery-7,80% to under 90%,5,300,2,2
+XJTU_RW_battery-7,80% to under 90%,5,360,1,1
+XJTU_RW_battery-7,80% to under 90%,6,120,0,0
+XJTU_RW_battery-7,80% to under 90%,6,180,0,0
+XJTU_RW_battery-7,80% to under 90%,6,240,0,0
+XJTU_RW_battery-7,80% to under 90%,6,300,0,0
+XJTU_RW_battery-7,80% to under 90%,6,360,0,0
+XJTU_RW_battery-7,80% to under 90%,7,120,0,0
+XJTU_RW_battery-7,80% to under 90%,7,180,0,0
+XJTU_RW_battery-7,80% to under 90%,7,240,0,0
+XJTU_RW_battery-7,80% to under 90%,7,300,0,0
+XJTU_RW_battery-7,80% to under 90%,7,360,0,0
+XJTU_RW_battery-7,80% to under 90%,8,120,0,0
+XJTU_RW_battery-7,80% to under 90%,8,180,0,0
+XJTU_RW_battery-7,80% to under 90%,8,240,0,0
+XJTU_RW_battery-7,80% to under 90%,8,300,0,0
+XJTU_RW_battery-7,80% to under 90%,8,360,0,0
+XJTU_RW_battery-7,Below 80%,2,120,0,0
+XJTU_RW_battery-7,Below 80%,2,180,0,0
+XJTU_RW_battery-7,Below 80%,2,240,0,0
+XJTU_RW_battery-7,Below 80%,2,300,0,0
+XJTU_RW_battery-7,Below 80%,2,360,0,0
+XJTU_RW_battery-7,Below 80%,3,120,0,0
+XJTU_RW_battery-7,Below 80%,3,180,0,0
+XJTU_RW_battery-7,Below 80%,3,240,0,0
+XJTU_RW_battery-7,Below 80%,3,300,0,0
+XJTU_RW_battery-7,Below 80%,3,360,0,0
+XJTU_RW_battery-7,Below 80%,4,120,0,0
+XJTU_RW_battery-7,Below 80%,4,180,0,0
+XJTU_RW_battery-7,Below 80%,4,240,0,0
+XJTU_RW_battery-7,Below 80%,4,300,0,0
+XJTU_RW_battery-7,Below 80%,4,360,0,0
+XJTU_RW_battery-7,Below 80%,5,120,0,0
+XJTU_RW_battery-7,Below 80%,5,180,0,0
+XJTU_RW_battery-7,Below 80%,5,240,0,0
+XJTU_RW_battery-7,Below 80%,5,300,0,0
+XJTU_RW_battery-7,Below 80%,5,360,0,0
+XJTU_RW_battery-7,Below 80%,6,120,0,0
+XJTU_RW_battery-7,Below 80%,6,180,0,0
+XJTU_RW_battery-7,Below 80%,6,240,0,0
+XJTU_RW_battery-7,Below 80%,6,300,0,0
+XJTU_RW_battery-7,Below 80%,6,360,0,0
+XJTU_RW_battery-7,Below 80%,7,120,0,0
+XJTU_RW_battery-7,Below 80%,7,180,0,0
+XJTU_RW_battery-7,Below 80%,7,240,0,0
+XJTU_RW_battery-7,Below 80%,7,300,0,0
+XJTU_RW_battery-7,Below 80%,7,360,0,0
+XJTU_RW_battery-7,Below 80%,8,120,0,0
+XJTU_RW_battery-7,Below 80%,8,180,0,0
+XJTU_RW_battery-7,Below 80%,8,240,0,0
+XJTU_RW_battery-7,Below 80%,8,300,0,0
+XJTU_RW_battery-7,Below 80%,8,360,0,0
+XJTU_RW_battery-8,90% and above,2,120,135,7
+XJTU_RW_battery-8,90% and above,2,180,20,7
+XJTU_RW_battery-8,90% and above,2,240,44,7
+XJTU_RW_battery-8,90% and above,2,300,78,7
+XJTU_RW_battery-8,90% and above,2,360,86,7
+XJTU_RW_battery-8,90% and above,3,120,72,7
+XJTU_RW_battery-8,90% and above,3,180,89,7
+XJTU_RW_battery-8,90% and above,3,240,51,7
+XJTU_RW_battery-8,90% and above,3,300,107,7
+XJTU_RW_battery-8,90% and above,3,360,69,7
+XJTU_RW_battery-8,90% and above,4,120,120,7
+XJTU_RW_battery-8,90% and above,4,180,49,7
+XJTU_RW_battery-8,90% and above,4,240,79,7
+XJTU_RW_battery-8,90% and above,4,300,32,7
+XJTU_RW_battery-8,90% and above,4,360,122,7
+XJTU_RW_battery-8,90% and above,5,120,0,0
+XJTU_RW_battery-8,90% and above,5,180,0,0
+XJTU_RW_battery-8,90% and above,5,240,0,0
+XJTU_RW_battery-8,90% and above,5,300,14,7
+XJTU_RW_battery-8,90% and above,5,360,13,7
+XJTU_RW_battery-8,90% and above,6,120,0,0
+XJTU_RW_battery-8,90% and above,6,180,0,0
+XJTU_RW_battery-8,90% and above,6,240,0,0
+XJTU_RW_battery-8,90% and above,6,300,0,0
+XJTU_RW_battery-8,90% and above,6,360,0,0
+XJTU_RW_battery-8,90% and above,7,120,0,0
+XJTU_RW_battery-8,90% and above,7,180,0,0
+XJTU_RW_battery-8,90% and above,7,240,0,0
+XJTU_RW_battery-8,90% and above,7,300,0,0
+XJTU_RW_battery-8,90% and above,7,360,0,0
+XJTU_RW_battery-8,90% and above,8,120,0,0
+XJTU_RW_battery-8,90% and above,8,180,0,0
+XJTU_RW_battery-8,90% and above,8,240,0,0
+XJTU_RW_battery-8,90% and above,8,300,0,0
+XJTU_RW_battery-8,90% and above,8,360,0,0
+XJTU_RW_battery-8,80% to under 90%,2,120,41,7
+XJTU_RW_battery-8,80% to under 90%,2,180,9,7
+XJTU_RW_battery-8,80% to under 90%,2,240,13,7
+XJTU_RW_battery-8,80% to under 90%,2,300,16,7
+XJTU_RW_battery-8,80% to under 90%,2,360,21,7
+XJTU_RW_battery-8,80% to under 90%,3,120,17,6
+XJTU_RW_battery-8,80% to under 90%,3,180,19,6
+XJTU_RW_battery-8,80% to under 90%,3,240,17,6
+XJTU_RW_battery-8,80% to under 90%,3,300,33,7
+XJTU_RW_battery-8,80% to under 90%,3,360,22,7
+XJTU_RW_battery-8,80% to under 90%,4,120,29,7
+XJTU_RW_battery-8,80% to under 90%,4,180,10,5
+XJTU_RW_battery-8,80% to under 90%,4,240,17,7
+XJTU_RW_battery-8,80% to under 90%,4,300,8,5
+XJTU_RW_battery-8,80% to under 90%,4,360,25,7
+XJTU_RW_battery-8,80% to under 90%,5,120,0,0
+XJTU_RW_battery-8,80% to under 90%,5,180,0,0
+XJTU_RW_battery-8,80% to under 90%,5,240,0,0
+XJTU_RW_battery-8,80% to under 90%,5,300,2,2
+XJTU_RW_battery-8,80% to under 90%,5,360,1,1
+XJTU_RW_battery-8,80% to under 90%,6,120,0,0
+XJTU_RW_battery-8,80% to under 90%,6,180,0,0
+XJTU_RW_battery-8,80% to under 90%,6,240,0,0
+XJTU_RW_battery-8,80% to under 90%,6,300,0,0
+XJTU_RW_battery-8,80% to under 90%,6,360,0,0
+XJTU_RW_battery-8,80% to under 90%,7,120,0,0
+XJTU_RW_battery-8,80% to under 90%,7,180,0,0
+XJTU_RW_battery-8,80% to under 90%,7,240,0,0
+XJTU_RW_battery-8,80% to under 90%,7,300,0,0
+XJTU_RW_battery-8,80% to under 90%,7,360,0,0
+XJTU_RW_battery-8,80% to under 90%,8,120,0,0
+XJTU_RW_battery-8,80% to under 90%,8,180,0,0
+XJTU_RW_battery-8,80% to under 90%,8,240,0,0
+XJTU_RW_battery-8,80% to under 90%,8,300,0,0
+XJTU_RW_battery-8,80% to under 90%,8,360,0,0
+XJTU_RW_battery-8,Below 80%,2,120,0,0
+XJTU_RW_battery-8,Below 80%,2,180,0,0
+XJTU_RW_battery-8,Below 80%,2,240,0,0
+XJTU_RW_battery-8,Below 80%,2,300,0,0
+XJTU_RW_battery-8,Below 80%,2,360,0,0
+XJTU_RW_battery-8,Below 80%,3,120,0,0
+XJTU_RW_battery-8,Below 80%,3,180,0,0
+XJTU_RW_battery-8,Below 80%,3,240,0,0
+XJTU_RW_battery-8,Below 80%,3,300,0,0
+XJTU_RW_battery-8,Below 80%,3,360,0,0
+XJTU_RW_battery-8,Below 80%,4,120,0,0
+XJTU_RW_battery-8,Below 80%,4,180,0,0
+XJTU_RW_battery-8,Below 80%,4,240,0,0
+XJTU_RW_battery-8,Below 80%,4,300,0,0
+XJTU_RW_battery-8,Below 80%,4,360,0,0
+XJTU_RW_battery-8,Below 80%,5,120,0,0
+XJTU_RW_battery-8,Below 80%,5,180,0,0
+XJTU_RW_battery-8,Below 80%,5,240,0,0
+XJTU_RW_battery-8,Below 80%,5,300,0,0
+XJTU_RW_battery-8,Below 80%,5,360,0,0
+XJTU_RW_battery-8,Below 80%,6,120,0,0
+XJTU_RW_battery-8,Below 80%,6,180,0,0
+XJTU_RW_battery-8,Below 80%,6,240,0,0
+XJTU_RW_battery-8,Below 80%,6,300,0,0
+XJTU_RW_battery-8,Below 80%,6,360,0,0
+XJTU_RW_battery-8,Below 80%,7,120,0,0
+XJTU_RW_battery-8,Below 80%,7,180,0,0
+XJTU_RW_battery-8,Below 80%,7,240,0,0
+XJTU_RW_battery-8,Below 80%,7,300,0,0
+XJTU_RW_battery-8,Below 80%,7,360,0,0
+XJTU_RW_battery-8,Below 80%,8,120,0,0
+XJTU_RW_battery-8,Below 80%,8,180,0,0
+XJTU_RW_battery-8,Below 80%,8,240,0,0
+XJTU_RW_battery-8,Below 80%,8,300,0,0
+XJTU_RW_battery-8,Below 80%,8,360,0,0

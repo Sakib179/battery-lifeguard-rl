@@ -1,0 +1,4 @@
+policy,origins,batteries,full_matches,matched_batteries,complete_outcomes,complete_batteries,energy_matches,energy_batteries,time_matches,time_batteries,missing_feedback,measured_budget_hits,measured_worst_shortfall_wh,measured_wh,measured_minutes
+fixed_1c,819,55,21,19,19,18,19,18,21,19,0,19,0.0,80.36410231349554,591.618792032285
+model,819,55,46,28,45,27,45,27,46,28,6,3,17.06793622983404,63.15579667700979,269.58335913309395
+energy_budget,819,55,24,18,24,18,24,18,24,18,4,24,0.0,73.30325876323681,478.21348034384357

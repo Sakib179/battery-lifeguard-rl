@@ -1,0 +1,22 @@
+{
+  "dataset_doi": "10.17632/kw34hhw7xg.3",
+  "horizon_cycles": 15,
+  "block_size": 5,
+  "policy_starts": [
+    11,
+    41,
+    66
+  ],
+  "budget_fraction": 0.9,
+  "overprediction_quantile": 0.9,
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 42,
+  "per_action_log_probability": 0.3333333333333333
+}

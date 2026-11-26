@@ -1,0 +1,122 @@
+{
+  "source": "BatteryLife XJTU",
+  "xjtu_source_doi": "10.5281/zenodo.10963339",
+  "nominal_ah": 2.0,
+  "cohorts": {
+    "RW": {
+      "name": "Random Walk",
+      "interval_cycles": 10,
+      "diagnostic_charge_a": 2,
+      "operating_charge_a": 6,
+      "currents_a": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "duration_grid_s": [
+        120,
+        180,
+        240,
+        300,
+        360
+      ]
+    },
+    "R3": {
+      "name": "R3",
+      "interval_cycles": 5,
+      "diagnostic_charge_a": 4,
+      "operating_charge_a": 4,
+      "currents_a": [
+        1,
+        2,
+        4,
+        6,
+        10
+      ]
+    }
+  },
+  "horizon_rpt_tests": [
+    1,
+    3
+  ],
+  "ridge_alphas": [
+    1,
+    10,
+    100
+  ],
+  "bootstrap_draws": 2000,
+  "seed": 42,
+  "health_bands": [
+    "90% and above",
+    "80% to under 90%",
+    "Below 80%"
+  ],
+  "min_batteries_per_action_and_band": 4,
+  "min_common_actions": 2,
+  "common_initial_current_duration_pairs": [
+    [
+      2,
+      120
+    ],
+    [
+      2,
+      180
+    ],
+    [
+      2,
+      240
+    ],
+    [
+      2,
+      300
+    ],
+    [
+      2,
+      360
+    ],
+    [
+      3,
+      120
+    ],
+    [
+      3,
+      180
+    ],
+    [
+      3,
+      240
+    ],
+    [
+      3,
+      300
+    ],
+    [
+      3,
+      360
+    ],
+    [
+      4,
+      120
+    ],
+    [
+      4,
+      180
+    ],
+    [
+      4,
+      240
+    ],
+    [
+      4,
+      300
+    ],
+    [
+      4,
+      360
+    ]
+  ]
+}

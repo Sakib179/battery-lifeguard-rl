@@ -1,0 +1,5 @@
+direction,target,lower_mae,lower_worst_decile,max_did_not_increase,same_coverage,passed
+2-to-3,capacity,True,True,True,True,True
+2-to-3,energy,True,True,True,True,True
+3-to-2,capacity,True,True,True,True,True
+3-to-2,energy,True,True,True,True,True

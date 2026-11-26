@@ -2,6 +2,7 @@
 
 import csv
 import json
+from math import isclose
 from pathlib import Path
 
 
@@ -11,7 +12,9 @@ LATE_LIFE_RESULTS = HERE.parent / "reports" / "lifeguard_fixed_anchor_soh_result
 ROLLING_RESULTS = HERE.parent / "reports" / "lifeguard_rolling_forecasts_results"
 FIXED_SOH_RESULTS = HERE.parent / "reports" / "lifeguard_fixed_soh_forecast_results"
 SWITCH_RESULTS = HERE.parent / "reports" / "lifeguard_mit_bit_switch_replay_results"
+CONTROLLER_RESULTS = HERE.parent / "reports" / "lifeguard_mit_bit_energy_budget_controller_results"
 FIXED_SOH_MODELS = {"dashboard_fixed", "previous_fixed", "revised_fixed"}
+CONTROLLER_POLICIES = ("fixed_1c", "model", "energy_budget")
 
 
 def rows(name, directory=RESULTS):
@@ -360,6 +363,108 @@ def load_switch_replay():
     return {"cases": list(cases.values()), "metrics": benchmark, "scoredCells": config["scored_cells"]}
 
 
+def load_controller_replay():
+    filenames = ("run_config.json", "simulation_trajectories.csv", "simulation_totals.csv",
+                 "simulation_metrics.csv", "replay_metrics.csv")
+    if not all((CONTROLLER_RESULTS / name).is_file() for name in filenames):
+        return None
+    config = json.loads((CONTROLLER_RESULTS / filenames[0]).read_text(encoding="utf-8"))
+    size, horizon = config["block_size"], config["horizon_cycles"]
+    if size <= 0 or horizon <= 0 or horizon % size:
+        raise ValueError("Invalid Notebook 18 replay horizon")
+    blocks = horizon // size
+    fraction = config["budget_fraction"]
+    if not 0 < fraction <= 1:
+        raise ValueError("Invalid Notebook 18 budget fraction")
+    cases = {}
+    for row in rows(filenames[1], CONTROLLER_RESULTS):
+        cell, start, step = (int(row[name]) for name in ("cell_id", "start_cycle", "step"))
+        key = (cell, start)
+        policy, rate = row["policy"], int(row["rate"])
+        budget = float(row["budget_wh"])
+        case = cases.setdefault(key, {"cell": cell, "start": start, "budget": budget, "policies": {}})
+        if (policy not in CONTROLLER_POLICIES or rate not in (1, 2, 3) or not 1 <= step <= blocks
+                or int(row["block_start"]) != start + (step - 1) * size
+                or not isclose(budget, case["budget"]) or budget <= 0):
+            raise ValueError(f"Invalid controller block for cell {cell} at cycle {start}, step {step}")
+        path = case["policies"].setdefault(policy, {})
+        if step in path:
+            raise ValueError(f"Duplicate controller block for cell {cell} at cycle {start}, step {step}")
+        block = {
+            "rate": rate, "wh": float(row["predicted_wh"]), "minutes": float(row["predicted_minutes"]),
+            "cumulativeWh": float(row["credited_wh_after"]), "fallback": row["fallback"] == "True",
+        }
+        if policy == "energy_budget":
+            plan = row["planned_sequence"]
+            if len(plan) != blocks - step + 1 or not plan.startswith(str(rate)) or set(plan) - set("123"):
+                raise ValueError(f"Invalid remaining plan for cell {cell} at cycle {start}, step {step}")
+            block.update(plan=list(map(int, plan)), lowerWh=float(row["remaining_lower_wh"]))
+        path[step] = block
+
+    totals = {}
+    for row in rows(filenames[2], CONTROLLER_RESULTS):
+        key = (int(row["cell_id"]), int(row["start_cycle"]), row["policy"])
+        if key in totals:
+            raise ValueError(f"Duplicate controller total for {key}")
+        totals[key] = row
+    expected_cases = set()
+    for key, case in cases.items():
+        if case["policies"].keys() != set(CONTROLLER_POLICIES):
+            raise ValueError(f"Missing controller policy for {key}")
+        for policy, path in case["policies"].items():
+            if path.keys() != set(range(1, blocks + 1)):
+                raise ValueError(f"Missing controller steps for {key}, {policy}")
+            ordered = [path[step] for step in range(1, blocks + 1)]
+            energy = minutes = 0
+            for block in ordered:
+                energy += block["wh"]
+                minutes += block["minutes"]
+                if block["wh"] < 0 or block["minutes"] <= 0 or not isclose(energy, block["cumulativeWh"]):
+                    raise ValueError(f"Invalid accumulated controller data for {key}, {policy}")
+                block["cumulativeMinutes"] = minutes
+            total_key = (*key, policy)
+            expected_cases.add(total_key)
+            total = totals[total_key]
+            if (not isclose(energy, float(total["wh"])) or not isclose(minutes, float(total["minutes"]))
+                    or not isclose(case["budget"], float(total["budget_wh"]))
+                    or "".join(str(block["rate"]) for block in ordered) != total["sequence"]
+                    or (policy == "fixed_1c" and not isclose(case["budget"], fraction * energy))):
+                raise ValueError(f"Controller replay differs from Notebook 18 totals for {key}, {policy}")
+            case["policies"][policy] = ordered
+    if expected_cases != totals.keys() or not cases:
+        raise ValueError("Controller trajectory and total exports do not cover the same cases")
+
+    simulated = {}
+    for row in rows(filenames[3], CONTROLLER_RESULTS):
+        simulated[row["policy"]] = {
+            "origins": int(row["origins"]), "batteries": int(row["batteries"]), "hits": int(row["budget_hits"]),
+            "wh": float(row["wh"]), "minutes": float(row["minutes"]),
+        }
+    measured = {}
+    for row in rows(filenames[4], CONTROLLER_RESULTS):
+        measured[row["policy"]] = {
+            "origins": int(row["origins"]), "batteries": int(row["batteries"]),
+            "matches": int(row["complete_outcomes"]), "matchBatteries": int(row["complete_batteries"]),
+            "energyMatches": int(row["energy_matches"]), "hits": int(row["measured_budget_hits"]),
+            "wh": optional(row["measured_wh"]), "minutes": optional(row["measured_minutes"]),
+        }
+    if simulated.keys() != set(CONTROLLER_POLICIES) or measured.keys() != set(CONTROLLER_POLICIES):
+        raise ValueError("Incomplete Notebook 18 benchmark summaries")
+    focus = (71, 11) if (71, 11) in cases else min(cases)
+    return {
+        "blockSize": size, "horizon": horizon, "budgetFraction": fraction,
+        "focus": focus[0], "focusStart": focus[1],
+        "cases": [cases[key] for key in sorted(cases)], "simulated": simulated, "measured": measured,
+    }
+
+
+def write_replay(template_name, output_name, marker, script_id, data):
+    template = (HERE / template_name).read_text(encoding="utf-8")
+    if template.count(marker) != 1:
+        raise ValueError(f"{template_name} needs one data marker")
+    (HERE / output_name).write_text(template.replace(marker, embed_data(script_id, data)), encoding="utf-8")
+
+
 def main():
     template = (HERE / "dashboard.template.html").read_text(encoding="utf-8")
     marker = "<!-- NOTEBOOK_RESULTS -->"
@@ -370,16 +475,20 @@ def main():
     replay = load_switch_replay()
     replay_link = ""
     if replay is not None:
-        replay_template = (HERE / "switch_replay.template.html").read_text(encoding="utf-8")
-        replay_marker = "<!-- SWITCH_RESULTS -->"
-        if replay_template.count(replay_marker) != 1:
-            raise ValueError("The switch replay template needs one data marker")
-        (HERE / "switch-replay.html").write_text(
-            replay_template.replace(replay_marker, embed_data("switch-data", replay)), encoding="utf-8")
-        replay_link = '<p class="replay-link"><a href="switch-replay.html">MIT–BIT switch replay</a></p>'
+        write_replay("switch_replay.template.html", "switch-replay.html", "<!-- SWITCH_RESULTS -->", "switch-data", replay)
+        replay_link = '<a href="switch-replay.html">MIT–BIT switch replay</a>'
         print(f"Wrote simulation/switch-replay.html with {len(replay['cases'])} held-out examples")
+    controller = load_controller_replay()
+    controller_link = ""
+    if controller is not None:
+        write_replay("charging_controller.template.html", "charging-controller.html",
+                     "<!-- CONTROLLER_RESULTS -->", "controller-data", controller)
+        controller_link = '<a href="charging-controller.html">Charging Controller</a>'
+        print(f"Wrote simulation/charging-controller.html with {len(controller['cases'])} held-out starts")
     output = HERE / "index.html"
-    output.write_text(template.replace(marker, embedded).replace("<!-- SWITCH_REPLAY_LINK -->", replay_link),
+    links = " ".join(link for link in (replay_link, controller_link) if link)
+    navigation = f'<nav class="replay-link" aria-label="Other simulations">{links}</nav>' if links else ""
+    output.write_text(template.replace(marker, embedded).replace("<!-- SWITCH_REPLAY_LINK -->", navigation),
                       encoding="utf-8")
     print(f"Wrote {output.relative_to(HERE.parent)} with {len(data['cells'])} cells")
 

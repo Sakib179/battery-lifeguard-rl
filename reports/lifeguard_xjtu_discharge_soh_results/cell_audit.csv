@@ -1,0 +1,17 @@
+cohort,cell_id,records,rpt_marked,rpt_verified,operating_verified
+R3,XJTU_R3_battery-1,798,133,133,665
+R3,XJTU_R3_battery-2,672,112,112,560
+R3,XJTU_R3_battery-3,672,112,112,560
+R3,XJTU_R3_battery-4,726,121,121,605
+R3,XJTU_R3_battery-5,738,123,123,615
+R3,XJTU_R3_battery-6,714,119,119,595
+R3,XJTU_R3_battery-7,600,100,100,500
+R3,XJTU_R3_battery-8,750,125,125,625
+RW,XJTU_RW_battery-1,197,17,17,160
+RW,XJTU_RW_battery-2,307,27,27,260
+RW,XJTU_RW_battery-3,340,30,30,290
+RW,XJTU_RW_battery-4,252,22,22,210
+RW,XJTU_RW_battery-5,274,24,24,230
+RW,XJTU_RW_battery-6,219,19,19,180
+RW,XJTU_RW_battery-7,186,16,16,150
+RW,XJTU_RW_battery-8,208,18,18,170

@@ -1,0 +1,3 @@
+horizon_cycles,simulator_pass,supported_replay_available,supported_origins,supported_batteries,time_pass,energy_pass,advance_at_horizon
+15,True,True,164,55,True,False,False
+30,True,False,0,0,False,False,False

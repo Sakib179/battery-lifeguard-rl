@@ -1,0 +1,17 @@
+{
+  "dataset_doi": "10.17632/kw34hhw7xg.3",
+  "batteries": 55,
+  "eligible_origins": 929,
+  "start_cycle_window": [
+    11,
+    91
+  ],
+  "block_size": 5,
+  "logging_probability": 0.3333333333333333,
+  "energy_target_fraction": 0.9,
+  "overprediction_quantile": 0.9,
+  "permitted_hit_rate_drop": 0.05,
+  "bootstrap_draws": 2000,
+  "seed": 42,
+  "model": "0.75 standard Ridge(alpha=1) + 0.25 expanded Ridge(alpha=1)"
+}

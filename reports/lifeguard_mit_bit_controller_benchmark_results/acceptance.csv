@@ -1,0 +1,4 @@
+criterion,passed
+time_reduction,True
+energy_noninferiority,True
+advance_to_simulator,True

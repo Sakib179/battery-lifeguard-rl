@@ -1,0 +1,23 @@
+cell_id,workbook,status,charge_rates,discharge_rates,verified_blocks,publisher_checksum_verified,detail
+2,,missing_aging_workbook,,,0,False,The publisher folder lists no aging workbook.
+6,#6/LR1865SZ_cycles201217_001_2.xlsx,included,3,3,19,True,
+10,,missing_aging_workbook,,,0,False,The publisher folder lists no aging workbook.
+13,,missing_aging_workbook,,,0,False,The publisher folder lists no aging workbook.
+16,,missing_aging_workbook,,,0,False,The publisher folder lists no aging workbook.
+19,,missing_aging_workbook,,,0,False,The publisher folder lists no aging workbook.
+22,#22/LR1865SZ_cycle201214_002_1.xlsx,other_discharge_rate,3,2,0,True,
+23,#23/LR1865SZ_cycles201226_002_1.xlsx,other_discharge_rate,3,1,0,True,
+26,#26/LR1865SZ_cycle201214_002_2.xlsx,other_discharge_rate,3,2,0,True,
+29,#29/LR1865SZ_cycle201214_002_3.xlsx,other_discharge_rate,3,2,0,True,
+32,#32/LR1865SZ_cycles201214_002_4.xlsx,other_discharge_rate,2,2,0,True,
+35,#35/LR1865SZ_cycles201214_002_5.xlsx,other_discharge_rate,2,2,0,True,
+38,#38/LR1865SZ_cycles201214_002_6.xlsx,other_discharge_rate,2,2,0,True,
+41,#41/LR1865SZ_cycles201221_002_8.xlsx,included,2,3,19,True,
+44,#44/LR1865SZ_cycles201003_003_5.xlsx,other_discharge_rate,1,2,0,True,
+45,#45/LR1865SZ_cycles201221_003_5.xlsx,other_discharge_rate,2,1,0,True,
+48,#48/LR1865SZ_cycles201003_003_6.xlsx,other_discharge_rate,1,2,0,True,
+49,#49/LR1865SZ_cycles201221_003_6.xlsx,other_discharge_rate,2,1,0,True,
+52,#52/LR1865SZ_cycles201003_003_7.xlsx,other_discharge_rate,1,1,0,True,
+53,#53/LR1865SZ_cycles201221_003_7.xlsx,other_discharge_rate,2,1,0,True,
+57,#57/LR1865SZ_cycles201003_003_8.xlsx,other_discharge_rate,1,1,0,True,
+58,#58/LR1865SZ_cycles201221_003_8.xlsx,included,2,3,19,True,
