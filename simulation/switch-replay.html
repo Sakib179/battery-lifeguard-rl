@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>MIT–BIT switch replay · LifeGuard-RL</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+      color: #edf5f6;
+      background: #0d161d;
+      --panel: #15232d;
+      --border: #324650;
+      --muted: #afc0c8;
+      --measured: #76e4cc;
+      --forecast: #f5bc80;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1100px; margin: auto; padding: 30px 24px 36px; }
+    h1, h2, h3, p, dl, dd { margin: 0; }
+    h1 { margin: 8px 0 6px; font-size: clamp(1.8rem, 4.5vw, 2.65rem); line-height: 1.1; }
+    h2 { font-size: 1.08rem; }
+    h3 { font-size: 0.94rem; }
+    a { color: var(--measured); }
+    .muted { color: var(--muted); }
+    .small { font-size: .88rem; line-height: 1.45; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 19px; }
+    label { display: grid; gap: 5px; font-size: .88rem; font-weight: 600; }
+    select, button { font: inherit; color: inherit; border: 1px solid var(--border); border-radius: 7px;
+                     background: #101b23; min-height: 42px; padding: 7px 11px; }
+    select { width: 100%; }
+    button { cursor: pointer; }
+    button:disabled { opacity: .48; cursor: default; }
+    :focus-visible { outline: 2px solid var(--measured); outline-offset: 3px; }
+    #play { background: var(--measured); color: #09211d; border-color: transparent; font-weight: 700; min-width: 76px; }
+    .status { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin-bottom: 12px; }
+    .status p { font-variant-numeric: tabular-nums; }
+    .views { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(250px, 1fr); gap: 12px; margin-top: 12px; align-items: start; }
+    .timeline { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; }
+    .timeline input { width: 100%; accent-color: var(--measured); margin: 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+    canvas { display: block; width: 100%; height: 210px; margin: 5px 0; }
+    .legend { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 10px; }
+    .legend span::before { display: inline-block; width: 16px; margin-right: 6px; vertical-align: middle; content: ""; border-top: 2px solid var(--measured); }
+    .legend span:last-child::before { border-color: var(--forecast); border-top-style: dashed; }
+    .plot-title + canvas { margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 7px; font: inherit; font-size: .88rem; font-variant-numeric: tabular-nums; }
+    th, td { text-align: right; padding: 7px 0; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--muted); font-weight: 550; }
+    tbody tr { border-top: 1px solid var(--border); }
+    .benchmark { margin-top: 14px; }
+    .benchmark section { margin-top: 13px; }
+    .source { margin-top: 14px; }
+    @media (max-width: 760px) {
+      .views { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 430px) {
+      main { padding: 20px 12px 28px; }
+      .panel { padding: 11px; }
+      select, button { font-size: .86rem; }
+      canvas { height: 185px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a class="small" href="index.html">← XJTU dashboard</a>
+      <h1>MIT–BIT switch replay</h1>
+      <p class="muted small">Recorded charge schedules with held-out forecasts over five aging cycles.</p>
+    </header>
+    <section class="panel controls" aria-label="Replay settings">
+      <label>Charging-rate switch<select id="direction"></select></label>
+      <label>Held-out example<select id="example"></select></label>
+    </section>
+    <div class="views">
+      <section class="panel" aria-labelledby="playback-title">
+        <div class="status">
+          <h2 id="playback-title">Replay</h2>
+          <p id="block-label" class="muted small"></p>
+        </div>
+        <div class="legend small"><span>Measured</span><span>Predicted</span></div>
+        <h3 class="plot-title">Operational SOH (%)</h3>
+        <canvas id="soh-chart" role="img" aria-label="Measured and predicted operational SOH by aging block"></canvas>
+        <h3 class="plot-title">Delivered energy (Wh)</h3>
+        <canvas id="energy-chart" role="img" aria-label="Measured and predicted delivered energy by aging block"></canvas>
+        <div class="timeline">
+          <label for="phase">Playback position</label>
+          <input id="phase" type="range" min="0" step="1">
+          <div class="actions">
+            <button id="play" type="button">Play</button>
+            <button id="back" type="button">Previous</button>
+            <button id="next" type="button">Next</button>
+          </div>
+        </div>
+      </section>
+      <aside aria-label="Replay errors">
+        <section class="panel">
+          <h2 id="phase-label" aria-live="polite"></h2>
+          <p class="muted small" id="models"></p>
+          <table aria-label="Selected block forecast and measured outcome">
+            <thead><tr><th scope="col">Target</th><th scope="col">Forecast</th><th scope="col">Measured</th><th scope="col">Error</th></tr></thead>
+            <tbody>
+              <tr><td>SOH (%)</td><td id="soh-forecast"></td><td id="soh-actual"></td><td id="soh-error"></td></tr>
+              <tr><td>Energy (Wh)</td><td id="wh-forecast"></td><td id="wh-actual"></td><td id="wh-error"></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="panel benchmark" aria-labelledby="benchmark-title">
+          <h2 id="benchmark-title">Held-out switch benchmark</h2>
+          <p id="benchmark-context" class="muted small"></p>
+          <table aria-label="Held-out mean and maximum errors">
+            <thead><tr><th scope="col">Target</th><th scope="col">Mean</th><th scope="col">Max</th><th scope="col">Scored</th></tr></thead>
+            <tbody id="benchmark-rows"></tbody>
+          </table>
+        </section>
+      </aside>
+    </div>
+    <p class="source small muted">Operational SOH uses measured capacity under a 3C discharge. The highlighted block begins at the recorded rate switch. <a href="https://data.mendeley.com/datasets/kw34hhw7xg/3">MIT–BIT v3 data source</a></p>
+    <noscript><p>This replay needs JavaScript to display the recorded blocks.</p></noscript>
+  </main>
+
+  <script id="switch-data" type="application/json">{"cases":[{"id":"2-to-3-typical","direction":"2-to-3","kind":"typical","cell":24,"focus":66,"blocks":[{"start":56,"end":60,"rate":2,"priorRate":1,"measuredSoh":83.20557491289198,"predictedSoh":85.11707514145036,"measuredWh":20.336861111351812,"predictedWh":22.308592894834888,"sohModel":"history_aware","whModel":"history_aware"},{"start":61,"end":65,"rate":2,"priorRate":2,"measuredSoh":78.60627177700347,"predictedSoh":80.83101196499169,"measuredWh":19.18055955177254,"predictedWh":21.145094161152734,"sohModel":"history_aware","whModel":"history_aware"},{"start":66,"end":70,"rate":3,"priorRate":2,"measuredSoh":50.45296167247386,"predictedSoh":53.93316322780663,"measuredWh":12.147687831993974,"predictedWh":14.384549588857594,"sohModel":"history_aware","whModel":"history_aware"},{"start":71,"end":75,"rate":3,"priorRate":3,"measuredSoh":45.853658536585364,"predictedSoh":46.38077182518143,"measuredWh":10.983095781035477,"predictedWh":13.140538474554466,"sohModel":"history_aware","whModel":"history_aware"},{"start":76,"end":80,"rate":3,"priorRate":3,"measuredSoh":40.90592334494773,"predictedSoh":40.11343092123586,"measuredWh":9.883946085453086,"predictedWh":11.664450653767428,"sohModel":"history_aware","whModel":"history_aware"}]},{"id":"2-to-3-worst","direction":"2-to-3","kind":"worst","cell":77,"focus":36,"blocks":[{"start":26,"end":30,"rate":1,"priorRate":3,"measuredSoh":152.72904483430798,"predictedSoh":111.8820604646879,"measuredWh":26.775955366413523,"predictedWh":30.081362454442356,"sohModel":"history_aware","whModel":"history_aware"},{"start":31,"end":35,"rate":2,"priorRate":1,"measuredSoh":109.4541910331384,"predictedSoh":125.0480829839377,"measuredWh":19.158012404308568,"predictedWh":30.205423550326955,"sohModel":"history_aware","whModel":"history_aware"},{"start":36,"end":40,"rate":3,"priorRate":2,"measuredSoh":67.05653021442495,"predictedSoh":86.30735055360356,"measuredWh":11.581479158473591,"predictedWh":21.349042859899946,"sohModel":"history_aware","whModel":"history_aware"},{"start":41,"end":45,"rate":1,"priorRate":3,"measuredSoh":137.23196881091616,"predictedSoh":102.22782191924838,"measuredWh":23.925907378902902,"predictedWh":28.17883759411822,"sohModel":"history_aware","whModel":"history_aware"},{"start":46,"end":50,"rate":1,"priorRate":1,"measuredSoh":139.8635477582846,"predictedSoh":129.93110787982343,"measuredWh":24.40721179573545,"predictedWh":33.331399924519026,"sohModel":"history_aware","whModel":"history_aware"}]},{"id":"3-to-2-typical","direction":"3-to-2","kind":"typical","cell":24,"focus":16,"blocks":[{"start":11,"end":15,"rate":3,"priorRate":1,"measuredSoh":91.01045296167247,"predictedSoh":83.10562797501615,"measuredWh":22.263235892043014,"predictedWh":20.28087116517422,"sohModel":"history_aware","whModel":"history_aware"},{"start":16,"end":20,"rate":2,"priorRate":3,"measuredSoh":103.06620209059234,"predictedSoh":105.33862509909726,"measuredWh":25.318904415771364,"predictedWh":25.73033381205952,"sohModel":"history_aware","whModel":"history_aware"},{"start":21,"end":25,"rate":2,"priorRate":2,"measuredSoh":99.02439024390243,"predictedSoh":96.01353927587807,"measuredWh":24.361299498554814,"predictedWh":23.513420682354123,"sohModel":"history_aware","whModel":"history_aware"},{"start":26,"end":30,"rate":2,"priorRate":2,"measuredSoh":94.84320557491289,"predictedSoh":93.72381737595371,"measuredWh":23.389466006784073,"predictedWh":23.301185091702678,"sohModel":"history_aware","whModel":"history_aware"}]},{"id":"3-to-2-worst","direction":"3-to-2","kind":"worst","cell":65,"focus":76,"blocks":[{"start":66,"end":70,"rate":1,"priorRate":1,"measuredSoh":110.58451816745655,"predictedSoh":108.58712291605924,"measuredWh":23.890869118307336,"predictedWh":29.28864439358766,"sohModel":"history_aware","whModel":"history_aware"},{"start":71,"end":75,"rate":3,"priorRate":1,"measuredSoh":57.5039494470774,"predictedSoh":72.37568834335596,"measuredWh":12.243446223970496,"predictedWh":18.98140354405564,"sohModel":"history_aware","whModel":"history_aware"},{"start":76,"end":80,"rate":2,"priorRate":3,"measuredSoh":86.96682464454976,"predictedSoh":75.6844978454509,"measuredWh":18.641759265561635,"predictedWh":20.903931098843675,"sohModel":"history_aware","whModel":"history_aware"},{"start":81,"end":85,"rate":3,"priorRate":2,"measuredSoh":53.63349131121643,"predictedSoh":59.25180234163235,"measuredWh":11.299067443309724,"predictedWh":15.299724590924356,"sohModel":"history_aware","whModel":"history_aware"},{"start":86,"end":90,"rate":2,"priorRate":3,"measuredSoh":80.41074249605055,"predictedSoh":70.39331160550535,"measuredWh":17.148111462824563,"predictedWh":19.668939281326438,"sohModel":"history_aware","whModel":"history_aware"}]}],"metrics":{"2-to-3":{"soh":{"mae":3.8733543714917027,"worst":19.250820339178603,"scored":98,"eligible":100},"wh":{"mae":2.659174426778789,"worst":9.767563701426354,"scored":96,"eligible":100}},"3-to-2":{"soh":{"mae":3.0064667196193504,"worst":11.282326799098854,"scored":122,"eligible":125},"wh":{"mae":2.0202473648946033,"worst":7.314583460506901,"scored":122,"eligible":125}}},"scoredCells":55}</script>
+  <script>
+    "use strict";
+
+    const get = id => document.getElementById(id);
+    const data = JSON.parse(get("switch-data").textContent);
+    const direction = get("direction"), example = get("example"), phase = get("phase");
+    const choices = {"2-to-3": "2C → 3C", "3-to-2": "3C → 2C"};
+    const modelNames = {history_aware: "History-aware Ridge", rate_only: "Rate-only Ridge", persistence: "Persistence"};
+    const missing = "—";
+    let active, timer = null;
+
+    function fill(select, options) {
+      select.replaceChildren(...options.map(([id, label]) => new Option(label, id)));
+    }
+
+    function formatted(value, unit = "") {
+      return Number.isFinite(value) ? value.toFixed(2) + unit : missing;
+    }
+
+    function chooseDirection() {
+      fill(example, data.cases.filter(item => item.direction === direction.value).map(item => [
+        item.id, (item.kind === "typical" ? "Typical SOH error" : "Largest SOH error") + " · cell #" + item.cell,
+      ]));
+      chooseExample();
+    }
+
+    function pause() {
+      clearInterval(timer);
+      timer = null;
+      get("play").textContent = "Play";
+    }
+
+    function chooseExample() {
+      pause();
+      active = data.cases.find(item => item.id === example.value);
+      phase.max = active.blocks.length * 2 - 1;
+      phase.value = 2 * active.blocks.findIndex(block => block.start === active.focus);
+      const metrics = data.metrics[active.direction];
+      get("benchmark-context").textContent = choices[active.direction] + " · " + data.scoredCells + " cells in the full benchmark";
+      get("benchmark-rows").replaceChildren(...[["soh", "SOH (pp)"], ["wh", "Energy (Wh)"]].map(([id, label]) => {
+        const metric = metrics[id];
+        const row = document.createElement("tr");
+        for (const value of [label, formatted(metric.mae), formatted(metric.worst), metric.scored + "/" + metric.eligible]) {
+          row.insertCell().textContent = value;
+        }
+        return row;
+      }));
+      render();
+    }
+
+    function draw(canvas, actual, prediction, index, reveal) {
+      const context = canvas.getContext("2d");
+      if (!context || !canvas.clientWidth || !canvas.clientHeight) return;
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const grid = active.blocks;
+      const shown = grid.slice(0, index + 1).flatMap((block, i) => [
+        block[prediction], i < index || reveal ? block[actual] : null,
+      ]).filter(Number.isFinite);
+      const pad = Math.max(1, (Math.max(...shown) - Math.min(...shown)) * .12);
+      const low = shown.length ? Math.min(...shown) - pad : 0;
+      const high = shown.length ? Math.max(...shown) + pad : 1;
+      const left = 44, right = w - 9, top = 8, bottom = h - 42;
+      const spacing = (right - left) / grid.length;
+      const x = i => left + spacing * (i + .5);
+      const y = value => bottom - (value - low) * (bottom - top) / (high - low);
+      const focus = grid.findIndex(block => block.start === active.focus);
+      context.fillStyle = "#253a45";
+      context.fillRect(x(focus) - spacing / 2, top, spacing, h - top - 5);
+      context.font = "11px system-ui";
+      for (let t = 0; t <= 3; t++) {
+        const value = low + (high - low) * t / 3, yy = y(value);
+        context.strokeStyle = "#324650";
+        context.beginPath();
+        context.moveTo(left, yy);
+        context.lineTo(right, yy);
+        context.stroke();
+        context.fillStyle = "#afc0c8";
+        context.textAlign = "right";
+        context.fillText(value.toFixed(1), left - 6, yy + 4);
+      }
+      context.textAlign = "center";
+      for (const [i, block] of grid.entries()) {
+        context.fillStyle = i === index ? "#edf5f6" : "#afc0c8";
+        context.fillText(block.start + "–" + block.end, x(i), bottom + 16);
+        context.fillText(block.rate + "C", x(i), bottom + 31);
+      }
+      function series(key, end, color, dashed) {
+        context.strokeStyle = context.fillStyle = color;
+        context.lineWidth = 2;
+        context.setLineDash(dashed ? [5, 4] : []);
+        context.beginPath();
+        let connected = false;
+        for (let i = 0; i <= end; i++) {
+          const value = grid[i][key];
+          if (!Number.isFinite(value)) { connected = false; continue; }
+          if (connected) context.lineTo(x(i), y(value)); else context.moveTo(x(i), y(value));
+          connected = true;
+        }
+        context.stroke();
+        context.setLineDash([]);
+        for (let i = 0; i <= end; i++) {
+          const value = grid[i][key];
+          if (!Number.isFinite(value)) continue;
+          context.beginPath();
+          context.arc(x(i), y(value), 3.5, 0, 2 * Math.PI);
+          context.fill();
+        }
+      }
+      series(prediction, index, "#f5bc80", true);
+      series(actual, index - Number(!reveal), "#76e4cc", false);
+    }
+
+    function render() {
+      const position = Number(phase.value), index = Math.floor(position / 2), reveal = position % 2 === 1;
+      const block = active.blocks[index];
+      get("block-label").textContent = "Cell #" + active.cell + " · cycles " + block.start + "–" + block.end +
+        " · " + block.priorRate + "C → " + block.rate + "C";
+      get("phase-label").textContent = reveal ? "Measured at block end" : "Forecast at block start";
+      get("models").textContent = block.sohModel === block.whModel ? modelNames[block.sohModel] :
+        "SOH " + modelNames[block.sohModel] + " · Energy " + modelNames[block.whModel];
+      for (const [key, predicted, actual, units] of [
+        ["soh", block.predictedSoh, block.measuredSoh, " pp"],
+        ["wh", block.predictedWh, block.measuredWh, " Wh"],
+      ]) {
+        get(key + "-forecast").textContent = formatted(predicted);
+        get(key + "-actual").textContent = reveal ? formatted(actual) : missing;
+        get(key + "-error").textContent = reveal && Number.isFinite(actual) && Number.isFinite(predicted)
+          ? formatted(Math.abs(predicted - actual), units) : missing;
+      }
+      get("back").disabled = position === 0;
+      get("next").disabled = position === Number(phase.max);
+      phase.setAttribute("aria-valuetext", "Cycles " + block.start + " to " + block.end + (reveal ? ", measured" : ", forecast"));
+      draw(get("soh-chart"), "measuredSoh", "predictedSoh", index, reveal);
+      draw(get("energy-chart"), "measuredWh", "predictedWh", index, reveal);
+    }
+
+    function seek(position) {
+      phase.value = Math.max(0, Math.min(Number(phase.max), position));
+      if (Number(phase.value) === Number(phase.max)) pause();
+      render();
+    }
+
+    direction.addEventListener("change", chooseDirection);
+    example.addEventListener("change", chooseExample);
+    phase.addEventListener("input", () => { pause(); render(); });
+    get("back").addEventListener("click", () => { pause(); seek(Number(phase.value) - 1); });
+    get("next").addEventListener("click", () => { pause(); seek(Number(phase.value) + 1); });
+    get("play").addEventListener("click", () => {
+      if (timer !== null) { pause(); return; }
+      if (Number(phase.value) === Number(phase.max)) seek(0);
+      get("play").textContent = "Pause";
+      timer = setInterval(() => seek(Number(phase.value) + 1), 900);
+    });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
+    fill(direction, Object.entries(choices).filter(([id]) => data.cases.some(item => item.direction === id)));
+    chooseDirection();
+    const resize = new ResizeObserver(render);
+    resize.observe(get("soh-chart"));
+    resize.observe(get("energy-chart"));
+  </script>
+</body>
+</html>

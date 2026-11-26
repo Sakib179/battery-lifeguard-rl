@@ -1,0 +1,5 @@
+case_id,direction,kind,cell_id,focus_start_cycle,focus_soh_error_pp
+2-to-3-typical,2-to-3,typical,24,66,3.480201555332769
+2-to-3-worst,2-to-3,worst,77,36,19.250820339178603
+3-to-2-typical,3-to-2,typical,24,16,2.2724230085049157
+3-to-2-worst,3-to-2,worst,65,76,11.282326799098854

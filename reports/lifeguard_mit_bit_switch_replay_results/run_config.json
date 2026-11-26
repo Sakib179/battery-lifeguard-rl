@@ -1,0 +1,19 @@
+{
+  "doi": "10.17632/kw34hhw7xg.3",
+  "mode": "benchmark",
+  "expected_randomized_cells": 55,
+  "source_cells_read": 55,
+  "scored_cells": 55,
+  "block_size": 5,
+  "pilot_cells": [
+    1,
+    3
+  ],
+  "ridge_alphas": [
+    1,
+    10,
+    100
+  ],
+  "seed": 42,
+  "discharge_rate_c": 3
+}

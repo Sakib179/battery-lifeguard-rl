@@ -10,6 +10,7 @@ RESULTS = HERE.parent / "reports" / "lifeguard_digital_twin_validation_results"
 LATE_LIFE_RESULTS = HERE.parent / "reports" / "lifeguard_fixed_anchor_soh_results"
 ROLLING_RESULTS = HERE.parent / "reports" / "lifeguard_rolling_forecasts_results"
 FIXED_SOH_RESULTS = HERE.parent / "reports" / "lifeguard_fixed_soh_forecast_results"
+SWITCH_RESULTS = HERE.parent / "reports" / "lifeguard_mit_bit_switch_replay_results"
 FIXED_SOH_MODELS = {"dashboard_fixed", "previous_fixed", "revised_fixed"}
 
 
@@ -301,16 +302,85 @@ def load_results():
     }
 
 
+def embed_data(script_id, data):
+    payload = json.dumps(data, separators=(",", ":"), allow_nan=False).replace("<", "\\u003c")
+    return f'<script id="{script_id}" type="application/json">{payload}</script>'
+
+
+def load_switch_replay():
+    filenames = ("run_config.json", "replay_cases.csv", "replay_blocks.csv", "metrics.csv")
+    if not all((SWITCH_RESULTS / name).is_file() for name in filenames):
+        return None
+    config = json.loads((SWITCH_RESULTS / filenames[0]).read_text(encoding="utf-8"))
+    if config["mode"] != "benchmark" or config["doi"] != "10.17632/kw34hhw7xg.3":
+        return None
+
+    cases = {}
+    for row in rows("replay_cases.csv", SWITCH_RESULTS):
+        case_id = row["case_id"]
+        if case_id in cases:
+            raise ValueError(f"Duplicate switch replay {case_id}")
+        cases[case_id] = {
+            "id": case_id, "direction": row["direction"], "kind": row["kind"],
+            "cell": int(row["cell_id"]), "focus": int(row["focus_start_cycle"]), "blocks": [],
+        }
+
+    size = config["block_size"]
+    for row in rows("replay_blocks.csv", SWITCH_RESULTS):
+        case = cases[row["case_id"]]
+        block = {
+            "start": int(row["start_cycle"]), "end": int(row["end_cycle"]),
+            "rate": int(row["charge_rate_c"]), "priorRate": int(row["previous_rate_c"]),
+            "measuredSoh": optional(row["observed_soh_pct"]), "predictedSoh": optional(row["predicted_soh"]),
+            "measuredWh": optional(row["observed_wh"]), "predictedWh": optional(row["predicted_wh"]),
+            "sohModel": row["soh_model"], "whModel": row["wh_model"],
+        }
+        if (int(row["cell_id"]) != case["cell"] or block["end"] - block["start"] + 1 != size
+                or any(b["start"] == block["start"] for b in case["blocks"])):
+            raise ValueError(f"Invalid block in switch replay {case['id']}")
+        case["blocks"].append(block)
+
+    direction_rates = {"2-to-3": (2, 3), "3-to-2": (3, 2)}
+    for case in cases.values():
+        case["blocks"].sort(key=lambda block: block["start"])
+        focus = next((block for block in case["blocks"] if block["start"] == case["focus"]), None)
+        if (focus is None or focus["measuredSoh"] is None or focus["predictedSoh"] is None
+                or (focus["priorRate"], focus["rate"]) != direction_rates.get(case["direction"])):
+            raise ValueError(f"Missing verified focus block for {case['id']}")
+
+    benchmark = {}
+    for row in rows("metrics.csv", SWITCH_RESULTS):
+        if row["model"] == "selected" and row["direction"] in direction_rates:
+            benchmark.setdefault(row["direction"], {})[row["target"]] = {
+                "mae": optional(row["mae"]), "worst": optional(row["worst_error"]),
+                "scored": int(row["scored_blocks"]), "eligible": int(row["eligible_blocks"]),
+            }
+    if {case["direction"] for case in cases.values()} != set(direction_rates):
+        return None
+    return {"cases": list(cases.values()), "metrics": benchmark, "scoredCells": config["scored_cells"]}
+
+
 def main():
     template = (HERE / "dashboard.template.html").read_text(encoding="utf-8")
     marker = "<!-- NOTEBOOK_RESULTS -->"
     if template.count(marker) != 1:
         raise ValueError("The dashboard template needs one notebook data marker")
     data = load_results()
-    payload = json.dumps(data, separators=(",", ":"), allow_nan=False).replace("<", "\\u003c")
-    embedded = f'<script id="notebook-data" type="application/json">{payload}</script>'
+    embedded = embed_data("notebook-data", data)
+    replay = load_switch_replay()
+    replay_link = ""
+    if replay is not None:
+        replay_template = (HERE / "switch_replay.template.html").read_text(encoding="utf-8")
+        replay_marker = "<!-- SWITCH_RESULTS -->"
+        if replay_template.count(replay_marker) != 1:
+            raise ValueError("The switch replay template needs one data marker")
+        (HERE / "switch-replay.html").write_text(
+            replay_template.replace(replay_marker, embed_data("switch-data", replay)), encoding="utf-8")
+        replay_link = '<p class="replay-link"><a href="switch-replay.html">MIT–BIT switch replay</a></p>'
+        print(f"Wrote simulation/switch-replay.html with {len(replay['cases'])} held-out examples")
     output = HERE / "index.html"
-    output.write_text(template.replace(marker, embedded), encoding="utf-8")
+    output.write_text(template.replace(marker, embedded).replace("<!-- SWITCH_REPLAY_LINK -->", replay_link),
+                      encoding="utf-8")
     print(f"Wrote {output.relative_to(HERE.parent)} with {len(data['cells'])} cells")
 
 

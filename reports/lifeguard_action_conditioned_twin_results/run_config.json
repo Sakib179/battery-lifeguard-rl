@@ -1,0 +1,35 @@
+{
+  "dataset": "BatteryLife v12 XJTU, fixed 2C and 3C with 1C discharge",
+  "pilot_cells": [
+    "XJTU_2C_battery-7",
+    "XJTU_3C_battery-11"
+  ],
+  "anchor_cycles": [
+    50,
+    100
+  ],
+  "horizons": [
+    1,
+    10,
+    50
+  ],
+  "charge_rates_c": [
+    2,
+    3
+  ],
+  "eol_soh_pct": 80.0,
+  "nominal_ah": 2.0,
+  "max_rollout_steps": 600,
+  "minimum_cells_per_rate_bin": 2,
+  "ridge_alphas": [
+    1,
+    10,
+    100
+  ],
+  "training_target_window_cycles": 10,
+  "algorithm_inputs": [
+    "lifeguard_soh_results",
+    "lifeguard_digital_twin_validation_results"
+  ],
+  "rolling_reference": true
+}
