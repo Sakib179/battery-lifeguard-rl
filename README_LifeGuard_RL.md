@@ -571,7 +571,7 @@ Open [LifeGuard-RL Live Battery Dashboard](http://127.0.0.1:8501). Use **Play** 
 The same dashboard runs from the existing Python Work environment.
 
 ```sh
-../../.venv/bin/python -B -m streamlit run presentation/app.py \
+../../.venv/bin/python -B -m streamlit run app/app.py \
     --server.address=127.0.0.1 --server.headless=true --server.fileWatcherType=none \
     --browser.gatherUsageStats=false
 ```

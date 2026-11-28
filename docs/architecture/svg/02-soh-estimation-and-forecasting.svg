@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1036.8pt" height="583.2pt" viewBox="0 0 1036.8 583.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>Soh Estimation And Forecasting</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Soh Estimation And Forecasting</dc:title>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 583.2 
+L 1036.8 583.2 
+L 1036.8 0 
+L 0 0 
+z
+" style="fill: #f4f7fb"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 0 0 
+L 1036.8 0 
+L 1036.8 5.04 
+L 0 5.04 
+z
+" clip-path="url(#pe95a458271)" style="fill: #12243a"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 0 0 
+L 226.8 0 
+L 226.8 5.04 
+L 0 5.04 
+z
+" clip-path="url(#pe95a458271)" style="fill: #087069"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 44.64 120.96 
+L 992.16 120.96 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #d2dce8; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 44.64 534.96 
+L 992.16 534.96 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #d2dce8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 743.04 209.88 
+L 777.915244 209.88 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #586d85; stroke-width: 1.65; stroke-linecap: round"/>
+    <path d="M 772.315244 207.08 
+L 777.915244 209.88 
+L 772.315244 212.68 
+z
+" clip-path="url(#pe95a458271)" style="fill: #586d85; stroke: #586d85; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 743.04 321.48 
+L 777.915244 321.48 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #586d85; stroke-width: 1.65; stroke-linecap: round"/>
+    <path d="M 772.315244 318.68 
+L 777.915244 321.48 
+L 772.315244 324.28 
+z
+" clip-path="url(#pe95a458271)" style="fill: #586d85; stroke: #586d85; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 743.04 433.08 
+L 777.915244 433.08 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #586d85; stroke-width: 1.65; stroke-linecap: round"/>
+    <path d="M 772.315244 430.28 
+L 777.915244 433.08 
+L 772.315244 435.88 
+z
+" clip-path="url(#pe95a458271)" style="fill: #586d85; stroke: #586d85; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 257.76 322.92 
+L 273.6 322.92 
+Q 281.52 322.92 281.52 315 
+L 281.52 217.8 
+Q 281.52 209.88 289.44 209.88 
+L 304.155244 209.88 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #1d5f99; stroke-width: 1.65; stroke-linecap: round"/>
+    <path d="M 298.555244 207.08 
+L 304.155244 209.88 
+L 298.555244 212.68 
+z
+" clip-path="url(#pe95a458271)" style="fill: #1d5f99; stroke: #1d5f99; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 281.52 322.92 
+L 304.155244 322.92 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #1d5f99; stroke-width: 1.65; stroke-linecap: round"/>
+    <path d="M 298.555244 320.12 
+L 304.155244 322.92 
+L 298.555244 325.72 
+z
+" clip-path="url(#pe95a458271)" style="fill: #1d5f99; stroke: #1d5f99; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 281.52 322.92 
+L 281.52 425.16 
+Q 281.52 433.08 289.44 433.08 
+L 304.155244 433.08 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #1d5f99; stroke-width: 1.65; stroke-linecap: round"/>
+    <path d="M 298.555244 430.28 
+L 304.155244 433.08 
+L 298.555244 435.88 
+z
+" clip-path="url(#pe95a458271)" style="fill: #1d5f99; stroke: #1d5f99; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 48.96 24.48 
+L 60.48 24.48 
+Q 64.8 24.48 64.8 28.8 
+L 64.8 40.32 
+Q 64.8 44.64 60.48 44.64 
+L 48.96 44.64 
+Q 44.64 44.64 44.64 40.32 
+L 44.64 28.8 
+Q 44.64 24.48 48.96 24.48 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #afd7cb; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 46.08 142.56 
+L 54 142.56 
+Q 55.44 142.56 55.44 144 
+L 55.44 144 
+Q 55.44 145.44 54 145.44 
+L 46.08 145.44 
+Q 44.64 145.44 44.64 144 
+L 44.64 144 
+Q 44.64 142.56 46.08 142.56 
+z
+" clip-path="url(#pe95a458271)" style="fill: #1d5f99"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 313.2 142.56 
+L 321.12 142.56 
+Q 322.56 142.56 322.56 144 
+L 322.56 144 
+Q 322.56 145.44 321.12 145.44 
+L 313.2 145.44 
+Q 311.76 145.44 311.76 144 
+L 311.76 144 
+Q 311.76 142.56 313.2 142.56 
+z
+" clip-path="url(#pe95a458271)" style="fill: #087069"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 786.96 142.56 
+L 794.88 142.56 
+Q 796.32 142.56 796.32 144 
+L 796.32 144 
+Q 796.32 145.44 794.88 145.44 
+L 786.96 145.44 
+Q 785.52 145.44 785.52 144 
+L 785.52 144 
+Q 785.52 142.56 786.96 142.56 
+z
+" clip-path="url(#pe95a458271)" style="fill: #604788"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 54 268.56 
+L 244.8 268.56 
+Q 254.16 268.56 254.16 277.92 
+L 254.16 367.92 
+Q 254.16 377.28 244.8 377.28 
+L 54 377.28 
+Q 44.64 377.28 44.64 367.92 
+L 44.64 277.92 
+Q 44.64 268.56 54 268.56 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #b6d1ea; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 59.04 280.08 
+L 63.36 280.08 
+Q 66.24 280.08 66.24 282.96 
+L 66.24 287.28 
+Q 66.24 290.16 63.36 290.16 
+L 59.04 290.16 
+Q 56.16 290.16 56.16 287.28 
+L 56.16 282.96 
+Q 56.16 280.08 59.04 280.08 
+z
+" clip-path="url(#pe95a458271)" style="fill: #e8f2fb; stroke: #b6d1ea; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 60.48 283.32 
+L 61.92 283.32 
+Q 63 283.32 63 284.4 
+L 63 285.84 
+Q 63 286.92 61.92 286.92 
+L 60.48 286.92 
+Q 59.4 286.92 59.4 285.84 
+L 59.4 284.4 
+Q 59.4 283.32 60.48 283.32 
+z
+" clip-path="url(#pe95a458271)" style="fill: #1d5f99"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 321.12 161.28 
+L 729.36 161.28 
+Q 738.72 161.28 738.72 170.64 
+L 738.72 249.12 
+Q 738.72 258.48 729.36 258.48 
+L 321.12 258.48 
+Q 311.76 258.48 311.76 249.12 
+L 311.76 170.64 
+Q 311.76 161.28 321.12 161.28 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #afd7cb; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 326.16 172.8 
+L 330.48 172.8 
+Q 333.36 172.8 333.36 175.68 
+L 333.36 180 
+Q 333.36 182.88 330.48 182.88 
+L 326.16 182.88 
+Q 323.28 182.88 323.28 180 
+L 323.28 175.68 
+Q 323.28 172.8 326.16 172.8 
+z
+" clip-path="url(#pe95a458271)" style="fill: #e3f3ef; stroke: #afd7cb; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 327.6 176.04 
+L 329.04 176.04 
+Q 330.12 176.04 330.12 177.12 
+L 330.12 178.56 
+Q 330.12 179.64 329.04 179.64 
+L 327.6 179.64 
+Q 326.52 179.64 326.52 178.56 
+L 326.52 177.12 
+Q 326.52 176.04 327.6 176.04 
+z
+" clip-path="url(#pe95a458271)" style="fill: #087069"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 794.88 161.28 
+L 982.8 161.28 
+Q 992.16 161.28 992.16 170.64 
+L 992.16 249.12 
+Q 992.16 258.48 982.8 258.48 
+L 794.88 258.48 
+Q 785.52 258.48 785.52 249.12 
+L 785.52 170.64 
+Q 785.52 161.28 794.88 161.28 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #d3c7e8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 799.92 172.8 
+L 804.24 172.8 
+Q 807.12 172.8 807.12 175.68 
+L 807.12 180 
+Q 807.12 182.88 804.24 182.88 
+L 799.92 182.88 
+Q 797.04 182.88 797.04 180 
+L 797.04 175.68 
+Q 797.04 172.8 799.92 172.8 
+z
+" clip-path="url(#pe95a458271)" style="fill: #f0ecf8; stroke: #d3c7e8; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 801.36 176.04 
+L 802.8 176.04 
+Q 803.88 176.04 803.88 177.12 
+L 803.88 178.56 
+Q 803.88 179.64 802.8 179.64 
+L 801.36 179.64 
+Q 800.28 179.64 800.28 178.56 
+L 800.28 177.12 
+Q 800.28 176.04 801.36 176.04 
+z
+" clip-path="url(#pe95a458271)" style="fill: #604788"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 321.12 272.88 
+L 729.36 272.88 
+Q 738.72 272.88 738.72 282.24 
+L 738.72 360.72 
+Q 738.72 370.08 729.36 370.08 
+L 321.12 370.08 
+Q 311.76 370.08 311.76 360.72 
+L 311.76 282.24 
+Q 311.76 272.88 321.12 272.88 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #afd7cb; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 326.16 284.4 
+L 330.48 284.4 
+Q 333.36 284.4 333.36 287.28 
+L 333.36 291.6 
+Q 333.36 294.48 330.48 294.48 
+L 326.16 294.48 
+Q 323.28 294.48 323.28 291.6 
+L 323.28 287.28 
+Q 323.28 284.4 326.16 284.4 
+z
+" clip-path="url(#pe95a458271)" style="fill: #e3f3ef; stroke: #afd7cb; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 327.6 287.64 
+L 329.04 287.64 
+Q 330.12 287.64 330.12 288.72 
+L 330.12 290.16 
+Q 330.12 291.24 329.04 291.24 
+L 327.6 291.24 
+Q 326.52 291.24 326.52 290.16 
+L 326.52 288.72 
+Q 326.52 287.64 327.6 287.64 
+z
+" clip-path="url(#pe95a458271)" style="fill: #087069"/>
+   </g>
+   <g id="patch_26">
+    <path d="M 794.88 272.88 
+L 982.8 272.88 
+Q 992.16 272.88 992.16 282.24 
+L 992.16 360.72 
+Q 992.16 370.08 982.8 370.08 
+L 794.88 370.08 
+Q 785.52 370.08 785.52 360.72 
+L 785.52 282.24 
+Q 785.52 272.88 794.88 272.88 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #d3c7e8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 799.92 284.4 
+L 804.24 284.4 
+Q 807.12 284.4 807.12 287.28 
+L 807.12 291.6 
+Q 807.12 294.48 804.24 294.48 
+L 799.92 294.48 
+Q 797.04 294.48 797.04 291.6 
+L 797.04 287.28 
+Q 797.04 284.4 799.92 284.4 
+z
+" clip-path="url(#pe95a458271)" style="fill: #f0ecf8; stroke: #d3c7e8; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_28">
+    <path d="M 801.36 287.64 
+L 802.8 287.64 
+Q 803.88 287.64 803.88 288.72 
+L 803.88 290.16 
+Q 803.88 291.24 802.8 291.24 
+L 801.36 291.24 
+Q 800.28 291.24 800.28 290.16 
+L 800.28 288.72 
+Q 800.28 287.64 801.36 287.64 
+z
+" clip-path="url(#pe95a458271)" style="fill: #604788"/>
+   </g>
+   <g id="patch_29">
+    <path d="M 321.12 384.48 
+L 729.36 384.48 
+Q 738.72 384.48 738.72 393.84 
+L 738.72 472.32 
+Q 738.72 481.68 729.36 481.68 
+L 321.12 481.68 
+Q 311.76 481.68 311.76 472.32 
+L 311.76 393.84 
+Q 311.76 384.48 321.12 384.48 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #afd7cb; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 326.16 396 
+L 330.48 396 
+Q 333.36 396 333.36 398.88 
+L 333.36 403.2 
+Q 333.36 406.08 330.48 406.08 
+L 326.16 406.08 
+Q 323.28 406.08 323.28 403.2 
+L 323.28 398.88 
+Q 323.28 396 326.16 396 
+z
+" clip-path="url(#pe95a458271)" style="fill: #e3f3ef; stroke: #afd7cb; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_31">
+    <path d="M 327.6 399.24 
+L 329.04 399.24 
+Q 330.12 399.24 330.12 400.32 
+L 330.12 401.76 
+Q 330.12 402.84 329.04 402.84 
+L 327.6 402.84 
+Q 326.52 402.84 326.52 401.76 
+L 326.52 400.32 
+Q 326.52 399.24 327.6 399.24 
+z
+" clip-path="url(#pe95a458271)" style="fill: #087069"/>
+   </g>
+   <g id="patch_32">
+    <path d="M 794.88 384.48 
+L 982.8 384.48 
+Q 992.16 384.48 992.16 393.84 
+L 992.16 472.32 
+Q 992.16 481.68 982.8 481.68 
+L 794.88 481.68 
+Q 785.52 481.68 785.52 472.32 
+L 785.52 393.84 
+Q 785.52 384.48 794.88 384.48 
+z
+" clip-path="url(#pe95a458271)" style="fill: #ffffff; stroke: #d3c7e8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_33">
+    <path d="M 799.92 396 
+L 804.24 396 
+Q 807.12 396 807.12 398.88 
+L 807.12 403.2 
+Q 807.12 406.08 804.24 406.08 
+L 799.92 406.08 
+Q 797.04 406.08 797.04 403.2 
+L 797.04 398.88 
+Q 797.04 396 799.92 396 
+z
+" clip-path="url(#pe95a458271)" style="fill: #f0ecf8; stroke: #d3c7e8; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_34">
+    <path d="M 801.36 399.24 
+L 802.8 399.24 
+Q 803.88 399.24 803.88 400.32 
+L 803.88 401.76 
+Q 803.88 402.84 802.8 402.84 
+L 801.36 402.84 
+Q 800.28 402.84 800.28 401.76 
+L 800.28 400.32 
+Q 800.28 399.24 801.36 399.24 
+z
+" clip-path="url(#pe95a458271)" style="fill: #604788"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 48.96 35.28 
+L 51.84 35.28 
+L 54 30.24 
+L 56.16 38.88 
+L 60.48 34.56 
+" clip-path="url(#pe95a458271)" style="fill: none; stroke: #087069; stroke-width: 1.65; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.2px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="72.72" y="39.448641" transform="rotate(-0 72.72 39.448641)">LIFEGUARD-RL</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 9.3px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end; fill: #516680" x="992.16" y="38.143594" transform="rotate(-0 992.16 38.143594)">HEALTH ESTIMATION   /   02</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 28px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="43.92" y="84.256875" transform="rotate(-0 43.92 84.256875)">Three ways to estimate battery health</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #41546b" x="45.36" y="109.008875" transform="rotate(-0 45.36 109.008875)">Choose the forecast path according to which measurements are available and when the estimate must be updated.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #516680" x="44.64" y="555.949875" transform="rotate(-0 44.64 555.949875)">Sources  ·  XJTU SOH benchmarks  /  Notebook 10 error audit  /  Notebook 11 rolling forecasts  /  Notebook 12 fixed forecasts</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 8.3px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end; fill: #516680" x="992.16" y="556.58507" transform="rotate(-0 992.16 556.58507)">SYSTEM DESIGN</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 9.3px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #1d5f99" x="61.92" y="149.389055" transform="rotate(-0 61.92 149.389055)">REFERENCE DATA</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 9.3px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087069" x="329.04" y="149.389055" transform="rotate(-0 329.04 149.389055)">INPUT AVAILABLE TO THE MODEL AND SELECTED METHOD</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 9.3px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #604788" x="802.8" y="149.389055" transform="rotate(-0 802.8 149.389055)">WHAT IT RETURNS</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #1d5f99" x="72" y="288.849469" transform="rotate(-0 72 288.849469)">MEASURED CAPACITY</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="56.16" y="312.235594" transform="rotate(-0 56.16 312.235594)">XJTU cycle records</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(56.16 332.214969)">Charge trace and capacity</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(56.16 345.950969)">SOH = capacity ÷ 2.0 Ah × 100</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(56.16 359.686969)">Measured SOH is the test target</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087069" x="339.12" y="181.569469" transform="rotate(-0 339.12 181.569469)">CHARGE ONLY · NOTEBOOK 10</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="323.28" y="204.955594" transform="rotate(-0 323.28 204.955594)">Guarded first-cycle correction</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(323.28 224.934969)">Use charging data through late taper and prior valid charge readings.</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(323.28 238.670969)">The guard checks unusual estimates against recent charge history.</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #604788" x="812.88" y="181.569469" transform="rotate(-0 812.88 181.569469)">FORECAST OUTPUT</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="797.04" y="206.114203" transform="rotate(-0 797.04 206.114203)">Current SOH</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(797.04 224.934969)">Current health before discharge</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(797.04 238.581805)">Cross-rate MAE · 0.217 / 0.194 pp</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087069" x="339.12" y="293.169469" transform="rotate(-0 339.12 293.169469)">CHARGE AND PAST DISCHARGE · NOTEBOOK 11</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="323.28" y="316.555594" transform="rotate(-0 323.28 316.555594)">Rolling trend and battery matching</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(323.28 336.534969)">Use the current charge and discharge history through cycle t − 1.</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(323.28 350.270969)">Select the trend or matching method by rate, age and horizon.</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #604788" x="812.88" y="293.169469" transform="rotate(-0 812.88 293.169469)">FORECAST OUTPUT</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="797.04" y="316.555594" transform="rotate(-0 797.04 316.555594)">Rolling SOH forecast</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(797.04 336.534969)">Current, +1, +10 and +50 cycles</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(797.04 350.270969)">Refresh every five cycles</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087069" x="339.12" y="404.769469" transform="rotate(-0 339.12 404.769469)">FIXED START · NOTEBOOK 12</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="323.28" y="428.155594" transform="rotate(-0 323.28 428.155594)">Revised degradation-curve forecast</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(323.28 448.134969)">Start once at cycle 50 or 100 using charge-based or measured SOH.</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(323.28 461.870969)">Project duration and fade from comparable training-battery curves.</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #604788" x="812.88" y="404.769469" transform="rotate(-0 812.88 404.769469)">FORECAST OUTPUT</text>
+   </g>
+   <g id="text_29">
+    <text style="font-weight: 700; font-size: 12.6px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #12243a" x="797.04" y="428.155594" transform="rotate(-0 797.04 428.155594)">Full SOH trajectory</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(797.04 448.134969)">One complete projected curve</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans', Arial, sans-serif; fill: #41546b" transform="translate(797.04 461.870969)">Full curve and final 20 cycles</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 9.1px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #516680" x="44.64" y="514.139031" transform="rotate(-0 44.64 514.139031)">SOH measures capacity relative to the nominal capacity. The two cross-rate errors come from separate 2C-to-3C and 3C-to-2C tests.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe95a458271">
+   <rect x="0" y="0" width="1036.8" height="583.2"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,9 +1,9 @@
 *
-!presentation/
-presentation/**
-!presentation/app.py
-!presentation/data.py
-!presentation/requirements.txt
+!app/
+app/**
+!app/app.py
+!app/data.py
+!app/requirements.txt
 !simulation/
 simulation/**
 !simulation/build_dashboard.py

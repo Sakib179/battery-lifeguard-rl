@@ -34,7 +34,7 @@ def read_data():
     bundle = Path(__file__).with_name("data.json")
     if bundle.is_file():
         return json.loads(bundle.read_text(encoding="utf-8"))
-    from presentation.data import collect_data
+    from data import collect_data
 
     return collect_data()
 

@@ -15,7 +15,7 @@ services:
     image: lifeguard-presentation:local
     build:
       context: .
-      dockerfile: presentation/Dockerfile
+      dockerfile: app/Dockerfile
     init: true
     ports:
       - "127.0.0.1:${LIFEGUARD_DEMO_PORT:-8501}:8501"
