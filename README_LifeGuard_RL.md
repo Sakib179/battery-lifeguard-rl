@@ -7,8 +7,9 @@
 **Primary dataset:** [BatteryLife v12 ---
 Zenodo](https://zenodo.org/records/21149533)\
 **Initial scope:** One dataset collection only\
-**Status:** Proposed research; no experimental results have been
-established yet.
+**Status:** This document records the original research agenda. See the
+[implementation README](README.md) for the completed XJTU and MIT–BIT experiments,
+current limitations, and demo instructions.
 
 ------------------------------------------------------------------------
 
