@@ -5,6 +5,13 @@ import json
 from math import isclose
 from pathlib import Path
 
+if __package__:
+    from .study_data import (load_charging_updates, load_coverage, load_discharge,
+                             load_measured_charging, load_simulator_validation)
+else:
+    from study_data import (load_charging_updates, load_coverage, load_discharge,
+                            load_measured_charging, load_simulator_validation)
+
 
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE.parent / "reports" / "lifeguard_digital_twin_validation_results"
@@ -458,19 +465,25 @@ def load_controller_replay():
     }
 
 
-def write_replay(template_name, output_name, marker, script_id, data):
+def write_replay(template_name, output_name, marker, script_id, data, embeds=()):
     template = (HERE / template_name).read_text(encoding="utf-8")
-    if template.count(marker) != 1:
-        raise ValueError(f"{template_name} needs one data marker")
-    (HERE / output_name).write_text(template.replace(marker, embed_data(script_id, data)), encoding="utf-8")
+    for supplement, element, payload in ((marker, script_id, data), *embeds):
+        if template.count(supplement) != 1:
+            raise ValueError(f"{template_name} needs one {supplement} marker")
+        template = template.replace(supplement, embed_data(element, payload))
+    (HERE / output_name).write_text(template, encoding="utf-8")
 
 
 def main():
     template = (HERE / "dashboard.template.html").read_text(encoding="utf-8")
     marker = "<!-- NOTEBOOK_RESULTS -->"
+    nav_marker = "<!-- SWITCH_REPLAY_LINK -->"
     if template.count(marker) != 1:
         raise ValueError("The dashboard template needs one notebook data marker")
+    if template.count(nav_marker) != 1:
+        raise ValueError("The dashboard template needs one simulation navigation marker")
     data = load_results()
+    data["coverage"] = load_coverage()
     embedded = embed_data("notebook-data", data)
     replay = load_switch_replay()
     replay_link = ""
@@ -481,14 +494,24 @@ def main():
     controller = load_controller_replay()
     controller_link = ""
     if controller is not None:
+        studies = {"charging": load_charging_updates(), "measured": load_measured_charging(),
+                   "validation": load_simulator_validation()}
         write_replay("charging_controller.template.html", "charging-controller.html",
-                     "<!-- CONTROLLER_RESULTS -->", "controller-data", controller)
+                     "<!-- CONTROLLER_RESULTS -->", "controller-data", controller,
+                     (("<!-- CHARGING_STUDIES -->", "charging-studies-data", studies),))
         controller_link = '<a href="charging-controller.html">Charging Controller</a>'
         print(f"Wrote simulation/charging-controller.html with {len(controller['cases'])} held-out starts")
+    discharge = load_discharge()
+    discharge_link = ""
+    if discharge is not None:
+        write_replay("discharge_controller.template.html", "discharge-controller.html",
+                     "<!-- DISCHARGE_RESULTS -->", "discharge-data", discharge)
+        discharge_link = '<a href="discharge-controller.html">XJTU Discharge</a>'
+        print(f"Wrote simulation/discharge-controller.html with {len(discharge['forecasts'])} forecast windows")
     output = HERE / "index.html"
-    links = " ".join(link for link in (replay_link, controller_link) if link)
+    links = " ".join(link for link in (discharge_link, controller_link, replay_link) if link)
     navigation = f'<nav class="replay-link" aria-label="Other simulations">{links}</nav>' if links else ""
-    output.write_text(template.replace(marker, embedded).replace("<!-- SWITCH_REPLAY_LINK -->", navigation),
+    output.write_text(template.replace(marker, embedded).replace(nav_marker, navigation),
                       encoding="utf-8")
     print(f"Wrote {output.relative_to(HERE.parent)} with {len(data['cells'])} cells")
 

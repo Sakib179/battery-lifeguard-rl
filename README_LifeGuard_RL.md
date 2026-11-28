@@ -490,6 +490,47 @@ simpler controller.
 
 Use only tools that are needed. Avoid unnecessary frameworks.
 
+### Local MLflow demo
+
+The native MLflow UI compares LifeGuard-RL's saved evaluation runs and recorded training histories. It uses a project-local SQLite database. From this repository root, use the Python Work environment.
+
+```sh
+../../.venv/bin/python -B -m tracking import
+../../.venv/bin/python -B -m tracking links
+../../.venv/bin/python -B -m tracking serve
+```
+
+Open [MLflow Tracking](http://127.0.0.1:5500). Press Ctrl+C in the terminal to stop the server. Port 5500 avoids the macOS AirPlay conflict on port 5000. If 5500 is occupied, choose another free port and pass the same `--port` to `serve` and `links`.
+
+MLflow 2.22.5 uses the SQLAlchemy 2.0 series in this setup. If Python Work has SQLAlchemy 2.1, install the compatible version into the project's ignored dependency directory.
+
+```sh
+uv pip install --no-deps --python ../../.venv/bin/python --target .mlflow/dependencies "SQLAlchemy==2.0.58"
+```
+
+#### Suggested demo order
+
+With the server running, use a second terminal to open a focused native chart view.
+
+```sh
+../../.venv/bin/python -B -m tracking charts soh-trajectory --open
+../../.venv/bin/python -B -m tracking charts discharge-soh --open
+../../.venv/bin/python -B -m tracking charts charging-policies --open
+../../.venv/bin/python -B -m tracking charts discharge-sac --open
+```
+
+Run `tracking charts` through Python Work to list the other chart views. These links open MLflow's chart view with matched runs and the relevant metrics already selected. Trajectory charts use operating cycles, fixed forecast charts use cycles ahead, refresh charts use cycles elapsed, and training curves use logged updates. Controller metrics are shown as bars for each policy.
+
+Every experiment has a **Benchmark overview** run. In **Artifacts**, open `plots/` for the figures, `sources/` for the original tables and summary, and `provenance.json` for file checksums. The **XJTU SOH and RUL**, **MIT-BIT Measured Replay**, **MIT-BIT Simulator Validation**, and **MIT-BIT Charging Forecast** experiments provide the remaining comparisons.
+
+Set `TRACK_WITH_MLFLOW = True` in the final cell of Notebook 22 or 23 to log a completed local export. The execution record indicates when the controller benchmark was reused. Identical result tables reuse the existing comparison runs. Saved reports can also be imported from a directory or a downloaded ZIP.
+
+```sh
+../../.venv/bin/python -B -m tracking import --notebook 23 --report /path/to/downloaded-results.zip
+```
+
+The **evidence** tag distinguishes held-out forecasts, recorded matches, simulated controllers, and stored training histories. The database and locally generated plots are stored in `.mlflow/`.
+
 ------------------------------------------------------------------------
 
 ## 10. Suggested repository structure

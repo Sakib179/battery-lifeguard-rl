@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>LifeGuard-RL · Battery simulation</title>
+  <link rel="stylesheet" href="study-ui.css">
   <style>
     :root {
       color-scheme: dark;
@@ -234,6 +235,22 @@
         </section>
       </aside>
     </div>
+    <section class="study-view" id="protocol-coverage" hidden aria-labelledby="protocol-heading">
+      <div class="study-panel">
+        <h2 id="protocol-heading">XJTU Protocol Coverage</h2>
+        <p class="study-note">Notebook 13 · Training battery counts by SOH band under the recorded fixed-rate protocols.</p>
+        <div class="study-controls"><label>Validation fold<select id="coverage-fold"></select></label></div>
+        <p id="coverage-switches" class="study-status"></p>
+        <div class="study-scroll" role="region" aria-label="Training battery coverage by SOH band" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">SOH band</th><th scope="col">2C batteries</th>
+              <th scope="col">3C batteries</th><th scope="col">Both rates supported</th></tr></thead>
+            <tbody id="coverage-rows"></tbody>
+          </table>
+        </div>
+        <p class="study-note" id="coverage-replay" hidden><a href="switch-replay.html">Recorded MIT–BIT charging-rate switches</a></p>
+      </div>
+    </section>
     <noscript><p>This dashboard needs JavaScript to play the saved results.</p></noscript>
   </main>
 
@@ -641,5 +658,7 @@
     useSelection();
     new ResizeObserver(() => drawChart(Number(slider.value) - run.start)).observe(chart);
   </script>
+  <script src="study-ui.js"></script>
+  <script src="protocol-coverage.js"></script>
 </body>
 </html>

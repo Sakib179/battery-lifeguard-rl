@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>XJTU Discharge · LifeGuard-RL</title>
+  <link rel="stylesheet" href="study-ui.css">
+</head>
+<body class="study-page">
+  <main>
+    <header>
+      <nav aria-label="Simulation navigation"><a href="index.html">LifeGuard-RL dashboard</a></nav>
+      <h1>XJTU Discharge</h1>
+      <p>Follow SOH and delivered energy forecasts, then compare discharge decisions on the same simulated starts.</p>
+    </header>
+    <div class="study-view">
+      <div id="discharge-tabs" class="study-tabbar" role="tablist" aria-label="Discharge studies">
+        <button id="forecast-tab" type="button" role="tab" aria-controls="discharge-forecast">Forecast Replay</button>
+        <button id="policies-tab" type="button" role="tab" aria-controls="discharge-policies">Controller Comparison</button>
+      </div>
+
+      <section id="discharge-forecast" class="study-stack" role="tabpanel" aria-labelledby="forecast-tab">
+        <div class="study-panel">
+          <h2>Updates for the same 30-cycle endpoint</h2>
+          <div class="study-controls">
+            <label>Battery<select id="discharge-battery"></select></label>
+            <label>Start cycle<select id="discharge-start"></select></label>
+            <div class="study-buttons" aria-label="Example forecasts">
+              <button type="button" id="example-3">Battery 3 · cycle 307</button>
+              <button type="button" id="example-5">Battery 5 · cycle 241</button>
+            </div>
+          </div>
+          <div class="study-buttons">
+            <button id="discharge-play" class="study-primary" type="button">Play</button>
+            <button id="discharge-next" type="button">Next</button>
+            <button id="discharge-reset" type="button">Reset</button>
+          </div>
+          <div id="discharge-timeline" class="study-timeline" role="group" aria-label="Operating cycles elapsed"></div>
+          <p id="discharge-status" class="study-status" role="status"></p>
+          <p id="discharge-context" class="study-note"></p>
+        </div>
+        <div class="study-panel">
+          <div class="study-legend" aria-label="Chart legend">
+            <span class="study-measured">Measured endpoint</span>
+            <span class="study-predicted">Recommended forecast</span>
+          </div>
+          <div class="study-grid">
+            <figure class="study-figure">
+              <figcaption>Forecast SOH at endpoint (%)</figcaption>
+              <canvas id="endpoint-soh" class="study-plot" aria-hidden="true"></canvas>
+            </figure>
+            <figure class="study-figure">
+              <figcaption>Forecast total delivered energy (Wh)</figcaption>
+              <canvas id="endpoint-wh" class="study-plot" aria-hidden="true"></canvas>
+            </figure>
+          </div>
+          <div class="study-scroll" role="region" aria-label="Forecast values" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Target</th><th scope="col">Original</th><th scope="col">Previous</th>
+                <th scope="col">Recommended</th><th scope="col">Measured endpoint</th>
+                <th scope="col">Previous error</th><th scope="col">Recommended error</th></tr></thead>
+              <tbody id="endpoint-values"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="study-panel">
+          <h2>Held-out forecast errors</h2>
+          <p id="discharge-error-context" class="study-note"></p>
+          <div class="study-scroll" role="region" aria-label="SOH and energy errors across matched windows" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Forecast</th><th scope="col">Windows</th><th scope="col">Mean absolute error</th>
+                <th scope="col">Worst 10% mean</th><th scope="col">Maximum error</th></tr></thead>
+              <tbody id="endpoint-errors"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="discharge-policies" class="study-stack" role="tabpanel" aria-labelledby="policies-tab" hidden>
+        <div class="study-panel">
+          <h2>Matched Controller Simulation</h2>
+          <p class="study-note">All policies face the same energy budget. Actions are the low, middle and high discharge templates in Notebook 23.</p>
+          <div class="study-controls">
+            <label>Disturbance<select id="controller-evaluation"></select></label>
+            <label>Battery<select id="controller-battery"></select></label>
+            <label>Start cycle<select id="controller-start"></select></label>
+            <label>Draw<select id="controller-draw"></select></label>
+            <label>SAC / PPO seed<select id="controller-seed"></select></label>
+          </div>
+          <div class="study-buttons">
+            <button id="controller-play" class="study-primary" type="button">Play</button>
+            <button id="controller-next" type="button">Next</button>
+            <button id="controller-reset" type="button">Reset</button>
+          </div>
+          <div id="controller-timeline" class="study-timeline" role="group" aria-label="Controller playback stages"></div>
+          <p id="controller-status" class="study-status" role="status"></p>
+          <div class="study-scroll" role="region" aria-label="Policy actions and final simulation outcomes" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Policy</th><th scope="col">Block 1</th><th scope="col">Block 2</th><th scope="col">Block 3</th>
+                <th scope="col">Final SOH loss (pp)</th><th scope="col">Final delivered Wh</th><th scope="col">Budget status</th></tr></thead>
+              <tbody id="controller-actions"></tbody>
+            </table>
+          </div>
+          <p class="study-note">The replay reveals one action per 10 operating cycles. SOH loss and delivered Wh are available at the end of the saved run.</p>
+        </div>
+        <div class="study-panel">
+          <h2>Across 133 simulated starts</h2>
+          <p class="study-note">Each start has eight matched disturbance draws. SAC and PPO summaries include three training seeds.</p>
+          <div class="study-scroll" role="region" aria-label="Discharge policy benchmark" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Policy</th><th scope="col">Mean SOH loss (pp)</th>
+                <th scope="col">Worst 10% (pp)</th><th scope="col">Maximum (pp)</th>
+                <th scope="col">Budget hit</th><th scope="col">Support stop</th></tr></thead>
+              <tbody id="controller-summary"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <p class="study-note study-footer">Notebook 23 · <a href="https://wang-fujin.github.io/">XJTU test protocols</a></p>
+    </div>
+    <noscript><p>Enable JavaScript to replay the saved forecasts and controller decisions.</p></noscript>
+  </main>
+  <!-- DISCHARGE_RESULTS -->
+  <script src="study-ui.js"></script>
+  <script src="discharge-study.js"></script>
+</body>
+</html>

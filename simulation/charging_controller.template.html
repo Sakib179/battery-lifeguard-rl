@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Charging Controller · LifeGuard-RL</title>
+  <link rel="stylesheet" href="study-ui.css">
   <style>
     :root {
       color-scheme: dark;
@@ -109,9 +110,47 @@
     <header>
       <nav aria-label="Simulation navigation"><a href="index.html">LifeGuard-RL dashboard</a></nav>
       <h1>Charging Controller</h1>
-      <p class="intro muted">Compare three charging policies over 15 cycles using saved MIT–BIT simulations from Notebook 18.</p>
+      <p class="intro muted">Compare charging policies, recorded matches, and forecasts on MIT–BIT batteries.</p>
     </header>
 
+    <div class="study-view">
+      <div class="study-tabbar" id="charging-tabs" role="tablist" aria-label="Charging studies">
+        <button id="charge-compare-tab" type="button" role="tab" aria-controls="charge-comparison">Controller Comparison</button>
+        <button id="charge-forecasts-tab" type="button" role="tab" aria-controls="charge-forecasts">Charging Forecasts</button>
+        <button id="charge-measured-tab" type="button" role="tab" aria-controls="charge-measured">Measured Replay</button>
+        <button id="charge-validation-tab" type="button" role="tab" aria-controls="charge-validation">Simulator Accuracy</button>
+      </div>
+      <section id="charge-comparison" class="study-stack" role="tabpanel" aria-labelledby="charge-compare-tab">
+        <div class="study-panel" id="matched-charging" hidden>
+          <h2>Matched Controller Simulation</h2>
+          <p class="study-note">Notebook 22 · Three 5-cycle blocks share a 15-cycle energy target.</p>
+          <div class="study-controls">
+            <label>Battery<select id="matched-battery"></select></label>
+            <label>Start cycle<select id="matched-start"></select></label>
+            <label>Disturbance draw<select id="matched-draw"></select></label>
+            <label>SAC seed<select id="matched-seed"></select></label>
+          </div>
+          <p id="matched-budget" class="study-status" role="status"></p>
+          <div class="study-scroll" role="region" aria-label="Matched 15-cycle policy results" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Policy</th><th scope="col">Charge rates by block</th>
+                <th scope="col">Charging time (min)</th><th scope="col">Delivered Wh</th>
+                <th scope="col">Wh shortfall</th><th scope="col">Budget status</th></tr></thead>
+              <tbody id="matched-rows"></tbody>
+            </table>
+          </div>
+          <h3>Across 164 simulated starts</h3>
+          <p class="study-note">Eight matched disturbance draws per start. The SAC summary includes three training seeds.</p>
+          <div class="study-scroll" role="region" aria-label="Charging controller benchmark" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Policy</th><th scope="col">Mean min</th><th scope="col">Mean Wh</th>
+                <th scope="col">Budget hit</th><th scope="col">Worst shortfall (Wh)</th></tr></thead>
+              <tbody id="matched-summary"></tbody>
+            </table>
+          </div>
+        </div>
+        <details id="legacy-charging" class="study-panel" open>
+          <summary>Notebook 18 · Step-by-step controller replay</summary>
     <section class="panel workspace" aria-label="Simulation playback">
       <div class="toolbar">
         <div class="filters">
@@ -192,11 +231,119 @@
         <p class="muted small note">Each policy matched a different set of recorded paths. Means use measured outcomes available for each column.</p>
       </section>
     </div>
+        </details>
+      </section>
+
+      <section id="charge-forecasts" class="study-stack" role="tabpanel" aria-labelledby="charge-forecasts-tab" hidden>
+        <div class="study-panel">
+          <h2>Charging Forecasts</h2>
+          <p class="study-note">Notebook 22 · Each prediction follows the recorded charging schedule for the selected start.</p>
+          <div class="study-controls">
+            <label>Forecast horizon<select id="charge-forecast-horizon"></select></label>
+            <label>Battery<select id="charge-forecast-battery"></select></label>
+            <label>Start cycle<select id="charge-forecast-start"></select></label>
+          </div>
+          <p id="charge-forecast-context" class="study-status" role="status"></p>
+          <div class="study-scroll" role="region" aria-label="Measured and predicted charging outcomes" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Outcome</th><th scope="col">Measured</th><th scope="col">Ridge</th>
+                <th scope="col">Refined forecast</th><th scope="col">Ridge error</th><th scope="col">Refined error</th></tr></thead>
+              <tbody id="charge-forecast-rows"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="study-panel">
+          <h2>Errors across held-out batteries</h2>
+          <div class="study-scroll" role="region" aria-label="Charging forecast error benchmark" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Forecast</th><th scope="col">Windows</th><th scope="col">Mean error</th>
+                <th scope="col">Worst 10% mean</th><th scope="col">Maximum error</th></tr></thead>
+              <tbody id="charge-forecast-errors"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="charge-measured" class="study-stack" role="tabpanel" aria-labelledby="charge-measured-tab" hidden>
+        <div class="study-panel">
+          <h2>Measured Replay</h2>
+          <p class="study-note">Notebook 16 · A policy receives measured time and energy when its rate matches the recorded rate for the 5-cycle block.</p>
+          <div class="study-controls">
+            <label>Battery<select id="measured-battery"></select></label>
+            <label>Start cycle<select id="measured-start"></select></label>
+          </div>
+          <p id="measured-context" class="study-status" role="status"></p>
+          <div class="study-scroll" role="region" aria-label="Recorded policy matches for one block" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Policy</th><th scope="col">Chosen rate</th><th scope="col">Recorded match</th>
+                <th scope="col">Measured min</th><th scope="col">Measured Wh</th><th scope="col">Energy target</th></tr></thead>
+              <tbody id="measured-block"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="study-panel">
+          <h2>Across 929 decision starts</h2>
+          <p class="study-note">Means and target hit rates use the weighted recorded matches for each policy. Wh availability can differ by policy.</p>
+          <div class="study-scroll" role="region" aria-label="Single-block measured charging benchmark" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Policy</th><th scope="col">Matched decisions</th><th scope="col">Matches with Wh</th>
+                <th scope="col">Mean min</th><th scope="col">Mean Wh</th><th scope="col">Energy target hit</th></tr></thead>
+              <tbody id="measured-summary"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="charge-validation" class="study-stack" role="tabpanel" aria-labelledby="charge-validation-tab" hidden>
+        <div class="study-panel">
+          <h2>Simulator Accuracy</h2>
+          <p class="study-note">Notebook 17 · Measured and predicted outcomes along the same recorded charging schedule.</p>
+          <div class="study-controls">
+            <label>Schedule cohort<select id="validation-cohort"></select></label>
+            <label>Rollout length<select id="validation-horizon"></select></label>
+            <label>Battery<select id="validation-battery"></select></label>
+            <label>Start cycle<select id="validation-start"></select></label>
+          </div>
+          <p id="validation-context" class="study-status" role="status"></p>
+          <div class="study-legend" aria-label="Chart legend">
+            <span class="study-measured">Measured</span><span class="study-predicted">Predicted</span>
+          </div>
+          <div class="study-grid">
+            <figure class="study-figure"><figcaption>Cumulative energy (Wh)</figcaption>
+              <canvas id="validation-energy" class="study-plot" aria-hidden="true"></canvas></figure>
+            <figure class="study-figure"><figcaption>Cumulative charging time (min)</figcaption>
+              <canvas id="validation-time" class="study-plot" aria-hidden="true"></canvas></figure>
+            <figure class="study-figure"><figcaption>Block discharge capacity (Ah)</figcaption>
+              <canvas id="validation-capacity" class="study-plot" aria-hidden="true"></canvas></figure>
+          </div>
+          <div class="study-scroll" role="region" aria-label="Measured and predicted outcomes by block" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Operating cycles</th><th scope="col">Charge rate</th><th scope="col">Measured Wh</th>
+                <th scope="col">Predicted Wh</th><th scope="col">Measured min</th><th scope="col">Predicted min</th>
+                <th scope="col">Measured Ah</th><th scope="col">Predicted Ah</th></tr></thead>
+              <tbody id="validation-blocks"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="study-panel">
+          <h2>Errors across recorded rollouts</h2>
+          <div class="study-scroll" role="region" aria-label="Simulator validation benchmark" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Outcome</th><th scope="col">Windows</th><th scope="col">Batteries</th>
+                <th scope="col">Baseline mean error</th><th scope="col">Simulator mean error</th>
+                <th scope="col">Worst 10% mean</th><th scope="col">Maximum error</th></tr></thead>
+              <tbody id="validation-errors"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
     <p class="source small"><a href="https://data.mendeley.com/datasets/kw34hhw7xg/3">MIT–BIT v3 dataset</a></p>
     <noscript><p>This page needs JavaScript to display the saved controller results.</p></noscript>
   </main>
 
   <!-- CONTROLLER_RESULTS -->
+  <!-- CHARGING_STUDIES -->
   <script>
     "use strict";
 
@@ -415,6 +562,15 @@
     selectBattery(data.focusStart);
     renderEvidence();
     window.addEventListener("resize", drawCharts);
+    get("charge-comparison").addEventListener("study-hide", pause);
+    get("charge-comparison").addEventListener("study-show", drawCharts);
+    get("legacy-charging").addEventListener("toggle", event => {
+      if (event.currentTarget.open) drawCharts();
+      else pause();
+    });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
   </script>
+  <script src="study-ui.js"></script>
+  <script src="charging-studies.js"></script>
 </body>
 </html>
