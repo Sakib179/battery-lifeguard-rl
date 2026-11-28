@@ -1,0 +1,11 @@
+*
+!Dockerfile
+!tracking
+!tracking/*.py
+!simulation
+!simulation/index.html
+!simulation/charging-controller.html
+!simulation/discharge-controller.html
+!simulation/switch-replay.html
+!simulation/*.js
+!simulation/*.css

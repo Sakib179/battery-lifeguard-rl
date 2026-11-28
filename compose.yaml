@@ -1,0 +1,24 @@
+name: lifeguard-rl
+
+services:
+  lifeguard:
+    image: lifeguard-rl:local
+    build: .
+    init: true
+    ports:
+      - "127.0.0.1:${LIFEGUARD_PORT:-5501}:5500"
+    volumes:
+      - mlflow-data:/var/lib/lifeguard
+
+  presentation:
+    profiles: [demo]
+    image: lifeguard-presentation:local
+    build:
+      context: .
+      dockerfile: presentation/Dockerfile
+    init: true
+    ports:
+      - "127.0.0.1:${LIFEGUARD_DEMO_PORT:-8501}:8501"
+
+volumes:
+  mlflow-data:

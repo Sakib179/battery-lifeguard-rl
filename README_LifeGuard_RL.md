@@ -531,6 +531,53 @@ Set `TRACK_WITH_MLFLOW = True` in the final cell of Notebook 22 or 23 to log a c
 
 The **evidence** tag distinguishes held-out forecasts, recorded matches, simulated controllers, and stored training histories. The database and locally generated plots are stored in `.mlflow/`.
 
+### Run both interfaces with Docker
+
+Start Docker Desktop and run these commands from the project root. The image uses its own Linux runtime. Complete any host-side MLflow imports or notebook exports before migrating the store.
+
+```sh
+docker compose build
+docker compose run --rm --volume "$(pwd -P)/.mlflow:/migration:ro" lifeguard \
+    python -m tracking.container migrate /migration \
+    --original-artifact-root "$(pwd -P)/.mlflow/artifacts"
+docker compose up
+```
+
+Open [MLflow](http://127.0.0.1:5501) or the [simulation dashboard](http://127.0.0.1:5501/simulation/). Port 5501 is published on localhost. Set `LIFEGUARD_PORT` to choose a different host port. Press Ctrl+C to stop the foreground service.
+
+The one-time migration copies the current SQLite database and artifacts into the Compose volume. Subsequent starts use that volume. To print its saved MLflow chart links while the service is running, use:
+
+```sh
+docker compose exec lifeguard python -m tracking --store /var/lib/lifeguard/mlflow charts --port 5501
+```
+
+To import a newer report export from the host, mount the report folder for the import command:
+
+```sh
+docker compose run --rm --volume "$(pwd -P)/reports:/app/reports:ro" lifeguard \
+    python -m tracking --store /var/lib/lifeguard/mlflow import
+```
+
+### Live Streamlit presentation
+
+Start Docker Desktop and run this from the project root.
+
+```sh
+docker compose --profile demo up --build presentation
+```
+
+Open [LifeGuard-RL Live Battery Dashboard](http://127.0.0.1:8501). Use **Play** to replay the saved results automatically or **Next** to pause at each reading. The demo runs offline after building the image. Press Ctrl+C in the terminal to stop it. Set `LIFEGUARD_DEMO_PORT` to change the Docker host port.
+
+The same dashboard runs from the existing Python Work environment.
+
+```sh
+../../.venv/bin/python -B -m streamlit run presentation/app.py \
+    --server.address=127.0.0.1 --server.headless=true --server.fileWatcherType=none \
+    --browser.gatherUsageStats=false
+```
+
+The [English presenter script](docs/live-presentation.md) describes the nine-minute demo and the expected results.
+
 ------------------------------------------------------------------------
 
 ## 10. Suggested repository structure
